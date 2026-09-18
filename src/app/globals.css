@@ -1,0 +1,381 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   SOIL CHARGER TECHNOLOGY — DESIGN SYSTEM
+   "Charged Soil": warm carbon ground, hairline technical rules, generous
+   whitespace, one high-voltage green behaving like charge moving through earth.
+
+   This file is the single source of truth for all design tokens.
+   `src/config/tokens.ts` mirrors the subset that JS/GSAP needs — keep in sync.
+   ========================================================================== */
+
+@theme {
+  /* --- CHARGE ------------------------------------------------------------
+     Primary accent. Deliberately scarce: CTAs, active states, diagram energy.
+     Rule: never more than ~5% of any viewport. Scarcity is what reads premium.
+
+     Measured contrast (WCAG 2.1, verified — not estimated):
+       charge-700 on soil-50 .......... 5.52:1  AA
+       white on charge-700 (button) ... 5.86:1  AA
+       charge-800 on soil-50 .......... 7.52:1  AAA
+       charge-500 on carbon ........... 7.59:1  AAA
+       charge-400 on carbon .......... 10.37:1  AAA
+     charge-600 is NOT used for text or button fills: it measures 3.64:1 on
+     soil-50 and 3.86:1 behind white, both below the 4.5:1 floor. */
+  --color-charge-50: #f1fde8;
+  --color-charge-100: #defac9;
+  --color-charge-200: #bdf39b;
+  --color-charge-300: #93e664;
+  --color-charge-400: #6dd53c;
+  --color-charge-500: #4fb827;
+  --color-charge-600: #3b941a;
+  --color-charge-700: #2f7318;
+  --color-charge-800: #285c19;
+  --color-charge-900: #234d1a;
+  --color-charge-950: #0e2a09;
+
+  /* --- SOIL --------------------------------------------------------------
+     Warm neutral carrying ~90% of the UI. Warm-tinted rather than blue-grey:
+     this is the single choice that keeps the site reading as soil science
+     instead of generic SaaS. */
+  --color-soil-50: #faf8f5;
+  --color-soil-100: #f3eee7;
+  --color-soil-200: #e5dacb;
+  --color-soil-300: #d0c0a9;
+  --color-soil-400: #b49f83;
+  --color-soil-500: #977f62;
+  --color-soil-600: #7b664d;
+  --color-soil-700: #5f503f;
+  --color-soil-800: #443a2f;
+  --color-soil-900: #2a241d;
+  --color-soil-950: #16120e;
+
+  /* --- CARBON ------------------------------------------------------------
+     Near-black surfaces, warm-shifted. Never pure #000. */
+  --color-carbon: #0c0e0b;
+  --color-carbon-raised: #13160f;
+  --color-carbon-line: #242820;
+
+  /* --- MINERAL -----------------------------------------------------------
+     Secondary. Water / environmental contexts and diagram encoding only. */
+  --color-mineral-400: #3fb8ae;
+  --color-mineral-500: #1f9a92;
+  --color-mineral-600: #177a76;
+
+  /* --- FEEDBACK ----------------------------------------------------------
+     Two steps each: a dark value for light surfaces and a light value for dark
+     surfaces. A single mid-tone cannot clear 4.5:1 against both. */
+  --color-danger-600: #c0341f; /* 5.28:1 on soil-50 */
+  --color-danger-300: #f08a78; /* on carbon */
+  --color-danger-soft: #fdecea;
+  /* 5.11:1 on soil-50 and 5.04:1 on warning-soft below. The previous #a35f00
+     measured 4.72:1 against soil-50 — a pass — but axe caught it failing at
+     4.42:1 where it was really painted, on <PlaceholderNotice>'s translucent
+     tint. */
+  --color-warning-600: #9c5a00;
+  /* Opaque, like `--color-danger-soft`. <PlaceholderNotice> previously tinted
+     its own background with `bg-warning/5`, which meant the colour behind its
+     text depended on whichever surface it happened to land on: 4.42:1 over
+     `bg`, 4.41:1 over `surface-sunken`. An opaque surface is the same
+     everywhere, so the ratio is a property of the component rather than of
+     where it was dropped. */
+  --color-warning-soft: #fdf6ea;
+  --color-warning-300: #e0a040; /* 8.56:1 on carbon */
+
+  /* --- TYPOGRAPHY --------------------------------------------------------
+     Display: technical precision. Body: neutral at small sizes.
+     Data: every scientific value — L/acre, g, pH, EC, section numbers — is
+     rendered in mono. Cheapest, highest-impact move for scientific credibility. */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-devanagari: var(--font-noto-devanagari), var(--font-inter), sans-serif;
+
+  /* Fluid type scale — clamp(min, preferred, max) */
+  --text-display-xl: clamp(3rem, 1.2rem + 7.5vw, 6rem);
+  --text-display-lg: clamp(2.25rem, 1.2rem + 4.4vw, 4rem);
+  --text-h2: clamp(1.75rem, 1.2rem + 2.3vw, 2.75rem);
+  --text-h3: clamp(1.375rem, 1.15rem + 0.95vw, 1.875rem);
+  --text-h4: clamp(1.125rem, 1.03rem + 0.4vw, 1.375rem);
+  --text-body-lg: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
+  --text-body: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
+  --text-caption: clamp(0.8125rem, 0.8rem + 0.06vw, 0.875rem);
+  --text-data: clamp(0.875rem, 0.83rem + 0.19vw, 1rem);
+
+  /* --- SPACING (4px base) ------------------------------------------------ */
+  --spacing: 0.25rem;
+
+  /* --- RADIUS ------------------------------------------------------------
+     Deliberately tight. No large rounded cards — that reads consumer, not
+     engineering. */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  /* --- ELEVATION ---------------------------------------------------------
+     Borders, not shadows. Exactly two shadows exist in the entire system. */
+  --shadow-dropdown: 0 4px 16px -4px rgb(22 18 14 / 0.12);
+  --shadow-modal: 0 24px 64px -12px rgb(22 18 14 / 0.28);
+
+  /* --- CONTAINERS -------------------------------------------------------- */
+  --container-content: 80rem; /* 1280 */
+  --container-wide: 90rem; /* 1440 */
+
+  /* --- MOTION ------------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-precise: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-reveal: 700ms;
+  --duration-story: 1200ms;
+
+  /* --- BREAKPOINTS ------------------------------------------------------- */
+  --breakpoint-xs: 23.4375rem; /* 375 */
+  --breakpoint-sm: 40rem; /* 640 */
+  --breakpoint-md: 48rem; /* 768 */
+  --breakpoint-lg: 64rem; /* 1024 */
+  --breakpoint-xl: 80rem; /* 1280 */
+  --breakpoint-2xl: 96rem; /* 1536 */
+}
+
+/* ============================================================================
+   SEMANTIC LAYER
+   Components reference these, not raw scale values, which is what lets
+   `.surface-dark` invert a whole section without touching a single class name.
+
+   NOTE: plain `@theme`, NOT `@theme inline`. `inline` substitutes the resolved
+   value straight into each utility — `.text-ink-muted` would compile to
+   `color: var(--color-soil-700)` — so a `.surface-dark` override of
+   `--color-ink-muted` would have no effect at all, and every dark section would
+   render dark-brown text on near-black. Plain `@theme` emits
+   `color: var(--color-ink-muted)`, which the override can cascade into.
+   ========================================================================== */
+@theme {
+  --color-bg: var(--color-soil-50);
+  --color-surface: #ffffff;
+  --color-surface-sunken: var(--color-soil-100);
+  --color-hairline: var(--color-soil-200);
+  --color-ink: var(--color-soil-950);
+  --color-ink-muted: var(--color-soil-700);
+  --color-ink-subtle: var(--color-soil-600);
+  --color-accent: var(--color-charge-700);
+  --color-accent-hover: var(--color-charge-800);
+  --color-on-accent: #ffffff;
+  --color-warning: var(--color-warning-600);
+  --color-danger: var(--color-danger-600);
+}
+
+/*
+ * Inverted sections opt in via `.surface-dark`.
+ *
+ * `.on-dark` applies the same token remap WITHOUT painting a background, for
+ * elements that sit over a dark surface they do not own — anything absolutely
+ * positioned over a dark hero, or a light component dropped inside a dark
+ * band. Without it such an element would render `--color-ink` (near-black) on
+ * near-black.
+ */
+.surface-dark,
+.on-dark {
+  --color-bg: var(--color-carbon);
+  --color-surface: var(--color-carbon-raised);
+  --color-surface-sunken: var(--color-carbon);
+  --color-hairline: var(--color-carbon-line);
+  --color-ink: var(--color-soil-50);
+  --color-ink-muted: var(--color-soil-300);
+  --color-ink-subtle: var(--color-soil-400);
+  --color-accent: var(--color-charge-400);
+  --color-accent-hover: var(--color-charge-300);
+  --color-on-accent: var(--color-carbon);
+  --color-warning: var(--color-warning-300);
+  --color-danger: var(--color-danger-300);
+}
+
+/* Only the owning surface paints. */
+.surface-dark {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/*
+ * Header, at rest.
+ *
+ * The bar is light on every route, including the ones whose first band is dark
+ * — the homepage hero and all 26 pages built on <PageHero>. An earlier version
+ * repainted it carbon above those heroes so header and hero read as one
+ * continuous dark field; above a photographic hero that came out as a flat
+ * black bar with a hard seam ruled across the top of the picture, so the light
+ * bar is what ships.
+ *
+ * `.at-top` is removed by the header as soon as the page scrolls, at which
+ * point the blurred, hairline-bordered variant takes over. At rest the bar is
+ * transparent and simply shows the page background, which is why no rule here
+ * paints one.
+ */
+
+/* ============================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis owns scrolling when enabled; native smooth would fight it. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    text-wrap: pretty;
+    margin: 0;
+  }
+
+  /* Visible focus is non-negotiable. `outline: none` is never used anywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background-color: var(--color-charge-200);
+    color: var(--color-soil-950);
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ============================================================================
+   PRIMITIVES
+   ========================================================================== */
+@layer components {
+  /* Signature motif: 1px hairline grid reading as an engineering drawing.
+     Costs nothing to render. */
+  .hairline-grid {
+    background-image:
+      linear-gradient(to right, var(--color-hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-hairline) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* Mono eyebrow: "01 / TECHNOLOGY" */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+  }
+
+  /* All scientific values route through this. */
+  .data-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-data);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ============================================================================
+   HERO REVEAL
+
+   Deliberately CSS, not JavaScript. The hero contains the LCP element, so:
+
+     - No JS means nothing to download, parse or wait for before it plays.
+     - Nothing can flash: the animation starts at first paint, not after
+       hydration, so there is no moment where the final state is shown and then
+       yanked back.
+     - It animates TRANSFORM ONLY, never opacity. An element fading up from
+       opacity 0 is not "painted" until it is visible, which pushes the Largest
+       Contentful Paint timestamp out by the length of the animation. Sliding an
+       already-opaque element costs LCP nothing.
+   ========================================================================== */
+@layer components {
+  .hero-rise > * {
+    animation: hero-rise 900ms var(--ease-out-expo) both;
+  }
+
+  /* Stagger without a wrapper per child. */
+  .hero-rise > *:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .hero-rise > *:nth-child(2) {
+    animation-delay: 80ms;
+  }
+  .hero-rise > *:nth-child(3) {
+    animation-delay: 160ms;
+  }
+  .hero-rise > *:nth-child(4) {
+    animation-delay: 240ms;
+  }
+  .hero-rise > *:nth-child(5) {
+    animation-delay: 320ms;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   Checked once in MotionGate at the root, but enforced here as a hard backstop.
+   No content is ever animation-gated — elements are visible at rest.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

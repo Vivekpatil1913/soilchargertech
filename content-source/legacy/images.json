@@ -1,0 +1,612 @@
+[
+  {
+    "legacyFile": "coverphoto_03102024081052129_coverphoto.png",
+    "bucket": "about",
+    "src": "/images/about/03102024081052129.jpg",
+    "width": 700,
+    "height": 500,
+    "bytes": 111408,
+    "nativeWidth": 700,
+    "nativeHeight": 500
+  },
+  {
+    "legacyFile": "coverphoto_1405202406113545_coverphoto.png",
+    "bucket": "about",
+    "src": "/images/about/1405202406113545.jpg",
+    "width": 1335,
+    "height": 671,
+    "bytes": 147632,
+    "nativeWidth": 1335,
+    "nativeHeight": 671
+  },
+  {
+    "legacyFile": "coverphoto_14092024043756123_coverphoto.png",
+    "bucket": "about",
+    "src": "/images/about/14092024043756123.jpg",
+    "width": 799,
+    "height": 681,
+    "bytes": 89795,
+    "nativeWidth": 799,
+    "nativeHeight": 681
+  },
+  {
+    "legacyFile": "coverphoto_2404202411374961_coverphoto.png",
+    "bucket": "about",
+    "src": "/images/about/2404202411374961.jpg",
+    "width": 1130,
+    "height": 714,
+    "bytes": 163037,
+    "nativeWidth": 1130,
+    "nativeHeight": 714
+  },
+  {
+    "legacyFile": "aboutus_270420241033535_companyprofile.png",
+    "bucket": "about",
+    "src": "/images/about/270420241033535.jpg",
+    "width": 962,
+    "height": 1015,
+    "bytes": 82596,
+    "nativeWidth": 962,
+    "nativeHeight": 1015
+  },
+  {
+    "legacyFile": "testimonials_62_Testimonials.png",
+    "bucket": "about",
+    "src": "/images/about/62.jpg",
+    "width": 490,
+    "height": 618,
+    "bytes": 43528,
+    "nativeWidth": 490,
+    "nativeHeight": 618
+  },
+  {
+    "legacyFile": "blog_0405202404520675_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/0405202404520675.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 103305,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_0405202412170276_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/0405202412170276.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 163436,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_0605202407142077_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/0605202407142077.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 220087,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_06052024113704113_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/06052024113704113.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 143185,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_08052024094334128_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/08052024094334128.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 252561,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_09052024075842129_companyprofile.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/09052024075842129.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 58301,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_10052024072327130_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/10052024072327130.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 96346,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_11052024073140131_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/11052024073140131.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 230660,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_12_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/12.jpg",
+    "width": 636,
+    "height": 394,
+    "bytes": 101823,
+    "nativeWidth": 636,
+    "nativeHeight": 394
+  },
+  {
+    "legacyFile": "blog_13052024115449133_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/13052024115449133.jpg",
+    "width": 1600,
+    "height": 480,
+    "bytes": 159953,
+    "nativeWidth": 2000,
+    "nativeHeight": 600
+  },
+  {
+    "legacyFile": "blog_14_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/14.jpg",
+    "width": 398,
+    "height": 265,
+    "bytes": 52338,
+    "nativeWidth": 398,
+    "nativeHeight": 265
+  },
+  {
+    "legacyFile": "blog_15_companyprofile.png",
+    "bucket": "articles",
+    "src": "/images/articles/15.jpg",
+    "width": 400,
+    "height": 267,
+    "bytes": 27636,
+    "nativeWidth": 400,
+    "nativeHeight": 267
+  },
+  {
+    "legacyFile": "blog_16_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/16.jpg",
+    "width": 385,
+    "height": 270,
+    "bytes": 30519,
+    "nativeWidth": 385,
+    "nativeHeight": 270
+  },
+  {
+    "legacyFile": "blog_17_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/17.jpg",
+    "width": 400,
+    "height": 300,
+    "bytes": 53503,
+    "nativeWidth": 400,
+    "nativeHeight": 300
+  },
+  {
+    "legacyFile": "blog_2_companyprofile.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/2.jpg",
+    "width": 320,
+    "height": 114,
+    "bytes": 14218,
+    "nativeWidth": 320,
+    "nativeHeight": 114
+  },
+  {
+    "legacyFile": "blog_3_blog1.jpg",
+    "bucket": "articles",
+    "src": "/images/articles/3.jpg",
+    "width": 320,
+    "height": 180,
+    "bytes": 16376,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  {
+    "legacyFile": "blog_33_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/33.jpg",
+    "width": 518,
+    "height": 342,
+    "bytes": 32036,
+    "nativeWidth": 518,
+    "nativeHeight": 342
+  },
+  {
+    "legacyFile": "blog_63_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/63.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 257294,
+    "nativeWidth": 1000,
+    "nativeHeight": 1000
+  },
+  {
+    "legacyFile": "blog_64_blog1.png",
+    "bucket": "articles",
+    "src": "/images/articles/64.jpg",
+    "width": 640,
+    "height": 417,
+    "bytes": 31520,
+    "nativeWidth": 640,
+    "nativeHeight": 417
+  },
+  {
+    "legacyFile": "gallaryphoto_18092024090106276_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/18092024090106276.jpg",
+    "width": 700,
+    "height": 500,
+    "bytes": 108250,
+    "nativeWidth": 700,
+    "nativeHeight": 500
+  },
+  {
+    "legacyFile": "gallaryphoto_222_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/222.jpg",
+    "width": 498,
+    "height": 258,
+    "bytes": 38017,
+    "nativeWidth": 498,
+    "nativeHeight": 258
+  },
+  {
+    "legacyFile": "gallaryphoto_233_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/233.jpg",
+    "width": 1280,
+    "height": 800,
+    "bytes": 238107,
+    "nativeWidth": 1280,
+    "nativeHeight": 800
+  },
+  {
+    "legacyFile": "gallaryphoto_234_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/234.jpg",
+    "width": 1280,
+    "height": 718,
+    "bytes": 170731,
+    "nativeWidth": 1280,
+    "nativeHeight": 718
+  },
+  {
+    "legacyFile": "gallaryphoto_241_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/241.jpg",
+    "width": 1226,
+    "height": 1280,
+    "bytes": 470386,
+    "nativeWidth": 1226,
+    "nativeHeight": 1280
+  },
+  {
+    "legacyFile": "gallaryphoto_242_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/242.jpg",
+    "width": 1000,
+    "height": 792,
+    "bytes": 162218,
+    "nativeWidth": 1000,
+    "nativeHeight": 792
+  },
+  {
+    "legacyFile": "gallaryphoto_243_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/243.jpg",
+    "width": 1308,
+    "height": 1600,
+    "bytes": 351717,
+    "nativeWidth": 1308,
+    "nativeHeight": 1600
+  },
+  {
+    "legacyFile": "gallaryphoto_244_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/244.jpg",
+    "width": 414,
+    "height": 229,
+    "bytes": 26239,
+    "nativeWidth": 414,
+    "nativeHeight": 229
+  },
+  {
+    "legacyFile": "gallaryphoto_245_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/245.jpg",
+    "width": 414,
+    "height": 234,
+    "bytes": 23983,
+    "nativeWidth": 414,
+    "nativeHeight": 234
+  },
+  {
+    "legacyFile": "gallaryphoto_246_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/246.jpg",
+    "width": 1024,
+    "height": 768,
+    "bytes": 212924,
+    "nativeWidth": 1024,
+    "nativeHeight": 768
+  },
+  {
+    "legacyFile": "gallaryphoto_247_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/247.jpg",
+    "width": 601,
+    "height": 503,
+    "bytes": 125073,
+    "nativeWidth": 601,
+    "nativeHeight": 503
+  },
+  {
+    "legacyFile": "gallaryphoto_255_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/255.jpg",
+    "width": 1600,
+    "height": 1346,
+    "bytes": 498015,
+    "nativeWidth": 1600,
+    "nativeHeight": 1346
+  },
+  {
+    "legacyFile": "gallaryphoto_256_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/256.jpg",
+    "width": 1024,
+    "height": 768,
+    "bytes": 201726,
+    "nativeWidth": 1024,
+    "nativeHeight": 768
+  },
+  {
+    "legacyFile": "gallaryphoto_257_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/257.jpg",
+    "width": 1600,
+    "height": 2263,
+    "bytes": 828946,
+    "nativeWidth": 4762,
+    "nativeHeight": 6735
+  },
+  {
+    "legacyFile": "gallaryphoto_260_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/260.jpg",
+    "width": 1600,
+    "height": 1541,
+    "bytes": 393810,
+    "nativeWidth": 1600,
+    "nativeHeight": 1541
+  },
+  {
+    "legacyFile": "gallaryphoto_261_gallaryphoto.png",
+    "bucket": "gallery",
+    "src": "/images/gallery/261.jpg",
+    "width": 1000,
+    "height": 450,
+    "bytes": 66812,
+    "nativeWidth": 1000,
+    "nativeHeight": 450
+  },
+  {
+    "legacyFile": "product_101_product1.png",
+    "bucket": "products",
+    "src": "/images/products/101.jpg",
+    "width": 1600,
+    "height": 1609,
+    "bytes": 274622,
+    "nativeWidth": 2036,
+    "nativeHeight": 2047
+  },
+  {
+    "legacyFile": "product_104_product1.png",
+    "bucket": "products",
+    "src": "/images/products/104.jpg",
+    "width": 1568,
+    "height": 1824,
+    "bytes": 258183,
+    "nativeWidth": 1568,
+    "nativeHeight": 1824
+  },
+  {
+    "legacyFile": "product_107_product1.png",
+    "bucket": "products",
+    "src": "/images/products/107.jpg",
+    "width": 1600,
+    "height": 1458,
+    "bytes": 338222,
+    "nativeWidth": 1622,
+    "nativeHeight": 1478
+  },
+  {
+    "legacyFile": "product_111_product1.png",
+    "bucket": "products",
+    "src": "/images/products/111.jpg",
+    "width": 592,
+    "height": 911,
+    "bytes": 158223,
+    "nativeWidth": 592,
+    "nativeHeight": 911
+  },
+  {
+    "legacyFile": "product_113_product1.png",
+    "bucket": "products",
+    "src": "/images/products/113.jpg",
+    "width": 1454,
+    "height": 2168,
+    "bytes": 624541,
+    "nativeWidth": 1454,
+    "nativeHeight": 2168
+  },
+  {
+    "legacyFile": "product_115_product1.png",
+    "bucket": "products",
+    "src": "/images/products/115.jpg",
+    "width": 1438,
+    "height": 2152,
+    "bytes": 557341,
+    "nativeWidth": 1438,
+    "nativeHeight": 2152
+  },
+  {
+    "legacyFile": "product_116_product1.png",
+    "bucket": "products",
+    "src": "/images/products/116.jpg",
+    "width": 1430,
+    "height": 2152,
+    "bytes": 601328,
+    "nativeWidth": 1430,
+    "nativeHeight": 2152
+  },
+  {
+    "legacyFile": "product_117_product1.png",
+    "bucket": "products",
+    "src": "/images/products/117.jpg",
+    "width": 1382,
+    "height": 2152,
+    "bytes": 591771,
+    "nativeWidth": 1382,
+    "nativeHeight": 2152
+  },
+  {
+    "legacyFile": "product_118_product1.png",
+    "bucket": "products",
+    "src": "/images/products/118.jpg",
+    "width": 1418,
+    "height": 2153,
+    "bytes": 584245,
+    "nativeWidth": 1418,
+    "nativeHeight": 2153
+  },
+  {
+    "legacyFile": "product_124_product1.png",
+    "bucket": "products",
+    "src": "/images/products/124.jpg",
+    "width": 1438,
+    "height": 2152,
+    "bytes": 593825,
+    "nativeWidth": 1438,
+    "nativeHeight": 2152
+  },
+  {
+    "legacyFile": "product_127_product1.png",
+    "bucket": "products",
+    "src": "/images/products/127.jpg",
+    "width": 159,
+    "height": 444,
+    "bytes": 21471,
+    "nativeWidth": 159,
+    "nativeHeight": 444
+  },
+  {
+    "legacyFile": "product_134_product1.png",
+    "bucket": "products",
+    "src": "/images/products/134.jpg",
+    "width": 153,
+    "height": 420,
+    "bytes": 21087,
+    "nativeWidth": 153,
+    "nativeHeight": 420
+  },
+  {
+    "legacyFile": "product_20092024090556178_product1.jpg",
+    "bucket": "products",
+    "src": "/images/products/20092024090556178.jpg",
+    "width": 596,
+    "height": 842,
+    "bytes": 86727,
+    "nativeWidth": 596,
+    "nativeHeight": 842
+  },
+  {
+    "legacyFile": "product_20092024091025179_product1.jpg",
+    "bucket": "products",
+    "src": "/images/products/20092024091025179.jpg",
+    "width": 596,
+    "height": 842,
+    "bytes": 58005,
+    "nativeWidth": 596,
+    "nativeHeight": 842
+  },
+  {
+    "legacyFile": "product_20092024103056180_product1.jpg",
+    "bucket": "products",
+    "src": "/images/products/20092024103056180.jpg",
+    "width": 596,
+    "height": 842,
+    "bytes": 83482,
+    "nativeWidth": 596,
+    "nativeHeight": 842
+  },
+  {
+    "legacyFile": "product_88_product1.png",
+    "bucket": "products",
+    "src": "/images/products/88.jpg",
+    "width": 1600,
+    "height": 1487,
+    "bytes": 230544,
+    "nativeWidth": 1800,
+    "nativeHeight": 1673
+  },
+  {
+    "legacyFile": "product_92_product1.png",
+    "bucket": "products",
+    "src": "/images/products/92.jpg",
+    "width": 1600,
+    "height": 1190,
+    "bytes": 231590,
+    "nativeWidth": 1948,
+    "nativeHeight": 1449
+  },
+  {
+    "legacyFile": "product_95_product1.png",
+    "bucket": "products",
+    "src": "/images/products/95.jpg",
+    "width": 1464,
+    "height": 1337,
+    "bytes": 214080,
+    "nativeWidth": 1464,
+    "nativeHeight": 1337
+  },
+  {
+    "legacyFile": "product_97_product1.png",
+    "bucket": "products",
+    "src": "/images/products/97.jpg",
+    "width": 1316,
+    "height": 1281,
+    "bytes": 245479,
+    "nativeWidth": 1316,
+    "nativeHeight": 1281
+  },
+  {
+    "legacyFile": "product_99_product1.png",
+    "bucket": "products",
+    "src": "/images/products/99.jpg",
+    "width": 1600,
+    "height": 1520,
+    "bytes": 249623,
+    "nativeWidth": 1816,
+    "nativeHeight": 1725
+  }
+]

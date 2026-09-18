@@ -1,0 +1,390 @@
+[
+  {
+    "legacyId": 88,
+    "name": "SUPER SOIL CHARGER",
+    "slug": "super-soil-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/88_product1.png",
+    "shortDescription": "Super Soil Charger is an eco-friendly natural organic product under the Indian Government's initiative and patented agricultural products of the Government of India.",
+    "functions": [
+      "Helps to increase organic carbon in the soil.",
+      "Fertilizers uptake rapidly by increasing the number of white roots.",
+      "Controls the content of soil (pH) and desiccation (EC).",
+      "Helps in the chelation of metal and chemical fertilizers in the soil.",
+      "Sterile soil converts into fertile soil.",
+      "There is an increase in the metabolism of micro organisms in the soil.",
+      "If Water drought it reduces the stress on the crop, thus increasing the crop's volatility even in low water.",
+      "Protects the crop from extreme cold and extreme heat."
+    ],
+    "ratio": "1) Orchards 3 to 5 liters per acre. 2) Vegetable 1 to 3 liters per acre (regular per month)",
+    "packing": "- 2 liter, 5 liter, 20 liter",
+    "extraLines": [
+      "Functions of Super Soil Charger: -"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 92,
+    "name": "SUPER FRUIT CHARGER",
+    "slug": "super-fruit-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/92_product1.png",
+    "shortDescription": "Super Fruit Charger Maintains the nitrogen ratio of the crop to the vitamins of the crop, helping to increase the enzyme growth.",
+    "functions": [],
+    "ratio": "15 ml per liter for orchard / 10 ml per liter for vegetable crop (5 to 7 ml for grapes)",
+    "packing": "- 5 liter, 20 liter",
+    "extraLines": [],
+    "hasContent": true
+  },
+  {
+    "legacyId": 95,
+    "name": "SUPER CROP CHARGER",
+    "slug": "super-crop-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/95_product1.png",
+    "shortDescription": "Super crop charger Botanical and Mineral Fertilizer, made from ???% organic technology and natural ingredients",
+    "functions": [],
+    "ratio": "- By spraying 2.3 ml per liter",
+    "packing": "- 1 liter, 5 liter",
+    "extraLines": [],
+    "hasContent": true
+  },
+  {
+    "legacyId": 97,
+    "name": "SUPER FLOWER CHARGER",
+    "slug": "super-flower-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/97_product1.png",
+    "shortDescription": "Super flower charger It is a Botanical and Mineral Fertilizer made from 100% Organic Technology and Natural Ingredients and flowering .",
+    "functions": [],
+    "ratio": "Spray 2-3 milliliters per liter (use 1 to 2 times a day) / 500 to 1000 ml per acre drip.",
+    "packing": "1 liter, 5 liter",
+    "extraLines": [],
+    "hasContent": true
+  },
+  {
+    "legacyId": 99,
+    "name": "SUPER SIZE CHARGER",
+    "slug": "super-size-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/99_product1.png",
+    "shortDescription": "Super Size Charger It is a botanical and mineral fertilizer made from 100% organic technology and natural ingredients.",
+    "functions": [],
+    "ratio": "Use 2 to 3 ml per liter spray and1 liter from drip for 3 to 4 times per acre drip.",
+    "packing": "1 liter, 5 liter",
+    "extraLines": [],
+    "hasContent": true
+  },
+  {
+    "legacyId": 101,
+    "name": "SUPER WATER CHARGER",
+    "slug": "super-water-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/101_product1.png",
+    "shortDescription": "Super water charger (Every drop of medicine makes it valuable) Super water charger Made by Indian technology,",
+    "functions": [],
+    "ratio": "Spraying 0.1 ml per liter of water / drip: 50 to 100 ml per acre with the medicine and increasing the effect of the drug.",
+    "packing": "100 ml, 500 ml, 1000 ml",
+    "extraLines": [],
+    "hasContent": true
+  },
+  {
+    "legacyId": 104,
+    "name": "SUPER PLANT  FIGHTER",
+    "slug": "super-plant-fighter",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/104_product1.png",
+    "shortDescription": "Super Plant Fighter is an international and botanical pest replayer and killer and Extremely beneficial for Organic control of all sucking insects (Thrips, Mawas, jassids, Red Spiders, Millibug White Bees, and others) and is Olycine Active Quill in Organic Super Fighter.",
+    "functions": [],
+    "ratio": "1 - 1.5 ml per liter spray",
+    "packing": "250 ml, 1 liters",
+    "extraLines": [
+      "Use of super water charger 0.1 ml together with effective results."
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 107,
+    "name": "SUPER PLANT  CLEANER",
+    "slug": "super-plant-cleaner",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/107_product1.png",
+    "shortDescription": "Super Plant Cleaner It is an internationally-classed organic broad spectrum fungicidal fertilizer. The natural phosphorus available in Super Fungi Cleaner is immediately activated and its antifungal properties reflect various types of fungal diseases.",
+    "functions": [],
+    "ratio": "1-2 grams per liter spray",
+    "packing": "250g / 1kg .",
+    "extraLines": [
+      "Taking a Fruit Charger and a Super Water Charger along with it provides effective results."
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 111,
+    "name": "SCT VEDIC NUTRI CHARGER",
+    "slug": "sct-vedic-nutri-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/111_product1.png",
+    "shortDescription": "Vedic Nutri Charger is a fantastic product with powerful alternatives to chemical nutrition. It provides natural nutrition to the crops in the field and makes it possible to grow natural agricultural products like forest.",
+    "functions": [
+      "Helps to have vigorous new shoots, abundant flowering and fruiting.",
+      "The nutri charger is a natural mineral basket in itself so it is ready to use. This keeps the crop straggled during emergencies.",
+      "Helps in the metabolism of plants.",
+      "Soil friendly bacteria create a friendly environment with fungi, as well as increase soil productivity and health.",
+      "Increases soil texture and humidity. Increases soil, water and nutrient holding capacity.",
+      "Develops strong cell structure by supplying essential vitamins to the crop.",
+      "Natural nitrogen, phosphorus and potash accelerate the synthesis process. Fills the need for additional elements of the hybrid variety."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "8.The natural nutrients in the nutri charger cause extraordinary changes in the natural texture and aroma of the roots, leaves, flowers and fruits.",
+      "Application: -",
+      "Basal Dose:- 3-5 kg per acre",
+      "By drip or drenching :- 1.2 kg"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 113,
+    "name": "SCT VEDIC ROOT CHARGER",
+    "slug": "sct-vedic-root-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/113_product1.png",
+    "shortDescription": "Vedic root charger is a natural food that charges the roots of the plant. Helps plant roots to regenerate friendly bacteria, fungi and other organisms.",
+    "functions": [
+      "The Vedic root charger is an atomic bomb of natural elements for roots.",
+      "The root charger promotes the uptake of elements by increasing the ion concentration (CEC) in the roots.",
+      "Since the Vedic root charger itself is a storehouse of elements, the overall development of white roots extends their life.",
+      "Vedic root charger enhances receptivity, activation and stress tolerance in roots.",
+      "The Vedic root charger helps in the process of symbiosis of plant fungi by sending signals to mycorrhiza and bacteria in the soil.",
+      "With the use of Vedic root charger, the soil becomes fertile and spongy.",
+      "The combined use of Vedic root charger and soil charger can control the disease and all soil borne diseases.",
+      "The natural ingredients in the Vedic root charger will increase the number of bacteria and fungi in the soil around the roots."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "Application: -",
+      "Basal Dose:- 3-5 kg per acre",
+      "By drip or drenching :- 1.2 kg"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 115,
+    "name": "SCT VEDIC HEALTH CHARGER",
+    "slug": "sct-vedic-health-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/115_product1.png",
+    "shortDescription": "Rare and extremely powerful minerals are naturally available from Vedic Health Charger to strengthen the DNA in the crop. Helps to make soil fertile. Vedic health charger makes crop to grows naturally and vigorously without any stimulant.",
+    "functions": [
+      "Strengthening of DNA and RNA in plant cells builds immunity against all kinds of diseases.",
+      "Significant improvement in crop quality is observed by stopping mutations (genetic chase) in plant cells.",
+      "Increases the medicinal properties of the crop.",
+      "Prevention of crop from wilt diseases and damping off.",
+      "Weak and stressed crops get rejuvenation",
+      "Barren and alkaline soils are fertile and lively",
+      "Increases the life span and increases the productivity of the crop",
+      "Provides nutrition for balanced metabolism in crops."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "Dosage: -",
+      "Spray: - 3 gm per liter",
+      "Soil: - 1.2 kg/acre"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 116,
+    "name": "SCT VEDIC LEAF CHARGER",
+    "slug": "sct-vedic-leaf-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/116_product1.png",
+    "shortDescription": "Leaf charger is a mineral basket, it helps in plant metabolism. Since the leaf charger is a natural storehouse of all the main, secondary, macronutrients and micronutrients required by the crop, the plant itself produces vital and essential enzymes, proteins and auxins. The Leaf Charger provides a source of natural elements for the overall growth and protection of the leaves.",
+    "functions": [
+      "Charges the chlorophyll in all the cells in energy.",
+      "Increases leaf and branch extension.",
+      "Increases food production and canopy of leaf",
+      "Increases leaf thickness and immunity. adverse conditions.",
+      "Protects the plant through leaf nutrition in adverse conditions.",
+      "Provides storage for abundant fruiting and flowering."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "4.Provides the element needed for photosynthesis, thus increasing leaf storage",
+      "Dosage: -",
+      "Spray: - 3 gm per liter",
+      "Soil: - 1.2 kg/acre"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 117,
+    "name": "SCT VEDIC SETTING CHARGER",
+    "slug": "sct-vedic-setting-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/117_product1.png",
+    "shortDescription": "SCT Vedic Setting Charger is a multi-problem solution to many problems of farmers related to setting with the help of Vedic setting charger. The setting charger serves to provide nutrients that are conducive to the production of hormones and enzymes necessary for flowering and fruiting.",
+    "functions": [
+      "The setting charger fills the deficiency of all the elements that cause the defoliation of flower",
+      "The Vedic setting charger improves the flowering pattern of the plant and produces strong and vigorous buds",
+      "Since the Vedic setting charger is a natural food, it continues to nourish flowers in hostile environments.",
+      "The Vedic setting charger lengthens the buds and flower stalks.",
+      "The Vedic setting charger nourishes the extra flowers attached to the plants.",
+      "The Vedic setting charger creates a lot of nectar in the flower so the bees are attracted."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "Application: -",
+      "Spray: - 3 g/litre",
+      "Soil: - 1.2 kg/acre"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 118,
+    "name": "SCT VEDIC QUALITY CHARGER",
+    "slug": "sct-vedic-quality-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/118_product1.png",
+    "shortDescription": "SCT Vedic's Quality Charger is the panacea for this problem. The store of natural nutrients in Vedic Quality Charger enhances the size, taste, colour, lusture, aroma and sugar of agricultural product. The best nutrition to the crops and produces the tastiest agricultural products which is in great demand in the market.",
+    "functions": [
+      "Plants produce GA, cytokines, hormones for fruit growth.",
+      "The Vedic Quality Charger protects the fruit from cracking due to balanced nutrition.",
+      "Protects crops from sunburn by increasing the internal growth of plants.",
+      "Helps in uniform size and quality by smoothing the function of phloem in the plant",
+      "Distributes sugar evenly in fruits and crops. Brings remarkable taste and crunch to leaves, flowers, fruits. Creates nectar-like nutrients by increasing the durability of agricultural products and fruits."
+    ],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Advantages :-",
+      "Application: -",
+      "Spray: - 3 gm/litre",
+      "Soil: - 1.2kg/acre"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 124,
+    "name": "SCT VEDIC PLANT CHARGER",
+    "slug": "sct-vedic-plant-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/124_product1.png",
+    "shortDescription": "Vedic Pest cleaners create a protective coating on the crop with the help of natural alkaloids, enzymes. Replaces the insect-like smell of crops. As a result, pests stay away from crops and starve to death. SCT Vedic Pest Cleaner works interstitial by being absorbed into the dye of the plant. So, the crop kills the insects by making them repellent and harmful alkaloids.",
+    "functions": [
+      "The alkaloids in the Vedic Pest cleaner play an important role in plant metabolism and catabolism and protect the plant from predators.",
+      "Vedic Pest cleaner works as an excellent repellent so sucking insects do not attack on the crop.",
+      "Vedic Pest cleaner creates a protective coating on leaves, flowers, fruits.",
+      "The pungent and bitter taste in Vedic Pest cleaner keeps the insects away from the crop.",
+      "Vedic Pest cleaner attract insect predators. So natural control of the enemy insects is done. Various natural ingredients in Pest cleaner strengthen the epidermis of leaves, flowers and fruits.",
+      "Vedic Pest cleaner is nutritious for bees and all friendly insects and is only annoying for enemy insects."
+    ],
+    "ratio": null,
+    "packing": "- 600 gm",
+    "extraLines": [
+      "Advantages :-",
+      "Application: -",
+      "Spray:- 3 g/litre"
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 125,
+    "name": "SCT VEDIC MILK CHARGER",
+    "slug": "sct-vedic-milk-charger",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/125_product1.png",
+    "shortDescription": "",
+    "functions": [],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [],
+    "hasContent": false
+  },
+  {
+    "legacyId": 127,
+    "name": "SCT VEDIC HEALTH FIGHTER",
+    "slug": "sct-vedic-health-fighter",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/127_product1.png",
+    "shortDescription": "",
+    "functions": [
+      "Vedic Health Fighter is the world's first trident action (fungal, bacterial and viral) therapeutic product.",
+      "Health fighter works best in both pre- and post-disease conditions.",
+      "Health fighter works well for dead disease if given from the ground along with soil charger.",
+      "The natural herbal extract from Health Fighter is absorbed into the epidermic cells of the crop and enhances the internal immunity of the crop (SAR – SYSTEMIC ACQUIRED RESISTANCE) and protects against a variety of fungal, bacterial and viral diseases.",
+      "Since Disease Fighter is an oil base product, it creates a protective coating from bacteria, viruses and fungi by applying a glossy coating around the crop."
+    ],
+    "ratio": null,
+    "packing": "- 1 litre",
+    "extraLines": [
+      "It works in",
+      "Advantages :-",
+      "Application: -",
+      "Spray:- 3-5ml/ litre",
+      "Soil:- 1-2 litre/acre",
+      "(Note: - This product is recommended for 100% SCT Vedic (Soil Charger Technology) user farmers only."
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 134,
+    "name": "SCT VEDIC ENERGY BOOSTER",
+    "slug": "sct-vedic-energy-booster",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/134_product1.png",
+    "shortDescription": "",
+    "functions": [],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [],
+    "hasContent": false
+  },
+  {
+    "legacyId": 178,
+    "name": "SCT VEDIC SHAKTI",
+    "slug": "sct-vedic-shakti",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/20092024090556178_product1.jpg",
+    "shortDescription": "For Rain Feed crop: 3-4 bags per acre Horticulture: 2-4 bags with RNPH=K",
+    "functions": [],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Balances the carbon-nitrogen ratio in the crop, enhancing resistance.",
+      "Increases the rate of crop metabolism for balanced growth by providing necessary natural nutrition.",
+      "Enhances crop productivity and increases the harvesting cycle.",
+      "Increases the nutritional and medicinal properties in crops."
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 179,
+    "name": "VEDIC SAMRAT",
+    "slug": "vedic-samrat",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/20092024091025179_product1.jpg",
+    "shortDescription": "SAMRAT (30 KG) For Rain Feed crop: 3-4 bags per acre Horticulture: 2-4 bags with RNPH=K Key",
+    "functions": [],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Key Benefits:",
+      "Enhances soil fertility and livens the soil, increasing productivity.",
+      "Improves soil structure and health, thereby increasing water holding capacity.",
+      "Promotes the development of crop roots, increasing their ability to absorb nutrients.",
+      "Supplies 72 types of natural trace elements necessary for crop growth, reducing plant stress.",
+      "Develops internal protection systems (SAR) of crops, boosting their disease resistance capabilities."
+    ],
+    "hasContent": true
+  },
+  {
+    "legacyId": 180,
+    "name": "VEDIC MIRACLE",
+    "slug": "vedic-miracle",
+    "image": "https://finalapi.soilchargertechnology.com/public/uploads/web/product/20092024103056180_product1.jpg",
+    "shortDescription": "MIRACLE (10 KG) For Rain Feed crops: 2 bags per acre Horticulture: 2 bags with RNPH=K",
+    "functions": [],
+    "ratio": null,
+    "packing": null,
+    "extraLines": [
+      "Provides instant energy to the crops.",
+      "Increases the availability of essential soil nutrients.",
+      "Supplies necessary natural micronutrients for the growth of crops.",
+      "Enables the production of enzymes, hormones, and other substances essential for crop development.",
+      "Nourishes beneficial microbes and fungi by bringing life to the soil.",
+      "Enhances the germination capacity of seeds under adverse conditions, ensuring robust crop establishment."
+    ],
+    "hasContent": true
+  }
+]
