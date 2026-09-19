@@ -133,7 +133,7 @@ export function ProblemSection() {
           className="max-w-3xl"
         />
 
-        <div className="mt-14 grid gap-10 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] md:items-start md:gap-8 lg:mt-20 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1fr)] lg:gap-14 xl:gap-16">
+        <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] md:items-start md:gap-8 lg:mt-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1fr)] lg:gap-14 xl:gap-16">
           {/* ---- Cross-section: sticky inside the section, md and up ------- */}
           <div className="md:sticky md:top-[100px] md:h-fit md:self-start">
             <div className="relative overflow-hidden rounded-2xl border border-hairline bg-white p-3 shadow-soft">

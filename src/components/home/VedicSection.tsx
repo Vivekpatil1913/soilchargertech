@@ -41,7 +41,7 @@ export function VedicSection() {
       </div>
 
       <Container width="wide" className="relative">
-        <div className="grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16 lg:py-32">
+        <div className="section-y grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16">
           {/* ---- Copy ------------------------------------------------------- */}
           <div>
             <ScrollReveal stagger={0.09}>
@@ -81,7 +81,7 @@ export function VedicSection() {
               whileInView="visible"
               viewport={viewportOnce}
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-              className="mt-12 grid grid-cols-3 gap-4 border-y border-white/10 py-7"
+              className="mt-10 grid grid-cols-3 gap-4 border-y border-white/10 py-7"
             >
               {FACTS.map((fact) => (
                 <motion.div key={fact.label} variants={fadeUp}>
@@ -103,12 +103,7 @@ export function VedicSection() {
               <CTAButton href="/technology#vedic" variant="onDark" size="lg">
                 Explore Vedic Technology
               </CTAButton>
-              <CTAButton
-                href="/products?range=vedic"
-                variant="onDark"
-                size="lg"
-                className="border-transparent bg-transparent hover:border-white/30"
-              >
+              <CTAButton href="/products?range=vedic" variant="ghostOnDark" size="lg">
                 See the Vedic range
               </CTAButton>
             </ScrollReveal>

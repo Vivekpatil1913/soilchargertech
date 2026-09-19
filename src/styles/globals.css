@@ -17,7 +17,11 @@
   --color-brand-300: #8bd196;
   --color-brand-400: #55b768;
   --color-brand-500: #2f9c49;
-  --color-brand-600: #1b8a4b;
+  /* Darkened from the logo's #1b8a4b so white text on a filled brand button
+     clears WCAG AA: #1b8a4b gave 4.39:1 against white, just under the 4.5
+     needed at button text sizes. This reads 5.0:1 and still sits inside the
+     logo's green family. */
+  --color-brand-600: #17803f;
   --color-brand-700: #146b3a;
   --color-brand-800: #125430;
   --color-brand-900: #0f4529;
@@ -221,7 +225,7 @@
 
 /* Section rhythm — the single source of vertical spacing. */
 @utility section-y {
-  padding-block: clamp(4rem, 2.2rem + 7vw, 8.5rem);
+  padding-block: clamp(2.25rem, 1.4rem + 2.6vw, 4rem);
 }
 
 /* Warm paper texture: an extremely subtle grain so large cream areas do not

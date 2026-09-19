@@ -6,3 +6,4 @@ export { ScrollReveal, RevealItem } from "./ScrollReveal";
 export { ImageReveal } from "./ImageReveal";
 export { AnimatedCounter } from "./AnimatedCounter";
 export { SmoothScroll } from "./SmoothScroll";
+export { SocialLinks } from "./SocialLinks";

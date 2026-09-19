@@ -40,7 +40,7 @@ export default function ApplicationsPage() {
             className="max-w-3xl"
           />
 
-          <ScrollReveal stagger={0.09} as="ul" className="mt-12 space-y-6">
+          <ScrollReveal stagger={0.09} as="ul" className="mt-10 space-y-6">
             {applications.map((app, i) => (
               <RevealItem key={app.id} variants={fadeUp} as="li">
                 <article
@@ -76,7 +76,7 @@ export default function ApplicationsPage() {
             ))}
           </ScrollReveal>
 
-          <div className="mt-12 rounded-2xl border border-hairline bg-white p-7 sm:p-9">
+          <div className="mt-10 rounded-2xl border border-hairline bg-white p-7 sm:p-9">
             <h2 className="text-h3 text-ink-900">Growing something not listed here?</h2>
             <p className="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-ink-500">
               The list above is crop families, not a limit. Soil health is the same problem whatever

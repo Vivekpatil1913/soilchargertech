@@ -43,7 +43,7 @@ export function ApplicationsSection() {
         <ScrollReveal
           stagger={0.08}
           as="ul"
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3"
         >
           {applications.map((app) => (
             <RevealItem key={app.id} variants={fadeUp} as="li">

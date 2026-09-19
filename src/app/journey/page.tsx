@@ -44,7 +44,7 @@ export default function JourneyPage() {
             className="max-w-3xl"
           />
 
-          <ScrollReveal stagger={0.1} as="ol" className="mt-12 space-y-4">
+          <ScrollReveal stagger={0.1} as="ol" className="mt-10 space-y-4">
             {strategySteps.map((step) => (
               <RevealItem key={step.number} variants={fadeUp} as="li">
                 <div className="group flex flex-col gap-4 rounded-2xl border border-hairline bg-white p-6 transition-[border-color,box-shadow] duration-400 hover:border-brand-200 hover:shadow-soft sm:flex-row sm:items-start sm:gap-8 sm:p-8">

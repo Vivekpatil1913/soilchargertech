@@ -110,7 +110,7 @@ export default function AboutPage() {
             className="max-w-3xl"
           />
 
-          <ScrollReveal stagger={0.09} as="ul" className="mt-12 grid gap-5 md:grid-cols-2">
+          <ScrollReveal stagger={0.09} as="ul" className="mt-10 grid gap-5 md:grid-cols-2">
             {pillars.map((pillar, i) => (
               <RevealItem key={pillar.title} variants={fadeUp} as="li">
                 <article className="group h-full rounded-2xl border border-hairline bg-white p-7 transition-[border-color,box-shadow,transform] duration-400 [transition-timing-function:var(--ease-out-soft)] hover:border-brand-200 hover:shadow-soft motion-safe:hover:-translate-y-1">
@@ -190,7 +190,7 @@ export default function AboutPage() {
           <ScrollReveal
             stagger={0.08}
             as="ul"
-            className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"
+            className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"
           >
             {team.map((person) => (
               <RevealItem key={person.name} variants={fadeUp} as="li">
@@ -225,7 +225,7 @@ export default function AboutPage() {
             title="Ten years, four turning points"
             className="max-w-3xl"
           />
-          <ScrollReveal stagger={0.08} as="ol" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ScrollReveal stagger={0.08} as="ol" className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {journey.map((milestone) => (
               <RevealItem key={milestone.year} variants={fadeUp} as="li">
                 <div className="h-full rounded-2xl border border-hairline bg-white p-6">

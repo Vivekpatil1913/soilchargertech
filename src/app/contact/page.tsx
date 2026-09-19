@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Briefcase, Mail, MapPin, MessageCircle, Phone, Users } from "lucide-react";
 
-import { addressOneLine, contact, socials } from "@/data/site";
+import { addressOneLine, contact } from "@/data/site";
 import { images } from "@/data/images";
 import { faqs } from "@/data/faqs";
 import { telHref, whatsappHref } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { SITE_URL } from "@/lib/constants";
 import { Container } from "@/components/common/Container";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { SocialLinks } from "@/components/common/SocialLinks";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { FaqAccordion } from "@/components/contact/FaqAccordion";
 
@@ -190,20 +191,7 @@ export default function ContactPage() {
 
               <div className="rounded-2xl border border-hairline bg-white p-6">
                 <h2 className="font-display text-lg font-bold text-ink-900">Follow SCT</h2>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {socials.map((social) => (
-                    <li key={social.label}>
-                      <a
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex rounded-full border border-hairline px-3.5 py-2 text-[0.82rem] font-medium text-ink-600 transition-colors hover:border-brand-300 hover:text-brand-700"
-                      >
-                        {social.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <SocialLinks tone="onLight" className="mt-4" />
               </div>
             </aside>
           </div>

@@ -31,7 +31,7 @@ export default function NotFound() {
           </CTAButton>
         </div>
 
-        <nav aria-label="Site sections" className="mt-14">
+        <nav aria-label="Site sections" className="mt-10">
           <h2 className="text-eyebrow text-ink-400">Or try one of these</h2>
           <ul className="mt-5 flex flex-wrap gap-2.5">
             {mainNav.map((item) => (

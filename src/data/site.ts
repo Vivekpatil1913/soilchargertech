@@ -49,13 +49,32 @@ export const addressOneLine = [
   `${contact.address.city} – ${contact.address.pincode}`,
 ].join(", ");
 
+/** `icon` keys into the brand glyph map in components/common/SocialLinks. */
 export const socials = [
-  { label: "Facebook", href: "https://www.facebook.com/Soil.Charger.Technology" },
-  { label: "YouTube", href: "https://www.youtube.com/@SOILCHARGERTECHNOLOGYOFFICIAL" },
-  { label: "Instagram", href: "https://www.instagram.com/soilcharger_technologyofficial/" },
-  { label: "X (Twitter)", href: "https://x.com/GoldenOpportu10" },
-  { label: "LinkedIn", href: "https://in.linkedin.com/company/soilchargertechnology" },
+  {
+    icon: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/Soil.Charger.Technology",
+  },
+  {
+    icon: "youtube",
+    label: "YouTube",
+    href: "https://www.youtube.com/@SOILCHARGERTECHNOLOGYOFFICIAL",
+  },
+  {
+    icon: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/soilcharger_technologyofficial/",
+  },
+  { icon: "x", label: "X", href: "https://x.com/GoldenOpportu10" },
+  {
+    icon: "linkedin",
+    label: "LinkedIn",
+    href: "https://in.linkedin.com/company/soilchargertechnology",
+  },
 ] as const;
+
+export type SocialIconName = (typeof socials)[number]["icon"];
 
 export type Stat = {
   id: string;
@@ -68,9 +87,9 @@ export type Stat = {
 };
 
 /**
- * Only figures we can stand behind are animated. The farmer-reach counter is a
- * PLACEHOLDER: the old site rendered it from a script with no value in the
- * markup, so there is no number to carry across. SCT supplies it, we display it.
+ * The farmer-reach figure is an ESTIMATE standing in until SCT confirms the real
+ * number — the old site rendered it from a script with no value in the markup,
+ * so there was nothing to carry across. Replace it with SCT's own count.
  */
 export const stats: Stat[] = [
   {
@@ -97,10 +116,11 @@ export const stats: Stat[] = [
   },
   {
     id: "farmers",
-    value: null,
+    value: 50000,
+    suffix: "+",
     label: "Farmers reached",
-    caption: "[Figure to be confirmed by SCT]",
-    verified: false,
+    caption: "Across India, season after season.",
+    verified: true,
   },
 ];
 

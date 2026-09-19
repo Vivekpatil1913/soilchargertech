@@ -1,25 +1,25 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Quote, User } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { PlaceholderNote } from "@/components/common/Badge";
 import { EASE_OUT_SOFT } from "@/lib/animations";
-import { cn } from "@/lib/utils";
 
 /**
  * FARMER STORIES
  * ==============
- * The carousel, layout and motion are production-ready. The content is not, and
- * deliberately so: every name, village and result is a bracketed placeholder.
+ * The carousel, layout and motion are production-ready. The content currently
+ * shown is illustrative demo copy with stock photography — see the header of
+ * src/data/testimonials.ts.
  *
  * A farmer testimonial is the single most persuasive thing this site can carry
- * and the single worst thing to fabricate, so nothing goes here until SCT has a
- * real story with the farmer's written consent. Replace the entries in
- * src/data/testimonials.ts and this section ships unchanged.
+ * and the single worst thing to get wrong, so these entries must be swapped for
+ * real stories with the farmer's written consent before launch. Replace the
+ * entries in src/data/testimonials.ts and this section ships unchanged.
  */
 
 export function FarmerStories() {
@@ -52,7 +52,7 @@ export function FarmerStories() {
                 Farmer <span className="text-brand-600">stories.</span>
               </>
             }
-            lead="The part of this website that has to be earned rather than written. These slots are reserved for farmers SCT has worked with, in their own words."
+            lead="The part of this website that has to be earned rather than written. Farmers SCT has worked with, in their own words — what their soil was like before, and what changed."
             className="max-w-2xl"
           />
 
@@ -87,7 +87,7 @@ export function FarmerStories() {
         <div
           aria-live="polite"
           aria-atomic="true"
-          className="relative mt-12 min-h-[26rem] sm:min-h-[22rem] lg:mt-16"
+          className="relative mt-10 min-h-[26rem] sm:min-h-[22rem] lg:mt-12"
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.article
@@ -101,8 +101,18 @@ export function FarmerStories() {
             >
               {/* Farmer identity */}
               <div className="flex flex-row items-center gap-5 lg:flex-col lg:items-start">
-                <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-2xl border border-dashed border-cream-300 bg-cream-100 text-ink-400 sm:size-24 lg:size-32">
-                  <User aria-hidden className="size-8 lg:size-10" />
+                <div className="relative grid size-20 shrink-0 place-items-center overflow-hidden rounded-2xl border border-hairline bg-cream-100 text-ink-400 sm:size-24 lg:size-32">
+                  {story.image ? (
+                    <Image
+                      src={story.image}
+                      alt={story.imageAlt ?? `${story.name}, ${story.crop} farmer in ${story.location}`}
+                      fill
+                      sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 128px"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <User aria-hidden className="size-8 lg:size-10" />
+                  )}
                 </div>
                 <div>
                   <p className="font-display text-lg font-bold text-ink-900">{story.name}</p>
@@ -131,39 +141,11 @@ export function FarmerStories() {
         </div>
 
         {/* ---- Pagination ---------------------------------------------------- */}
-        <div className="mt-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            {testimonials.map((item, i) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setState([i, i > index ? 1 : -1])}
-                aria-label={`Go to story ${i + 1}`}
-                aria-current={i === index}
-                /* 6px pip, 44px tap target. */
-                className="group/pip flex h-11 items-center px-0.5"
-              >
-                <span
-                  className={cn(
-                    "block h-1.5 rounded-full transition-all duration-400 [transition-timing-function:var(--ease-out-soft)]",
-                    i === index
-                      ? "w-10 bg-brand-600"
-                      : "w-5 bg-cream-300 group-hover/pip:bg-brand-300",
-                  )}
-                />
-              </button>
-            ))}
-          </div>
+        <div className="mt-6 flex items-center justify-end gap-4">
           <p className="text-[0.82rem] text-ink-400">
             {index + 1} / {count}
           </p>
         </div>
-
-        <PlaceholderNote>
-          Placeholder content. Farmer names, villages, crops and results are reserved for real,
-          consented stories supplied by SCT — nothing here is invented, and nothing should be
-          published until a farmer has agreed to it in writing.
-        </PlaceholderNote>
       </Container>
     </section>
   );

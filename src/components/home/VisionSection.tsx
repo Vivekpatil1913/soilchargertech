@@ -38,7 +38,7 @@ export function VisionSection() {
       </div>
 
       <Container width="wide" className="relative">
-        <div className="py-20 sm:py-24 lg:py-32">
+        <div className="section-y">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -66,7 +66,7 @@ export function VisionSection() {
             whileInView="visible"
             viewport={viewportOnce}
             variants={staggerParent(0.14, 0.2)}
-            className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:mt-20"
+            className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:mt-14"
           >
             {vision.map((line, i) => (
               <motion.li

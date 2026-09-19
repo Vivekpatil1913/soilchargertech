@@ -14,7 +14,25 @@ type ScrollRevealProps = {
   stagger?: number;
 };
 
-const MotionTag = motion.create as unknown as <T extends ElementType>(c: T) => ElementType;
+const create = motion.create as unknown as <T extends ElementType>(c: T) => ElementType;
+
+/**
+ * Motion components are cached per tag. Calling motion.create() during render
+ * returns a fresh component type each time, which makes React unmount and
+ * remount the subtree on every parent re-render — so a reveal that already
+ * played would play again (visibly, as a blink) whenever an unrelated piece of
+ * state near it changed, e.g. paging a carousel next to a section heading.
+ */
+const motionCache = new Map<ElementType, ElementType>();
+
+function MotionTag(as: ElementType): ElementType {
+  let Tag = motionCache.get(as);
+  if (!Tag) {
+    Tag = create(as);
+    motionCache.set(as, Tag);
+  }
+  return Tag;
+}
 
 /**
  * Wraps any block in the site's standard "reveal once on scroll" behaviour.

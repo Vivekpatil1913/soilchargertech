@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "text" | "onDark";
+type Variant = "primary" | "secondary" | "text" | "onDark" | "inverse" | "ghostOnDark";
 type Size = "md" | "lg";
 
 type CTAButtonProps = {
@@ -28,6 +28,15 @@ const variants: Record<Variant, string> = {
     "border border-brand-200 bg-white/70 text-brand-800 backdrop-blur hover:border-brand-500 hover:bg-white hover:text-brand-700",
   onDark:
     "border border-white/25 bg-white/10 text-white backdrop-blur hover:border-white/50 hover:bg-white/20",
+  /* Primary action sitting on a dark band — white fill, brand-coloured label.
+     A variant rather than a className override, because overriding `text-white`
+     from `primary` is decided by stylesheet order and silently loses, which is
+     how this button once ended up white-on-white. */
+  inverse:
+    "bg-white text-brand-800 shadow-[0_10px_28px_-14px_rgb(0_0_0/0.55)] hover:bg-cream-100 hover:text-brand-900",
+  /* Secondary action on a dark band: no fill until hovered. */
+  ghostOnDark:
+    "border border-transparent bg-transparent text-white hover:border-white/35 hover:bg-white/10",
   text: "text-brand-700 hover:text-brand-800",
 };
 

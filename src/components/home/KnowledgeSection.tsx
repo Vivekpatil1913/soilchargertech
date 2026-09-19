@@ -42,7 +42,7 @@ export function KnowledgeSection({ limit = 3 }: { limit?: number }) {
         <ScrollReveal
           stagger={0.09}
           as="ul"
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3"
         >
           {featured.map((article) => (
             <RevealItem key={article.slug} variants={fadeUp} as="li" className="h-full">

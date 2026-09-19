@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { footerNav, legalNav } from "@/data/navigation";
-import { addressOneLine, contact, site, socials } from "@/data/site";
+import { addressOneLine, contact, site } from "@/data/site";
 import { images } from "@/data/images";
 import { telHref } from "@/lib/utils";
 import { Container } from "@/components/common/Container";
+import { SocialLinks } from "@/components/common/SocialLinks";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 
@@ -32,7 +33,7 @@ export function Footer() {
       />
 
       <Container width="wide" className="relative">
-        <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-16">
+        <div className="grid gap-12 py-12 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-16">
           {/* ---- Brand + contact ------------------------------------------ */}
           <div>
             {/* The client's logo, used exactly as supplied. */}
@@ -127,19 +128,7 @@ export function Footer() {
 
         {/* ---- Bottom bar -------------------------------------------------- */}
         <div className="flex flex-col gap-6 border-t border-white/10 py-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block py-1.5 text-[0.85rem] text-cream-200/65 transition-colors hover:text-white"
-              >
-                {social.label}
-              </a>
-            ))}
-          </div>
+          <SocialLinks tone="onDark" />
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <LanguageSwitcher tone="onDark" />

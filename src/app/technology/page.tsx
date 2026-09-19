@@ -62,7 +62,7 @@ export default function TechnologyPage() {
             className="max-w-3xl"
           />
 
-          <ScrollReveal stagger={0.1} as="ul" className="mt-12 grid gap-6 lg:grid-cols-3">
+          <ScrollReveal stagger={0.1} as="ul" className="mt-10 grid gap-6 lg:grid-cols-3">
             {FOCUS.map((item) => (
               <RevealItem key={item.id} variants={fadeUp} as="li">
                 <article

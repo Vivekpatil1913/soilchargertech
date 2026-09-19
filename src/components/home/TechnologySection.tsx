@@ -48,7 +48,7 @@ export function TechnologySection() {
         {/* ---- The chain --------------------------------------------------- */}
         <ScrollReveal
           stagger={0.07}
-          className="mt-14 overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white via-brand-50/50 to-cream-100 p-5 shadow-soft sm:p-8 lg:mt-18"
+          className="mt-10 overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white via-brand-50/50 to-cream-100 p-5 shadow-soft sm:p-8 lg:mt-14"
         >
           <ol className="flex flex-col gap-3 lg:flex-row lg:items-stretch lg:gap-2">
             {soilChain.map((link, i) => (
@@ -96,7 +96,7 @@ export function TechnologySection() {
         </ScrollReveal>
 
         {/* ---- The detail --------------------------------------------------- */}
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:h-fit">
             <h3 className="text-h3 text-ink-900">What sits behind each link</h3>
             <p className="mt-4 text-[0.95rem] leading-relaxed text-ink-500">

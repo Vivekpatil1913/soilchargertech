@@ -38,7 +38,7 @@ export function ProductShowcase() {
         </div>
 
         {/* ---- The two ranges ---------------------------------------------- */}
-        <ScrollReveal stagger={0.12} className="mt-12 grid gap-5 md:grid-cols-2">
+        <ScrollReveal stagger={0.12} className="mt-10 grid gap-5 md:grid-cols-2">
           {ranges.map((range) => (
             <RevealItem
               key={range.id}

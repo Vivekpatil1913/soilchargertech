@@ -44,7 +44,7 @@ export function SolutionSection() {
           className="max-w-3xl"
         />
 
-        <ScrollReveal stagger={0.1} className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-18 lg:grid-cols-4">
+        <ScrollReveal stagger={0.1} className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4">
           {strategySteps.map((step, i) => {
             const Icon = ICONS[i];
             const accent = ACCENTS[i];
@@ -81,7 +81,7 @@ export function SolutionSection() {
           })}
         </ScrollReveal>
 
-        <ScrollReveal className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <ScrollReveal className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
           <CTAButton href="/about" variant="text">
             Read the full SCT story
           </CTAButton>

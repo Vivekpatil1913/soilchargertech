@@ -226,7 +226,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE_OUT_SOFT, delay: 1.05 }}
-          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline lg:mt-20 lg:grid-cols-4"
+          className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline lg:mt-14 lg:grid-cols-4"
         >
           {stats.map((stat) => (
             <div key={stat.id} className="bg-cream-50/80 p-5 backdrop-blur sm:p-6">

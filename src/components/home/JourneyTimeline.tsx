@@ -50,7 +50,7 @@ export function JourneyTimeline() {
           className="max-w-3xl"
         />
 
-        <div ref={railRef} className="relative mt-14 lg:mt-20">
+        <div ref={railRef} className="relative mt-10 lg:mt-14">
           {/* ---- Rail: vertical on mobile ---------------------------------- */}
           <div aria-hidden className="absolute bottom-0 left-[1.4rem] top-2 w-px bg-cream-300 lg:hidden">
             <motion.div
@@ -75,7 +75,7 @@ export function JourneyTimeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.6, ease: EASE_OUT_SOFT, delay: i * 0.08 }}
-                className="relative flex-1 pl-14 lg:pl-0 lg:pt-16"
+                className="relative flex flex-1 flex-col pl-14 lg:pl-0 lg:pt-16"
               >
                 {/* Marker */}
                 <motion.span
@@ -89,7 +89,7 @@ export function JourneyTimeline() {
                   <span className="size-3 rounded-full bg-brand-600" />
                 </motion.span>
 
-                <div className="rounded-2xl border border-hairline bg-white p-6 shadow-soft transition-shadow duration-400 hover:shadow-lift">
+                <div className="flex h-full flex-1 flex-col rounded-2xl border border-hairline bg-white p-6 shadow-soft transition-shadow duration-400 hover:shadow-lift">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="font-display text-2xl font-extrabold tracking-tight text-brand-700">
                       {milestone.year}
@@ -110,7 +110,7 @@ export function JourneyTimeline() {
           </ol>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-10">
           <CTAButton href="/journey" variant="secondary">
             Explore the full journey
           </CTAButton>

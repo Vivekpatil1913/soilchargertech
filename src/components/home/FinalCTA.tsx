@@ -48,7 +48,10 @@ export function FinalCTA() {
   return (
     <section aria-labelledby="cta-heading" className="section-y bg-cream-50">
       <Container width="wide">
-        <div className="relative overflow-hidden rounded-[2rem] bg-brand-900">
+        {/* text-cream-100 so anything inside inherits a light colour by
+            default — a link added here later cannot accidentally land on the
+            dark panel still carrying the page's near-black body colour. */}
+        <div className="relative overflow-hidden rounded-[2rem] bg-brand-900 text-cream-100">
           {/* Field photograph, held well back behind the copy */}
           <div aria-hidden className="absolute inset-0">
             <Image
@@ -86,11 +89,7 @@ export function FinalCTA() {
 
               <RevealItem variants={fadeUp}>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <CTAButton
-                    href="/contact"
-                    size="lg"
-                    className="bg-white text-brand-800 shadow-none hover:bg-cream-100 hover:shadow-none"
-                  >
+                  <CTAButton href="/contact" variant="inverse" size="lg">
                     Talk to SCT
                   </CTAButton>
                   <CTAButton href="/products" variant="onDark" size="lg">
