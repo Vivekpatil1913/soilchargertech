@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SOIL CHARGER TECHNOLOGY — DESIGN SYSTEM
+   Palette derived from the SCT logo:
+     · Sprout green gradient (leaf mark)      -> primary
+     · Saffron arc (upper crescent)           -> accent
+     · Deep maroon wordmark ("Soil Charger")  -> earth / headings
+     · White logo field                       -> cream & surface neutrals
+   ========================================================================== */
+
+@theme {
+  /* ---- Brand: green (primary) ---------------------------------------- */
+  --color-brand-50: #f0faf1;
+  --color-brand-100: #dbf2de;
+  --color-brand-200: #b9e5bf;
+  --color-brand-300: #8bd196;
+  --color-brand-400: #55b768;
+  --color-brand-500: #2f9c49;
+  --color-brand-600: #1b8a4b;
+  --color-brand-700: #146b3a;
+  --color-brand-800: #125430;
+  --color-brand-900: #0f4529;
+  --color-brand-950: #062715;
+
+  /* ---- Leaf: fresh highlight green from the sprout gradient ---------- */
+  --color-leaf-300: #a7dc6d;
+  --color-leaf-400: #8ecf4c;
+  --color-leaf-500: #7cc242;
+  --color-leaf-600: #64a233;
+
+  /* ---- Saffron: accent taken from the logo arc ----------------------- */
+  --color-saffron-50: #fff6ed;
+  --color-saffron-100: #ffe9d4;
+  --color-saffron-200: #fed0a8;
+  --color-saffron-300: #fdb071;
+  --color-saffron-400: #fb8c3a;
+  --color-saffron-500: #ef7c22;
+  --color-saffron-600: #d9600f;
+  --color-saffron-700: #b4480f;
+
+  /* ---- Earth: maroon wordmark + soil browns -------------------------- */
+  --color-earth-50: #fbf4f2;
+  --color-earth-100: #f5e5e1;
+  --color-earth-200: #eccdc5;
+  --color-earth-400: #c07a68;
+  --color-earth-600: #9a3a28;
+  --color-earth-700: #7b2419;
+  --color-earth-800: #611d15;
+  --color-earth-900: #4a1a14;
+
+  /* ---- Neutrals: warm cream ground, never pure black ----------------- */
+  --color-cream-50: #fdfcf8;
+  --color-cream-100: #fbf8f1;
+  --color-cream-200: #f4efe3;
+  --color-cream-300: #e8e0cf;
+
+  --color-ink-400: #8a8078;
+  --color-ink-500: #6b6259;
+  --color-ink-600: #4d453e;
+  --color-ink-700: #352e29;
+  --color-ink-900: #26201c;
+
+  /* ---- Semantic aliases ---------------------------------------------- */
+  --color-background: var(--color-cream-100);
+  --color-surface: #ffffff;
+  --color-foreground: var(--color-ink-900);
+  --color-muted: var(--color-ink-500);
+  --color-hairline: #e7e0d2;
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Radii ----------------------------------------------------------- */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+
+  /* ---- Elevation: soft, earthy, never heavy ---------------------------- */
+  --shadow-soft: 0 1px 2px rgb(38 32 28 / 0.04), 0 8px 24px -12px rgb(38 32 28 / 0.12);
+  --shadow-lift: 0 2px 6px rgb(38 32 28 / 0.05), 0 20px 44px -20px rgb(38 32 28 / 0.2);
+  --shadow-ring: 0 0 0 1px var(--color-hairline);
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 620ms;
+
+  /* ---- Breakpoints (mobile 320+, tablet 768+, laptop 1024+, desktop 1440+) */
+  --breakpoint-xs: 22.5rem; /* 360px */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px  tablet  */
+  --breakpoint-lg: 64rem; /* 1024px laptop  */
+  --breakpoint-xl: 80rem; /* 1280px         */
+  --breakpoint-2xl: 90rem; /* 1440px desktop */
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+
+    /* Safety net against sideways scroll. `clip` rather than `hidden` on
+       purpose: `hidden` would turn the root into a scroll container and stop
+       every `position: sticky` element on the site from sticking. `clip`
+       trims overflow without creating one. */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, brand-coloured focus for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  /* Google Translate injects a top banner + body offset; neutralise it so the
+     sticky header and hero are never pushed out of place. */
+  body {
+    top: 0 !important;
+  }
+
+  .skiptranslate iframe.skiptranslate {
+    display: none !important;
+  }
+
+  font[style] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ==========================================================================
+   FLUID TYPE SCALE — intentional at every breakpoint, not a shrunk desktop
+   ========================================================================== */
+
+@utility text-display {
+  font-size: clamp(2.35rem, 1.15rem + 5.2vw, 5.25rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+@utility text-h1 {
+  font-size: clamp(2rem, 1.15rem + 3.6vw, 3.85rem);
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+@utility text-h2 {
+  font-size: clamp(1.7rem, 1.1rem + 2.5vw, 2.95rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.026em;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.3rem, 1rem + 1.1vw, 1.8rem);
+  line-height: 1.22;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 0.98rem + 0.45vw, 1.28rem);
+  line-height: 1.62;
+}
+
+@utility text-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   COMPOSITION HELPERS
+   ========================================================================== */
+
+/* Section rhythm — the single source of vertical spacing. */
+@utility section-y {
+  padding-block: clamp(4rem, 2.2rem + 7vw, 8.5rem);
+}
+
+/* Warm paper texture: an extremely subtle grain so large cream areas do not
+   read as flat, empty screens on big displays. */
+@utility grain {
+  position: relative;
+}
+
+@utility grain-layer {
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(38 32 28 / 0.055) 1px,
+      transparent 0
+    );
+  background-size: 22px 22px;
+}
+
+/* Organic blurred colour field used behind hero + feature sections. */
+@utility bloom {
+  filter: blur(72px);
+  opacity: 0.5;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+/* Text CTA arrow that slides on hover — shared micro-interaction. */
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes sct-grow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sct-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(3deg);
+  }
+}
+
+@keyframes sct-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@utility animate-drift {
+  animation: sct-drift 9s var(--ease-in-out-soft) infinite;
+}
+
+@utility animate-marquee {
+  animation: sct-marquee 38s linear infinite;
+}
+
+/* ==========================================================================
+   REDUCED MOTION — simplified, not broken
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
