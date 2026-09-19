@@ -6,7 +6,6 @@ import { ArrowLeft } from "lucide-react";
 
 import { articles, getArticle } from "@/data/knowledge";
 import { Container } from "@/components/common/Container";
-import { PlaceholderNote } from "@/components/common/Badge";
 import { CTAButton } from "@/components/common/CTAButton";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
@@ -87,14 +86,19 @@ export default async function ArticlePage({ params }: Params) {
         <div className="section-y bg-cream-50">
           <Container width="narrow">
             <div className="text-[1.02rem] leading-[1.75] text-ink-600">
-              <p>{article.body}</p>
-            </div>
+              <p className="text-[1.1rem] leading-[1.7] text-ink-700">{article.intro}</p>
 
-            <PlaceholderNote>
-              This article is a commissioned stub. The full text is to be written with SCT&apos;s
-              agronomy team and translated into Marathi and Hindi before publication — the heading,
-              category, summary and reading time above are ready to keep.
-            </PlaceholderNote>
+              {article.body.map((section) => (
+                <section key={section.heading} className="mt-10">
+                  <h2 className="text-h3 text-ink-900">{section.heading}</h2>
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph} className="mt-4">
+                      {paragraph}
+                    </p>
+                  ))}
+                </section>
+              ))}
+            </div>
 
             <div className="mt-10 rounded-2xl border border-hairline bg-white p-7">
               <h2 className="text-h3 text-ink-900">Have a question about your own soil?</h2>

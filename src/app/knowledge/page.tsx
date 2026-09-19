@@ -8,7 +8,6 @@ import { images } from "@/data/images";
 import { Container } from "@/components/common/Container";
 import { PageHero } from "@/components/common/PageHero";
 import { ScrollReveal, RevealItem } from "@/components/common/ScrollReveal";
-import { PlaceholderNote } from "@/components/common/Badge";
 import { fadeUp } from "@/lib/animations";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
@@ -83,12 +82,6 @@ export default function KnowledgePage() {
               </RevealItem>
             ))}
           </ScrollReveal>
-
-          <PlaceholderNote>
-            Article summaries are written and ready. Full article bodies are to be written with
-            SCT&apos;s agronomy team and translated into Marathi and Hindi — see
-            src/data/knowledge.ts.
-          </PlaceholderNote>
         </Container>
       </section>
 

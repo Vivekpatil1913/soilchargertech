@@ -17,8 +17,17 @@ export const transitions = {
   slow: { duration: 0.9, ease: EASE_OUT_SOFT },
 } satisfies Record<string, Transition>;
 
-/** Standard viewport trigger: fires once, slightly before the element lands. */
-export const viewportOnce = { once: true, amount: 0.25, margin: "0px 0px -80px 0px" } as const;
+/**
+ * Standard viewport trigger: fires once, slightly before the element lands.
+ *
+ * `amount` must stay at "some" (IntersectionObserver threshold 0). A fractional
+ * threshold is unreachable for anything taller than the viewport — an element
+ * 4x the viewport height tops out at an intersection ratio of 0.25 — so a tall
+ * section or a long grid would never cross it and would sit at opacity 0
+ * forever. The negative bottom margin, not the threshold, is what holds the
+ * reveal back until the element has properly entered.
+ */
+export const viewportOnce = { once: true, amount: "some", margin: "0px 0px -80px 0px" } as const;
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 26 },

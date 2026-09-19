@@ -24,6 +24,10 @@ export function PageHero({ eyebrow, title, lead, image, children }: PageHeroProp
 
   return (
     <section
+      /* Read by the `:has()` rule in globals.css that lifts the fixed header's
+         links to cream while it is sitting over this hero. Set here rather than
+         in the header because only the hero knows how dark it is. */
+      data-hero={hasImage ? "dark" : "light"}
       className={cn(
         "relative overflow-hidden pb-14 pt-[7.5rem] sm:pb-16 lg:pb-20 lg:pt-[10rem]",
         hasImage ? "bg-brand-950 text-cream-100" : "bg-cream-100",

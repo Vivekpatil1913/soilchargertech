@@ -4,13 +4,13 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { products as allProducts, productRanges, type ProductRange } from "@/data/products";
 import { ProductCard } from "./ProductCard";
-import { fadeUp, staggerParent, viewportOnce } from "@/lib/animations";
+import { transitions, viewportOnce } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 /**
  * The full catalogue with a range filter. Filtering is client-side over a small
  * static array — no fetch, no loading state, and the cards re-flow with a short
- * stagger so the change reads as a transition rather than a jump.
+ * per-card delay so the change reads as a transition rather than a jump.
  */
 
 type Filter = "all" | ProductRange;
@@ -67,20 +67,31 @@ export function ProductGrid({ initialRange = "all" }: { initialRange?: Filter })
         </p>
       ) : null}
 
-      <motion.ul
+      {/* The reveal sits on each card, not on the <ul>. With 21 cards the list
+          runs several screens tall, and a viewport trigger on a container that
+          size fires late or not at all — the cards would stay at opacity 0. Per
+          card it also reads better: rows arrive as you reach them. The small
+          index-based delay ripples each row left to right in place of the
+          parent stagger. */}
+      <ul
         key={filter}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-        variants={staggerParent(0.05)}
         className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       >
-        {products.map((product) => (
-          <motion.li key={product.id} variants={fadeUp} className="h-full">
+        {products.map((product, i) => (
+          <motion.li
+            key={product.id}
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            /* Written out rather than reusing the fadeUp variant: a variant
+               carries its own transition, which would swallow this delay. */
+            transition={{ ...transitions.base, delay: (i % 4) * 0.06 }}
+            className="h-full"
+          >
             <ProductCard product={product} className="h-full" />
           </motion.li>
         ))}
-      </motion.ul>
+      </ul>
     </div>
   );
 }

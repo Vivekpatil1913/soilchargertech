@@ -79,7 +79,12 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tr-[5rem] shadow-lift">
+              {/* 6:5, down from the 4:5 this started as. At 4:5 the photograph
+                  alone ran past the bottom of the story text beside it, pushing
+                  the founder card away from the copy it belongs with. This crop
+                  is the tallest that still lands the card level with the text,
+                  so the column ends about where the left one does. */}
+              <div className="relative aspect-[6/5] overflow-hidden rounded-[2rem] rounded-tr-[5rem] shadow-lift">
                 <Image
                   src={images.farmers.bullock.src}
                   alt={images.farmers.bullock.alt}

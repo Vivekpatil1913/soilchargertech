@@ -223,6 +223,46 @@
    COMPOSITION HELPERS
    ========================================================================== */
 
+/* ==========================================================================
+   HEADER OVER A DARK HERO
+   ==========================================================================
+   The fixed header is transparent until the visitor scrolls, and its links are
+   dark ink — correct over the cream home hero, unreadable over the brand-950
+   photo heroes that products, applications, contact, farmer stories, journey,
+   knowledge and technology open on.
+
+   The hero tags itself with data-hero="dark"; these rules lift the links while
+   the header is still transparent over it. Done in CSS with :has() rather than
+   in React because the header lives in the layout, above the page that knows
+   its own hero — passing the tone upward would mean a context set after mount,
+   which paints dark-on-dark for a frame first. This is right in the initial
+   server render, and any page added later is covered with no route list to
+   maintain.
+
+   Scoped to [data-scrolled="false"]: once the bar turns solid cream the links
+   want their dark ink back. */
+
+/* Base link colour over the dark hero. */
+:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-link] {
+  color: color-mix(in oklab, var(--color-cream-100) 82%, transparent);
+}
+
+:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-link]:hover {
+  color: #fff;
+}
+
+/* The current page. Same specificity as the :hover rule above, so it is placed
+   after it deliberately — source order is what decides the tie. */
+:root:has([data-hero="dark"])
+  [data-site-header][data-scrolled="false"]
+  [data-nav-link][aria-current="page"] {
+  color: var(--color-leaf-400);
+}
+
+:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-underline] {
+  background-color: var(--color-leaf-400);
+}
+
 /* Section rhythm — the single source of vertical spacing. */
 @utility section-y {
   padding-block: clamp(2.25rem, 1.4rem + 2.6vw, 4rem);

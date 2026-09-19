@@ -15,11 +15,24 @@ import { Logo } from "./Logo";
 /**
  * Sticky header.
  *
- * It starts transparent so the hero photograph reads full-bleed, then settles
- * into a solid cream bar with a hairline once the visitor scrolls past it. The
- * full link set appears from 1280px up; below that the bar stays deliberately
- * sparse — logo, language, call to action, menu — rather than cramming nine
- * items into a tablet width.
+ * It starts transparent so the hero reads full-bleed, then settles into a solid
+ * cream bar with a hairline once the visitor scrolls past it.
+ *
+ * Link colour is the subtle part. The links are dark ink, which is right over
+ * the cream home hero but invisible over the `bg-brand-950` photo heroes that
+ * seven inner pages open on. Rather than thread the hero's tone up from the
+ * page into the layout's header — which React cannot do cleanly in this
+ * direction, and which would flash the wrong colour before hydration — the
+ * hero marks itself with `data-hero="dark"` and a `:has()` rule in globals.css
+ * lifts the links to cream. That is correct in the first server-rendered paint
+ * and needs no list of which routes are dark.
+ *
+ * The data attributes below are the hooks for that rule; `data-scrolled` scopes
+ * it to the transparent state only, since the solid bar wants dark ink again.
+ *
+ * The full link set appears from 1280px up; below that the bar stays
+ * deliberately sparse — logo, language, call to action, menu — rather than
+ * cramming nine items into a tablet width.
  */
 
 export function Navbar() {
@@ -60,6 +73,8 @@ export function Navbar() {
         initial={{ y: -28, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+        data-site-header
+        data-scrolled={scrolled ? "true" : "false"}
         className={cn(
           "fixed inset-x-0 top-0 z-[60] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-400 [transition-timing-function:var(--ease-out-soft)]",
           scrolled
@@ -79,6 +94,7 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
+                      data-nav-link
                       className={cn(
                         "group relative inline-flex items-center rounded-full px-3.5 py-2 text-[0.875rem] font-medium transition-colors duration-200",
                         active ? "text-brand-700" : "text-ink-600 hover:text-ink-900",
@@ -89,6 +105,7 @@ export function Navbar() {
                           the current page. */}
                       <span
                         aria-hidden
+                        data-nav-underline
                         className={cn(
                           "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-center rounded-full bg-brand-600 transition-transform duration-300 [transition-timing-function:var(--ease-out-soft)]",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
