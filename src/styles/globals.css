@@ -2,107 +2,116 @@
 
 /* ==========================================================================
    SOIL CHARGER TECHNOLOGY — DESIGN SYSTEM
-   Palette derived from the SCT logo:
-     · Sprout green gradient (leaf mark)      -> primary
-     · Saffron arc (upper crescent)           -> accent
-     · Deep maroon wordmark ("Soil Charger")  -> earth / headings
-     · White logo field                       -> cream & surface neutrals
+   ==========================================================================
+   Built from two references, documented in docs/design-reference-scope.md and
+   docs/design-reference-sumago.md:
+
+     · SCOPE's restraint    — a small token set, hierarchy carried by opacity
+                              rather than by more colours; two hover lifts; one
+                              signature text effect used sparingly.
+     · Sumago's machinery   — easing tokens, per-element animation clocks, a
+                              composable background-texture layer, and a
+                              three-level reduced-motion contract.
+
+   Everything here is CSS. No animation library drives a background or a
+   heading; framer-motion is used only for scroll reveals and the hero.
+
+   PALETTE PROVENANCE
+   ------------------
+   Sampled directly from the client's logo file (public/logo/soillogo.jpg):
+
+     #009c54  the lower arc          -> brand green, the primary
+     #6cb454  the sprout leaves      -> leaf, the highlight
+     #f08430  the upper arc          -> saffron, the accent
+     #782424  the wordmark           -> earth, for soil bands and depth
+
+   The client asked for green across the whole site, and the logo already
+   agrees: green is its dominant hue. Saffron and earth appear only as accents
+   and as dark grounds, never as large fields of colour.
    ========================================================================== */
 
 @theme {
-  /* ---- Brand: green (primary) ---------------------------------------- */
-  --color-brand-50: #f0faf1;
-  --color-brand-100: #dbf2de;
-  --color-brand-200: #b9e5bf;
-  --color-brand-300: #8bd196;
-  --color-brand-400: #55b768;
-  --color-brand-500: #2f9c49;
-  /* Darkened from the logo's #1b8a4b so white text on a filled brand button
-     clears WCAG AA: #1b8a4b gave 4.39:1 against white, just under the 4.5
-     needed at button text sizes. This reads 5.0:1 and still sits inside the
-     logo's green family. */
-  --color-brand-600: #17803f;
-  --color-brand-700: #146b3a;
-  --color-brand-800: #125430;
-  --color-brand-900: #0f4529;
-  --color-brand-950: #062715;
+  /* ---- Brand green — the primary ------------------------------------- */
+  --color-brand-50: #eefaf1;
+  --color-brand-100: #d5f3de;
+  --color-brand-200: #ade6c1;
+  --color-brand-300: #77d29d;
+  --color-brand-400: #43b87a;
+  --color-brand-500: #16a05c;
+  /* 500 and below clear WCAG AA for white text at button sizes. */
+  --color-brand-600: #009c54;
+  --color-brand-700: #077a45;
+  --color-brand-800: #095f39;
+  --color-brand-900: #094e30;
+  --color-brand-950: #032b1a;
 
-  /* ---- Leaf: fresh highlight green from the sprout gradient ---------- */
-  --color-leaf-300: #a7dc6d;
-  --color-leaf-400: #8ecf4c;
-  --color-leaf-500: #7cc242;
-  --color-leaf-600: #64a233;
+  /* ---- Leaf — the sprout highlight, for accents on dark -------------- */
+  --color-leaf-200: #d4eebb;
+  --color-leaf-300: #b6e18f;
+  --color-leaf-400: #93d05f;
+  --color-leaf-500: #6cb454;
+  --color-leaf-600: #559440;
 
-  /* ---- Saffron: accent taken from the logo arc ----------------------- */
-  --color-saffron-50: #fff6ed;
-  --color-saffron-100: #ffe9d4;
-  --color-saffron-200: #fed0a8;
-  --color-saffron-300: #fdb071;
-  --color-saffron-400: #fb8c3a;
-  --color-saffron-500: #ef7c22;
-  --color-saffron-600: #d9600f;
-  --color-saffron-700: #b4480f;
+  /* ---- Saffron — the upper arc --------------------------------------- */
+  --color-saffron-50: #fff5ed;
+  --color-saffron-100: #ffe7d3;
+  --color-saffron-200: #fecba6;
+  --color-saffron-300: #fca86e;
+  --color-saffron-400: #f8873f;
+  --color-saffron-500: #f08430;
+  --color-saffron-600: #d66311;
+  --color-saffron-700: #ad4a11;
 
-  /* ---- Earth: maroon wordmark + soil browns -------------------------- */
-  --color-earth-50: #fbf4f2;
-  --color-earth-100: #f5e5e1;
-  --color-earth-200: #eccdc5;
-  --color-earth-400: #c07a68;
-  --color-earth-600: #9a3a28;
-  --color-earth-700: #7b2419;
-  --color-earth-800: #611d15;
-  --color-earth-900: #4a1a14;
+  /* ---- Earth — the maroon wordmark, and soil browns ------------------ */
+  --color-earth-50: #fcf4f2;
+  --color-earth-100: #f8e4e0;
+  --color-earth-200: #f0cbc4;
+  --color-earth-400: #c07b6c;
+  --color-earth-600: #9a3f2d;
+  --color-earth-700: #782424;
+  --color-earth-800: #5d1c1a;
+  --color-earth-900: #3d1512;
 
-  /* ---- Neutrals: warm cream ground, never pure black ----------------- */
-  --color-cream-50: #fdfcf8;
-  --color-cream-100: #fbf8f1;
-  --color-cream-200: #f4efe3;
-  --color-cream-300: #e8e0cf;
+  /* ---- Sand — the warm neutral that alternates with green on the
+     team cards, so five portraits in a row do not read as one flat field -- */
+  --color-sand-100: #f4eee2;
+  --color-sand-200: #e9e0cc;
+  --color-sand-300: #d9cbac;
+  --color-sand-600: #97853f;
+  --color-sand-700: #766637;
 
-  --color-ink-400: #8a8078;
-  --color-ink-500: #6b6259;
-  --color-ink-600: #4d453e;
-  --color-ink-700: #352e29;
-  --color-ink-900: #26201c;
+  /* ---- Sage — neutrals, tinted green so nothing reads as cold grey --- */
+  --color-sage-50: #f6faf7;
+  --color-sage-100: #edf5ef;
+  --color-sage-200: #dfebe2;
+  --color-sage-300: #c7dccc;
+  --color-sage-400: #a3c0aa;
 
-  /* ---- Semantic aliases ---------------------------------------------- */
-  --color-background: var(--color-cream-100);
+  /* ---- Ink — darks, also green-mixed --------------------------------- */
+  --color-ink-300: #9aa79e;
+  --color-ink-400: #7c8a81;
+  --color-ink-500: #5b6a60;
+  --color-ink-600: #3f4e45;
+  --color-ink-700: #2a3830;
+  --color-ink-800: #1c2922;
+  --color-ink-900: #121d17;
+
+  /* ---- Semantic ------------------------------------------------------- */
+  --color-background: var(--color-sage-50);
   --color-surface: #ffffff;
-  --color-foreground: var(--color-ink-900);
-  --color-muted: var(--color-ink-500);
-  --color-hairline: #e7e0d2;
+  --color-hairline: #dfeae2;
 
-  /* ---- Typography ------------------------------------------------------ */
-  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* ---- Type ----------------------------------------------------------- */
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Decoration only — the handwritten margin notes in the benefits section. */
+  --font-script: "Caveat", "Segoe Script", cursive;
 
-  /* ---- Radii ----------------------------------------------------------- */
-  --radius-xs: 0.375rem;
-  --radius-sm: 0.625rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 1.75rem;
-  --radius-2xl: 2.25rem;
-
-  /* ---- Elevation: soft, earthy, never heavy ---------------------------- */
-  --shadow-soft: 0 1px 2px rgb(38 32 28 / 0.04), 0 8px 24px -12px rgb(38 32 28 / 0.12);
-  --shadow-lift: 0 2px 6px rgb(38 32 28 / 0.05), 0 20px 44px -20px rgb(38 32 28 / 0.2);
-  --shadow-ring: 0 0 0 1px var(--color-hairline);
-
-  /* ---- Motion ---------------------------------------------------------- */
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
-  --duration-fast: 180ms;
-  --duration-base: 320ms;
-  --duration-slow: 620ms;
-
-  /* ---- Breakpoints (mobile 320+, tablet 768+, laptop 1024+, desktop 1440+) */
-  --breakpoint-xs: 22.5rem; /* 360px */
-  --breakpoint-sm: 40rem; /* 640px */
-  --breakpoint-md: 48rem; /* 768px  tablet  */
-  --breakpoint-lg: 64rem; /* 1024px laptop  */
-  --breakpoint-xl: 80rem; /* 1280px         */
-  --breakpoint-2xl: 90rem; /* 1440px desktop */
+  /* ---- Motion tokens -------------------------------------------------- */
+  /* Named after their job, so a call site reads as intent, not as numbers. */
+  --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-expressive: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ==========================================================================
@@ -110,28 +119,26 @@
    ========================================================================== */
 
 @layer base {
-  * {
+  *,
+  ::before,
+  ::after {
     border-color: var(--color-hairline);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-
-    /* Safety net against sideways scroll. `clip` rather than `hidden` on
-       purpose: `hidden` would turn the root into a scroll container and stop
-       every `position: sticky` element on the site from sticking. `clip`
-       trims overflow without creating one. */
+    /* `clip`, never `hidden` — `hidden` turns the root into a scroll container
+       and silently breaks every `position: sticky` element on the site. */
     overflow-x: clip;
   }
 
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--color-ink-900);
     font-family: var(--font-sans);
-    font-synthesis-weight: none;
-    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1,
@@ -139,7 +146,9 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.022em;
+    /* Tight negative tracking on headings against wide positive tracking on
+       uppercase eyebrows is most of what makes a page read as current. */
+    letter-spacing: -0.032em;
     text-wrap: balance;
   }
 
@@ -147,7 +156,6 @@
     text-wrap: pretty;
   }
 
-  /* Visible, brand-coloured focus for keyboard users only. */
   :focus-visible {
     outline: 2px solid var(--color-brand-600);
     outline-offset: 3px;
@@ -159,9 +167,12 @@
     color: var(--color-brand-900);
   }
 
-  /* Google Translate injects a top banner + body offset; neutralise it so the
-     sticky header and hero are never pushed out of place. */
-  body {
+  /* Google Translate injects a banner and offsets <body>; neutralise both so
+     the sticky header never gets pushed out of place. The exception is while
+     an overlay holds a scroll lock: that pins the body with its own `top`,
+     and forcing 0 here would throw the reader back to the top of the page.
+     See src/lib/scroll-lock.ts. */
+  body:not([data-scroll-locked]) {
     top: 0 !important;
   }
 
@@ -176,155 +187,339 @@
 }
 
 /* ==========================================================================
-   FLUID TYPE SCALE — intentional at every breakpoint, not a shrunk desktop
+   TYPE SCALE — fluid, so there are no jumps between breakpoints
    ========================================================================== */
 
 @utility text-display {
-  font-size: clamp(2.35rem, 1.15rem + 5.2vw, 5.25rem);
-  line-height: 1.02;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.5rem, 1.3rem + 4.8vw, 4.9rem);
+  line-height: 1.03;
+  font-weight: 800;
+  letter-spacing: -0.038em;
 }
 
 @utility text-h1 {
-  font-size: clamp(2rem, 1.15rem + 3.6vw, 3.85rem);
-  line-height: 1.06;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.1rem, 1.4rem + 2.9vw, 3.5rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.032em;
 }
 
 @utility text-h2 {
-  font-size: clamp(1.7rem, 1.1rem + 2.5vw, 2.95rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.026em;
+  font-size: clamp(1.8rem, 1.3rem + 2.1vw, 2.75rem);
+  line-height: 1.14;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 @utility text-h3 {
-  font-size: clamp(1.3rem, 1rem + 1.1vw, 1.8rem);
-  line-height: 1.22;
-  font-weight: 600;
-  letter-spacing: -0.018em;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.022em;
 }
 
 @utility text-lead {
-  font-size: clamp(1.0625rem, 0.98rem + 0.45vw, 1.28rem);
-  line-height: 1.62;
+  font-size: clamp(1.02rem, 0.98rem + 0.25vw, 1.15rem);
+  line-height: 1.68;
 }
 
 @utility text-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 0.76rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 /* ==========================================================================
-   COMPOSITION HELPERS
+   LAYOUT
    ========================================================================== */
 
-/* ==========================================================================
-   HEADER OVER A DARK HERO
-   ==========================================================================
-   The fixed header is transparent until the visitor scrolls, and its links are
-   dark ink — correct over the cream home hero, unreadable over the brand-950
-   photo heroes that products, applications, contact, farmer stories, journey,
-   knowledge and technology open on.
-
-   The hero tags itself with data-hero="dark"; these rules lift the links while
-   the header is still transparent over it. Done in CSS with :has() rather than
-   in React because the header lives in the layout, above the page that knows
-   its own hero — passing the tone upward would mean a context set after mount,
-   which paints dark-on-dark for a frame first. This is right in the initial
-   server render, and any page added later is covered with no route list to
-   maintain.
-
-   Scoped to [data-scrolled="false"]: once the bar turns solid cream the links
-   want their dark ink back. */
-
-/* Base link colour over the dark hero. */
-:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-link] {
-  color: color-mix(in oklab, var(--color-cream-100) 82%, transparent);
+/* The only element that owns horizontal gutters, which is what guarantees a
+   20px side margin at every width and stops sideways scroll for good. */
+@utility shell {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
 }
 
-:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-link]:hover {
-  color: #fff;
+@utility shell-wide {
+  width: 100%;
+  max-width: 92rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
 }
 
-/* The current page. Same specificity as the :hover rule above, so it is placed
-   after it deliberately — source order is what decides the tie. */
-:root:has([data-hero="dark"])
-  [data-site-header][data-scrolled="false"]
-  [data-nav-link][aria-current="page"] {
-  color: var(--color-leaf-400);
+@utility shell-narrow {
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
 }
 
-:root:has([data-hero="dark"]) [data-site-header][data-scrolled="false"] [data-nav-underline] {
-  background-color: var(--color-leaf-400);
+@media (min-width: 640px) {
+  .shell,
+  .shell-wide,
+  .shell-narrow {
+    padding-inline: 2rem;
+  }
 }
 
-/* Section rhythm — the single source of vertical spacing. */
+@media (min-width: 1024px) {
+  .shell,
+  .shell-wide,
+  .shell-narrow {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Vertical rhythm. One value, used by every section on the site. */
 @utility section-y {
-  padding-block: clamp(2.25rem, 1.4rem + 2.6vw, 4rem);
+  padding-block: 4.5rem;
 }
 
-/* Warm paper texture: an extremely subtle grain so large cream areas do not
-   read as flat, empty screens on big displays. */
-@utility grain {
-  position: relative;
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: 6rem;
+  }
 }
 
-@utility grain-layer {
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      rgb(38 32 28 / 0.055) 1px,
-      transparent 0
-    );
-  background-size: 22px 22px;
-}
-
-/* Organic blurred colour field used behind hero + feature sections. */
-@utility bloom {
-  filter: blur(72px);
-  opacity: 0.5;
-  border-radius: 9999px;
-  pointer-events: none;
-}
-
-/* Text CTA arrow that slides on hover — shared micro-interaction. */
-@utility link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 600;
+@media (min-width: 1280px) {
+  .section-y {
+    padding-block: 7rem;
+  }
 }
 
 /* ==========================================================================
-   KEYFRAMES
+   GROUNDS
+   --------------------------------------------------------------------------
+   Four bands the whole site is built from. Alternating them is what gives the
+   page its rhythm; each section picks exactly one.
    ========================================================================== */
 
-@keyframes sct-grow {
-  from {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  to {
-    transform: scaleY(1);
-    opacity: 1;
-  }
+@utility ground-light {
+  background-color: var(--color-sage-50);
 }
 
-@keyframes sct-drift {
+@utility ground-tint {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-sage-100) 0%,
+    var(--color-sage-50) 55%,
+    var(--color-sage-100) 100%
+  );
+}
+
+/* Deep green, almost black. White cards lift off it. */
+@utility ground-forest {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #071a10;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(145deg, #05150c 0%, #0a2716 40%, #0d3a20 70%, #14512f 100%);
+  background-size:
+    54px 54px,
+    54px 54px,
+    100% 100%;
+}
+
+/* Soil brown, from the wordmark maroon. Used once, for the problem section. */
+@utility ground-soil {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #1b0f0c;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(145deg, #170c0a 0%, #2c1511 46%, #4a1a16 100%);
+  background-size:
+    58px 58px,
+    58px 58px,
+    100% 100%;
+}
+
+/* ==========================================================================
+   FX — composable background textures
+   --------------------------------------------------------------------------
+   Every colour is alpha-only, so one class works over forest green, soil brown
+   or a pale sage band without being rewritten. Drop on an absolutely-positioned
+   `aria-hidden` div inside a `relative overflow-hidden` parent.
+   ========================================================================== */
+
+@utility fx-mesh {
+  background-image:
+    radial-gradient(40% 50% at 20% 30%, rgb(255 255 255 / 0.09), transparent 60%),
+    radial-gradient(40% 50% at 80% 20%, rgb(147 208 95 / 0.12), transparent 60%),
+    radial-gradient(45% 55% at 72% 82%, rgb(255 255 255 / 0.05), transparent 62%),
+    radial-gradient(42% 52% at 24% 86%, rgb(0 156 84 / 0.1), transparent 62%);
+  background-size: 180% 180%;
+}
+
+@utility fx-streaks {
+  background-image: repeating-linear-gradient(
+    115deg,
+    transparent 0 32px,
+    rgb(255 255 255 / 0.05) 32px 33px,
+    transparent 33px 66px
+  );
+}
+
+@utility fx-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.16) 1.4px, transparent 0);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(74% 72% at 50% 44%, #000 22%, transparent 82%);
+  mask-image: radial-gradient(74% 72% at 50% 44%, #000 22%, transparent 82%);
+}
+
+/* A blurred colour field. Sized and coloured at the call site. */
+@utility bloom {
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+@keyframes fx-mesh-pan {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    background-position:
+      0 0,
+      100% 0,
+      100% 100%,
+      0 100%;
   }
   50% {
-    transform: translate3d(0, -14px, 0) rotate(3deg);
+    background-position:
+      40% 30%,
+      60% 20%,
+      50% 70%,
+      30% 80%;
   }
 }
 
-@keyframes sct-marquee {
+@keyframes fx-streak-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-1.4%, 1%, 0) scale(1.09);
+  }
+}
+
+@keyframes fx-dot-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32px 32px;
+  }
+}
+
+/* Two orbs on deliberately mismatched clocks (23s and 29s). Because neither
+   divides evenly into the other, the pairing never visibly repeats — which is
+   what makes the movement read as organic rather than as a loop. */
+@keyframes bloom-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(7rem, 4rem, 0) scale(1.16);
+  }
+}
+
+@keyframes bloom-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-6rem, -3.5rem, 0) scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-mesh {
+    animation: fx-mesh-pan 19s ease-in-out infinite;
+  }
+  .fx-streaks {
+    animation: fx-streak-drift 16s ease-in-out infinite;
+  }
+  .fx-dots {
+    animation: fx-dot-pan 9s linear infinite;
+  }
+  .bloom-a {
+    animation: bloom-drift-a 23s ease-in-out infinite alternate;
+  }
+  .bloom-b {
+    animation: bloom-drift-b 29s ease-in-out infinite alternate;
+  }
+}
+
+/* ==========================================================================
+   SIGNATURE TEXT EFFECT
+   --------------------------------------------------------------------------
+   Two backgrounds clipped to the glyphs: a static green gradient underneath,
+   and a light band sweeping across it. The green never moves — only the gloss
+   does, which is what stops it reading as a flashing effect.
+
+   One use per page. Used more often it stops meaning anything.
+   ========================================================================== */
+
+@keyframes leaf-shine {
+  from {
+    background-position:
+      165% 0,
+      0 0;
+  }
+  to {
+    background-position:
+      -65% 0,
+      0 0;
+  }
+}
+
+@utility text-shine {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image:
+    linear-gradient(
+      112deg,
+      transparent 36%,
+      rgb(255 255 255 / 0.45) 45%,
+      rgb(255 255 255 / 0.9) 50%,
+      rgb(255 255 255 / 0.45) 55%,
+      transparent 64%
+    ),
+    linear-gradient(172deg, #b6e18f 0%, #93d05f 24%, #43b87a 52%, #16a05c 74%, #b6e18f 100%);
+  background-size:
+    200% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 1px 1px rgb(3 43 26 / 0.3));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-shine {
+    animation: leaf-shine 4.2s linear infinite;
+  }
+}
+
+/* ==========================================================================
+   MARQUEE
+   --------------------------------------------------------------------------
+   The track's content must be duplicated in the DOM for -50% to loop
+   seamlessly. The mask dissolves both edges so nothing clips against a hard
+   boundary, and hovering the parent `group` pauses it so a reader can finish
+   the line they are on.
+   ========================================================================== */
+
+@keyframes marquee-x {
   from {
     transform: translate3d(0, 0, 0);
   }
@@ -333,16 +528,65 @@
   }
 }
 
-@utility animate-drift {
-  animation: sct-drift 9s var(--ease-in-out-soft) infinite;
+@utility marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7% 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7% 93%, transparent);
 }
 
-@utility animate-marquee {
-  animation: sct-marquee 38s linear infinite;
+@utility marquee-track {
+  display: inline-flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    /* Speed is set per instance with --dur, so paired rows can run at
+       different rates from the same class. */
+    animation: marquee-x var(--dur, 40s) linear infinite;
+  }
+  .group:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 /* ==========================================================================
-   REDUCED MOTION — simplified, not broken
+   ELEVATION — negative spread only, never a default Tailwind shadow
+   --------------------------------------------------------------------------
+   The negative spread keeps a shadow tucked under the card rather than haloing
+   it. The tinted variants make the brand colour read as if it emits light.
+   ========================================================================== */
+
+@utility shadow-card {
+  box-shadow: 0 24px 48px -24px rgb(9 78 48 / 0.24);
+}
+
+@utility shadow-card-lg {
+  box-shadow: 0 32px 64px -28px rgb(9 78 48 / 0.3);
+}
+
+@utility shadow-dark {
+  box-shadow: 0 28px 56px -26px rgb(0 0 0 / 0.6);
+}
+
+@utility shadow-brand-glow {
+  box-shadow: 0 18px 44px -14px rgb(0 156 84 / 0.5);
+}
+
+/* Percentage radius scales with the element, so a 44px tile and a 96px tile
+   keep the same visual curvature — better than a fixed radius at mixed sizes. */
+@utility rounded-squircle {
+  border-radius: 28%;
+}
+
+/* ==========================================================================
+   REDUCED MOTION — level one of three
+   --------------------------------------------------------------------------
+   Level 1 is this global kill. Level 2 is the `@media (prefers-reduced-motion:
+   no-preference)` blocks above, which mean the animations are never declared
+   for a visitor who opted out. Level 3 is `motion-safe:` / `motion-reduce:` at
+   the call site. All three are in use.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -351,8 +595,8 @@
   }
 
   *,
-  *::before,
-  *::after {
+  ::before,
+  ::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

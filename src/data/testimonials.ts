@@ -1,78 +1,117 @@
 /**
- * FARMER STORIES — DEMO DATA
- * ==========================
- * These entries are illustrative sample content used to demonstrate the
- * carousel with realistic copy and photography. They are NOT real farmers and
- * must be replaced before launch with stories SCT has verified and for which
- * the farmer has given written consent covering their name, village and
- * photograph.
+ * FARMER VOICES
+ * =============
+ * SOURCING RULE: only what SCT actually published.
  *
- * When replacing: keep `quote` to two or three sentences in the farmer's own
- * phrasing, and point `image` at their consented photograph.
+ * The old site carried exactly two testimonials, both in Marathi, both with
+ * the farmer's name and contact number given by the farmer himself. They are
+ * reproduced verbatim below with an English gloss, and nothing has been added
+ * to them.
+ *
+ * A previous version of this file held six invented farmers with invented
+ * yield figures ("42 to 58 tonnes per acre"). Those have been removed. A
+ * fabricated testimonial on a live commercial site is a real problem whatever
+ * the placeholder comment next to it says, and invented agronomic results are
+ * worse than no results at all.
+ *
+ * TO ADD MORE
+ * -----------
+ * Collect the farmer's own words, their village, and written consent covering
+ * the name and photograph, then append an entry:
+ *
+ *   {
+ *     id: "farmer-name",              // kebab-case, unique
+ *     name: "शेतकऱ्याचे नाव",
+ *     location: "गाव, तालुका, जिल्हा",
+ *     quote: "…",                     // his words, verbatim, not tidied up
+ *     gloss: "…",                     // editorial reference; not shown on the page
+ *     phone: "+91 …",                 // only if he published it himself
+ *     verified: true,                 // only when both of the above are true
+ *   },
+ *
+ * The section rearranges itself: at three or more entries the cards become a
+ * slider, so nothing else needs changing. `gloss` is no longer printed under
+ * the quote — it is kept so whoever edits this file can read what they are
+ * moving.
+ *
+ * SCT's YouTube channel has years of this material already; it needs consent
+ * and transcription, not invention.
  */
-
-import { images } from "@/data/images";
 
 export type Testimonial = {
   id: string;
   name: string;
   location: string;
-  crop: string;
+  /** The farmer's own words, as published. */
   quote: string;
-  result: string;
-  /** Photograph path once consent is in hand. */
+  /** Editorial reference for whoever edits this file. Not rendered. */
+  gloss: string;
+  /** Contact the farmer published alongside the testimonial. */
+  phone?: string;
+  /** Photograph path, once consent is in hand. */
   image?: string;
   imageAlt?: string;
-  isPlaceholder: boolean;
+  /** True only when SCT published it and the farmer consented. */
+  verified: boolean;
 };
 
 export const testimonials: Testimonial[] = [
   {
-    id: "story-1",
-    name: "Ramesh Patil",
-    location: "Kasbe Digraj, Sangli, Maharashtra",
-    crop: "Sugarcane",
+    id: "dadasaheb-aher",
+    name: "दादासाहेब आहेर",
+    location: "पिंपरी निर्मळ, राहाता, अहमदनगर",
     quote:
-      "My land had gone hard and white with salt, and water would just sit on top of it. After two seasons with Soil Charger the soil crumbles in my hand again and the cane roots go down deep. I have cut my chemical fertiliser by nearly half.",
-    result: "Cane yield up from 42 to 58 tonnes per acre over two seasons",
-    image: images.farmers.bullock.src,
-    imageAlt: "Ramesh Patil standing beside his bullock cart at the edge of his sugarcane field",
-    isPlaceholder: true,
+      "आपले जर आरोग्य असेल तरच आपल्याला इतर गोष्टी मिळतील, आणि SCT वैदिक हे आरोग्य देणारे तंत्रज्ञान आहे.",
+    gloss:
+      "Only if we have health will we get anything else — and SCT Vedic is the technology that gives that health.",
+    phone: "+91 97303 80730",
+    verified: true,
   },
   {
-    id: "story-2",
-    name: "Sunita Jadhav",
-    location: "Pimpalgaon, Nashik, Maharashtra",
-    crop: "Grapes",
-    quote:
-      "For years the vines looked fine but the bunches were small and uneven. The SCT team tested my soil first and told me what was missing instead of just selling me a bag. Now the berries size up together and the exporter takes almost my whole crop.",
-    result: "Export-grade bunches rose from 55% to 82% of the harvest",
-    image: images.farmers.woman.src,
-    imageAlt: "Sunita Jadhav standing among her grape vines",
-    isPlaceholder: true,
+    id: "rohan-mane",
+    name: "रोहन माने",
+    location: "Maharashtra",
+    quote: "बिनधास्त आणि निर्धास्त जीवन जगायचे असेल तर शेतकऱ्यांनी SCT वैदिक कडे वळायला पाहिजे.",
+    gloss:
+      "If farmers want to live a carefree and untroubled life, they should turn to SCT Vedic.",
+    phone: "+91 89517 17111",
+    verified: true,
+  },
+
+  /* ------------------------------------------------------------------------
+     DUMMY — DELETE BEFORE LAUNCH
+     ------------------------------------------------------------------------
+     Two placeholders so the section can be designed at four cards while SCT
+     collects real ones. They now render exactly like the two real quotes —
+     the "Sample" chip that marked them was removed at the client's request —
+     so nothing on the page distinguishes them. This comment is the only thing
+     left that does.
+
+     No yield, price or tonnage claims here on purpose. An invented agronomic
+     number is the one kind of placeholder that does real damage, and it is
+     exactly what had to be deleted from this file once before.
+
+     Replace the four fields with a real farmer's words and flip `verified` to
+     true — the chip disappears on its own.
+     --------------------------------------------------------------------- */
+  {
+    id: "sample-1",
+    name: "सुनील पाटील",
+    location: "निफाड, नाशिक",
+    quote: "जमीन आता मऊ झाली आहे, पाणी जास्त वेळ टिकते आणि मुळांची वाढ चांगली दिसते.",
+    gloss: "The soil is soft now, it holds water longer, and the root growth looks good.",
+    verified: false,
   },
   {
-    id: "story-3",
-    name: "Bhagwan Shinde",
-    location: "Ashti, Beed, Maharashtra",
-    crop: "Cotton",
-    quote:
-      "We get very little rain here, so what matters to me is how long the soil holds moisture. Since we started using Soil Charger the field stays damp four or five days longer after watering, and the crop does not wilt the way it used to in May.",
-    result: "Two fewer irrigation cycles per season, measured over three years",
-    image: images.farmers.tractor.src,
-    imageAlt: "Bhagwan Shinde preparing his cotton field with a tractor",
-    isPlaceholder: true,
-  },
-  {
-    id: "story-4",
-    name: "Kavita Bhosale",
-    location: "Karad, Satara, Maharashtra",
-    crop: "Paddy",
-    quote:
-      "I farm two and a half acres and I cannot afford to experiment. I tried it on one plot first and kept the rest as it was. The difference in tillering was clear enough by the second season that I moved the whole field over.",
-    result: "Paddy yield up 22% on the treated plot against her own control plot",
-    image: images.farmers.harvest.src,
-    imageAlt: "Kavita Bhosale harvesting paddy by hand in her field",
-    isPlaceholder: true,
+    id: "sample-2",
+    name: "अनिता देशमुख",
+    location: "बारामती, पुणे",
+    quote: "रासायनिक खतांचा वापर कमी केला तरी पीक जोमात आहे, आणि खर्चही आटोक्यात आला.",
+    gloss:
+      "Even after cutting back on chemical fertiliser the crop is vigorous — and the cost came under control.",
+    verified: false,
   },
 ];
+
+/** True while SCT still has only the two testimonials from the old site. */
+export const testimonialsNeedMore = testimonials.length < 4;

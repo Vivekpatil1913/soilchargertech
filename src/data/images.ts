@@ -26,7 +26,7 @@ const PLACEHOLDER = "Placeholder — replace with SCT photography" as const;
 
 export const images = {
   logo: {
-    mark: { src: "/logo/sct-logo.png", alt: "Soil Charger Technology logo", credit: "SCT" },
+    mark: { src: "/logo/soillogo.jpg", alt: "Soil Charger Technology logo", credit: "SCT" },
   },
 
   hero: {
@@ -165,6 +165,58 @@ export const images = {
     iso: { src: "/images/legacy/ISO.png", alt: "ISO 9001:2008 certification mark", credit: "SCT" },
   },
 } as const satisfies Record<string, Record<string, SiteImage>>;
+
+/**
+ * MOVING FOOTAGE
+ * ==============
+ * One clip, in one full-width band under the hero, and nowhere else. A farmer
+ * scanning the page for three seconds learns more from watching someone work
+ * soil than from any sentence we could write — but the audience is on rural
+ * mobile data, so the rules are strict: no audio track, no controls, under two
+ * megabytes, and the poster frame is what actually paints. <LoopingVideo />
+ * skips the download entirely on a metered or slow connection.
+ *
+ * Five shots of Indian fieldwork, cut to ~24 seconds with 0.6s dissolves, and
+ * a final dissolve from the tail back into the head so the loop has no seam.
+ *
+ * Two renditions, picked at runtime by viewport width:
+ *   · `sm` — 854x480, phones and tablets
+ *   · `lg` — 1600x900, laptops and up
+ *
+ * REPLACE THIS. SCT has 51 videos on its own channel
+ * (youtube.com/@SOILCHARGERTECHNOLOGYOFFICIAL) showing real fields and real
+ * results — far more persuasive than stock. Export 10-12 seconds at 16:9,
+ * strip the audio, and re-encode at these two sizes:
+ *
+ *   ffmpeg -i clip.mp4 -vf "scale=1600:900" -an -c:v libx264 -crf 32 \\
+ *     -preset slow -movflags +faststart field-band-1600.mp4
+ *
+ * The poster must be frame one of the final file, or the swap to video jumps:
+ *
+ *   ffmpeg -i field-band-1600.mp4 -frames:v 1 -q:v 7 field-band-poster.jpg
+ */
+export type SiteVideo = {
+  /** Phone rendition. */
+  sm: string;
+  /** Desktop rendition. */
+  lg: string;
+  /** Frame one. Shown until the video can play — and instead of it when it cannot. */
+  poster: SiteImage;
+  credit: "SCT" | "Placeholder — replace with SCT footage";
+};
+
+export const videos = {
+  fieldBand: {
+    sm: "/videos/field-band-854.mp4",
+    lg: "/videos/field-band-1600.mp4",
+    poster: {
+      src: "/images/hero/field-band-poster.jpg",
+      alt: "A farmer turning soil by hand with a hoe at the edge of a sugarcane field",
+      credit: PLACEHOLDER,
+    },
+    credit: "Placeholder — replace with SCT footage",
+  },
+} as const satisfies Record<string, SiteVideo>;
 
 /**
  * Product photography note

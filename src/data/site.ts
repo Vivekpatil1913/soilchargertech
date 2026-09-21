@@ -158,14 +158,64 @@ export const pillars = [
   },
 ] as const;
 
+/** Role glyph, shown large and faint behind the portrait and again in the badge. */
+export type TeamIcon = "sprout" | "people" | "gear" | "growth";
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  image: string;
+  icon: TeamIcon;
+  /** One line in their own voice, shown on the team card. */
+  quote: string;
+  /** Personal LinkedIn. Falls back to the company page when absent. */
+  linkedin?: string;
+};
+
 /**
  * Leadership as listed on SCT's Our Team page.
- * Photographs are the company's own, carried over from the existing site.
+ * Photographs are the company's own, carried over from the existing site —
+ * studio cut-outs on white, which is why the card blends them onto the
+ * green disc rather than boxing them in a frame.
+ *
+ * `linkedin` is a per-person override. Until SCT supplies individual profile
+ * URLs it falls back to the company page, and the card renders identically
+ * either way.
  */
 export const team = [
-  { name: "Mr. Ram Mukhekar", role: "Founder", image: "/images/legacy/team1.png" },
-  { name: "Aniket Sahane", role: "Director", image: "/images/legacy/team2.png" },
-  { name: "Rushikesh Hadwale", role: "Production Director", image: "/images/legacy/team3.png" },
-  { name: "Prasad Mukhekar", role: "Development Director", image: "/images/legacy/team4.png" },
-  { name: "Arun Patole", role: "General Manager", image: "/images/legacy/team5.png" },
-] as const;
+  {
+    name: "Mr. Ram Mukhekar",
+    icon: "sprout" as const,
+    role: "Founder",
+    image: "/images/legacy/team1.png",
+    quote: "Healthier soil. Happier farmers. A better tomorrow.",
+  },
+  {
+    name: "Aniket Sahane",
+    icon: "people" as const,
+    role: "Director",
+    image: "/images/legacy/team2.png",
+    quote: "Innovating for sustainable agriculture.",
+  },
+  {
+    name: "Rushikesh Hadwale",
+    icon: "gear" as const,
+    role: "Production Director",
+    image: "/images/legacy/team3.png",
+    quote: "From soil to success, with science and care.",
+  },
+  {
+    name: "Prasad Mukhekar",
+    icon: "growth" as const,
+    role: "Development Director",
+    image: "/images/legacy/team4.png",
+    quote: "Building solutions for a stronger tomorrow.",
+  },
+  {
+    name: "Arun Patole",
+    icon: "people" as const,
+    role: "General Manager",
+    image: "/images/legacy/team5.png",
+    quote: "Working together for thriving communities.",
+  },
+] as const satisfies readonly TeamMember[];

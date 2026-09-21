@@ -1,153 +1,185 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { footerNav, legalNav } from "@/data/navigation";
-import { addressOneLine, contact, site } from "@/data/site";
-import { images } from "@/data/images";
-import { telHref } from "@/lib/utils";
-import { Container } from "@/components/common/Container";
-import { SocialLinks } from "@/components/common/SocialLinks";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
 
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
+import { LogoMark } from "@/components/layout/Logo";
+import { footerNav, legalNav } from "@/data/navigation";
+import { addressOneLine, contact, site, socials } from "@/data/site";
+import { telHref, whatsappHref } from "@/lib/utils";
+import Link from "@/shims/Link";
 
 /**
- * Footer.
+ * FOOTER
+ * ======
+ * Carries the destinations the five-item header deliberately dropped, so
+ * nothing became unreachable when the navigation was cut back.
  *
- * The page body stays bright throughout; the footer is the one deep band, in
- * brand green rather than black, so the site closes on the brand's own colour
- * instead of a generic dark slab.
+ * Phone numbers, WhatsApp and the address sit above the link columns rather
+ * than beneath them. For this audience the contact block is the most-used part
+ * of a footer, not the fine print.
  */
+
+const SOCIAL_ICON = {
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  linkedin: Linkedin,
+  x: null,
+} as const;
+
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="relative overflow-hidden bg-brand-950 text-cream-200">
-      {/* Soft organic bloom, kept very low contrast so text stays legible. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 -top-40 size-[34rem] bloom bg-brand-700/40"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-52 right-0 size-[30rem] bloom bg-saffron-700/20"
-      />
+    <footer className="ground-forest text-sage-300">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 fx-mesh opacity-70" />
+        <div className="bloom bloom-a absolute -left-32 -top-24 size-[28rem] bg-brand-500/20" />
+      </div>
 
-      <Container width="wide" className="relative">
-        <div className="grid gap-12 py-12 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-16">
-          {/* ---- Brand + contact ------------------------------------------ */}
+      <div className="shell-wide relative pb-5 pt-12 lg:pb-6 lg:pt-14">
+        {/* ---- Brand + contact ------------------------------------------ */}
+        <div className="grid gap-8 border-b border-white/10 pb-9 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-10">
           <div>
-            {/* The client's logo, used exactly as supplied. */}
-            <Link
-              href="/"
-              aria-label="Soil Charger Technology — go to homepage"
-              className="relative block h-20 w-[5.25rem]"
-            >
-              <Image
-                src="/logo/sct-logo.png"
-                alt="Soil Charger Technology"
-                fill
-                sizes="84px"
-                className="object-contain"
-              />
-            </Link>
+            <div className="flex items-center gap-4">
+              <span className="grid size-[4.5rem] place-items-center rounded-2xl bg-white p-2">
+                <LogoMark />
+              </span>
+              <div>
+                <p className="font-display text-lg font-extrabold leading-tight text-white">
+                  {site.name}
+                </p>
+                <p className="mt-0.5 text-[0.84rem] text-sage-400">{site.tagline}</p>
+              </div>
+            </div>
 
-            <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-cream-200/75">
-              Working on soil since {site.founded} — restoring organic carbon, strengthening
-              fertility, and building agriculture that leaves the ground better than it found it.
+            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-sage-300/80">
+              {site.description}
             </p>
 
-            <address className="mt-8 space-y-4 not-italic text-[0.9rem]">
-              <div className="flex gap-3">
-                <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-leaf-400" />
-                <span className="text-cream-200/75">{addressOneLine}</span>
-              </div>
-              <div className="flex gap-3">
-                <Phone aria-hidden className="mt-0.5 size-4 shrink-0 text-leaf-400" />
-                <span className="flex flex-col gap-1">
-                  {contact.phones.map((phone) => (
+            <ul className="mt-5 flex flex-wrap gap-2.5">
+              {socials.map((social) => {
+                const Icon = SOCIAL_ICON[social.icon];
+                return (
+                  <li key={social.label}>
                     <a
-                      key={phone}
-                      href={telHref(phone)}
-                      className="inline-block py-1 text-cream-200/75 transition-colors hover:text-white"
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="grid size-10 place-items-center rounded-full border border-white/15 bg-white/[0.06] text-sage-200 transition-colors hover:border-leaf-400/50 hover:text-white"
                     >
-                      {phone}
+                      {Icon ? (
+                        <Icon aria-hidden className="size-4" />
+                      ) : (
+                        <span aria-hidden className="text-[0.9rem] font-bold">
+                          X
+                        </span>
+                      )}
                     </a>
-                  ))}
-                </span>
-              </div>
-              <div className="flex gap-3">
-                <Mail aria-hidden className="mt-0.5 size-4 shrink-0 text-leaf-400" />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-eyebrow text-leaf-400">Reach us</h2>
+            <ul className="mt-5 space-y-4 text-[0.92rem]">
+              {contact.phones.map((phone) => (
+                <li key={phone}>
+                  <a
+                    href={telHref(phone)}
+                    className="inline-flex items-center gap-3 text-sage-200 transition-colors hover:text-white"
+                  >
+                    <Phone aria-hidden className="size-4 shrink-0 text-leaf-400" />
+                    {phone}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href={whatsappHref(contact.whatsapp, "Hello SCT, I have a question.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 text-sage-200 transition-colors hover:text-white"
+                >
+                  <WhatsAppIcon className="size-4 shrink-0 text-leaf-400" />
+                  Message on WhatsApp
+                </a>
+              </li>
+              <li>
                 <a
                   href={`mailto:${contact.emails.general}`}
-                  className="inline-block break-all py-1 text-cream-200/75 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-3 break-all text-sage-200 transition-colors hover:text-white"
                 >
+                  <Mail aria-hidden className="size-4 shrink-0 text-leaf-400" />
                   {contact.emails.general}
                 </a>
-              </div>
-            </address>
-
-            <div className="mt-8 flex items-center gap-4">
-              <Image
-                src={images.certification.iso.src}
-                alt={images.certification.iso.alt}
-                width={72}
-                height={72}
-                className="h-12 w-auto rounded-md bg-white/95 p-1.5"
-              />
-              <p className="text-xs leading-relaxed text-cream-200/55">
-                ISO 9001:2008 certified
-                <br />
-                Nashik, Maharashtra, India
-              </p>
-            </div>
+              </li>
+            </ul>
           </div>
 
-          {/* ---- Link columns --------------------------------------------- */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
-            {footerNav.map((column) => (
-              <nav key={column.heading} aria-label={column.heading}>
-                <h2 className="text-eyebrow text-leaf-400">{column.heading}</h2>
-                <ul className="mt-5 space-y-3">
-                  {column.links.map((link) => (
-                    <li key={`${column.heading}-${link.href}-${link.label}`}>
-                      <Link
-                        href={link.href}
-                        className="group inline-flex py-1.5 text-[0.9rem] text-cream-200/70 transition-colors hover:text-white"
-                      >
-                        <span className="border-b border-transparent pb-0.5 transition-colors group-hover:border-leaf-400/60">
-                          {link.label}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            ))}
-          </div>
-        </div>
-
-        {/* ---- Bottom bar -------------------------------------------------- */}
-        <div className="flex flex-col gap-6 border-t border-white/10 py-8 lg:flex-row lg:items-center lg:justify-between">
-          <SocialLinks tone="onDark" />
-
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <LanguageSwitcher tone="onDark" />
-            {legalNav.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="inline-block py-1.5 text-[0.85rem] text-cream-200/65 transition-colors hover:text-white"
+          <div>
+            <h2 className="text-eyebrow text-leaf-400">Find us</h2>
+            <p className="mt-5 flex gap-3 text-[0.92rem] leading-relaxed text-sage-300/85">
+              <MapPin aria-hidden className="mt-1 size-4 shrink-0 text-leaf-400" />
+              <span>{addressOneLine}</span>
+            </p>
+            <p className="mt-5 text-[0.84rem] text-sage-400">
+              Sales:{" "}
+              <a
+                href={`mailto:${contact.emails.sales}`}
+                className="break-all transition-colors hover:text-white"
               >
-                {link.label}
-              </Link>
-            ))}
+                {contact.emails.sales}
+              </a>
+              <br />
+              Careers:{" "}
+              <a
+                href={`mailto:${contact.emails.careers}`}
+                className="break-all transition-colors hover:text-white"
+              >
+                {contact.emails.careers}
+              </a>
+            </p>
           </div>
         </div>
 
-        <p className="border-t border-white/10 py-6 text-[0.8rem] text-cream-200/45">
-          © {year} {site.legalName}. All rights reserved.
-        </p>
-      </Container>
+        {/* ---- Link columns --------------------------------------------- */}
+        <nav aria-label="Footer" className="grid gap-8 pb-7 pt-9 sm:grid-cols-2 lg:grid-cols-4">
+          {footerNav.map((group) => (
+            <div key={group.heading}>
+              <h2 className="text-eyebrow text-sage-400">{group.heading}</h2>
+              <ul className="mt-5 space-y-2.5">
+                {group.links.map((link) => (
+                  <li key={link.href + link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[0.9rem] text-sage-300/85 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        {/* ---- Legal ----------------------------------------------------- */}
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-5 text-[0.84rem] text-sage-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {site.name}. All rights reserved.
+          </p>
+          <ul className="flex flex-wrap gap-5">
+            {legalNav.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="transition-colors hover:text-white">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </footer>
   );
 }

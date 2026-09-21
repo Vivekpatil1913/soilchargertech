@@ -1,7 +1,11 @@
 import { site } from "@/data/site";
 
 /** Canonical site origin, overridable per deployment. */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? site.url;
+/* Vite exposes env through import.meta.env, not process.env — `process` does
+   not exist in the browser and referencing it blanks the whole page. Set
+   VITE_SITE_URL in .env to point canonicals and JSON-LD at a staging host. */
+export const SITE_URL =
+  import.meta.env.VITE_SITE_URL?.replace(/\/$/, "") ?? site.url;
 
 export const SEO_DEFAULTS = {
   title: "Soil Charger Technology | Sustainable Agriculture & Soil Health",
