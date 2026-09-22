@@ -30,7 +30,7 @@ function RouteFallback() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center" role="status" aria-live="polite">
       <span className="sr-only">Loading</span>
-      <span className="size-10 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />
+      <span className="size-9 animate-spin rounded-full border-2 border-ink-200 border-t-forest-600" />
     </div>
   );
 }
@@ -44,14 +44,14 @@ export default function App() {
 
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-600 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-forest-900 focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
       >
         Skip to content
       </a>
 
       <Header />
 
-      <main id="main">
+      <main id="main" className="pt-[4.5rem] lg:pt-[7.75rem]">
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

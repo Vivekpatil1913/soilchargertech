@@ -3,6 +3,13 @@ export type NavLink = {
   href: string;
   /** Short line shown in the mobile menu so the destination is obvious. */
   hint?: string;
+  /**
+   * The label is a proper name, so Google Translate must leave it alone —
+   * "SCT Vedic" was coming out as "एससीटी वैदिक" in the footer while the same
+   * range read "SCT Vedic" on the products page two clicks away.
+   * See components/common/NoTranslate.tsx.
+   */
+  proper?: boolean;
 };
 
 /**
@@ -53,8 +60,8 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
   {
     heading: "Products",
     links: [
-      { label: "SCT Vedic", href: "/products?range=vedic" },
-      { label: "Super Series", href: "/products?range=super" },
+      { label: "SCT Vedic", href: "/products?range=vedic", proper: true },
+      { label: "Super Series", href: "/products?range=super", proper: true },
       { label: "All Products", href: "/products" },
     ],
   },

@@ -15,7 +15,7 @@ export function PhotoGallerySection() {
           align="center"
           title={
             <>
-              The fields, <span className="text-brand-600">as they are.</span>
+              The fields, <span className="text-forest-600">as they are.</span>
             </>
           }
           lead="Soil, crops and the people who work them. Tap any photograph to open it full size."

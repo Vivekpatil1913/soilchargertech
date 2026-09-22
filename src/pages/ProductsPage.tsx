@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
 import { ContactCta } from "@/components/home/ContactCta";
+import { NoTranslate } from "@/components/common/NoTranslate";
 import { CategoryCard } from "@/components/products/CategoryCard";
 import { Reveal, Section, Shell } from "@/components/ui";
 import {
@@ -65,7 +66,7 @@ export default function ProductsPage() {
         eyebrow="Our products"
         title={
           <>
-            {categoryCount} categories, <span className="text-shine">two ranges.</span>
+            {categoryCount} categories, two ranges.
           </>
         }
         lead="Everything here traces back to the objective SCT set in 2015 — give the soil a dependable source of organic carbon, and build outward. Pick a category to see the products inside it."
@@ -89,12 +90,14 @@ export default function ProductsPage() {
                   className={cn(
                     "inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.9rem] font-semibold transition-all duration-300",
                     active
-                      ? "shadow-brand-glow border-brand-600 bg-brand-600 text-white"
-                      : "border-hairline bg-white text-ink-600 hover:border-brand-300 hover:text-brand-700",
+                      ? "shadow-glow-green border-forest-600 bg-forest-600 text-white"
+                      : "border-ink-100 bg-white text-ink-600 hover:border-forest-300 hover:text-forest-700",
                   )}
                 >
-                  {option.label}
-                  <span className={active ? "text-brand-100" : "text-ink-400"}>{option.count}</span>
+                  <NoTranslate>{option.label}</NoTranslate>
+                  <NoTranslate className={active ? "text-forest-100" : "text-ink-400"}>
+                    {option.count}
+                  </NoTranslate>
                 </button>
               );
             })}
@@ -120,7 +123,7 @@ export default function ProductsPage() {
             ))}
           </ul>
 
-          <div className="mx-auto mt-12 max-w-3xl space-y-4 rounded-2xl border border-hairline bg-white p-6 text-center">
+          <div className="mx-auto mt-12 max-w-3xl space-y-4 rounded-2xl border border-ink-100 bg-white p-6 text-center">
             <p className="text-[0.86rem] leading-relaxed text-ink-500">
               Descriptions, benefits, dosage and pack sizes are reproduced from SCT&apos;s own
               published material, and the photographs are SCT&apos;s own. For guidance on your crop
@@ -128,7 +131,7 @@ export default function ProductsPage() {
             </p>
 
             {productsAreProvisional ? (
-              <p className="text-[0.84rem] leading-relaxed text-saffron-700">
+              <p className="text-[0.84rem] leading-relaxed text-harvest-700">
                 The individual products listed inside each category are generated from SCT&apos;s
                 published pack sizes and are marked as awaiting confirmation. They will be replaced
                 with SCT&apos;s own product list.

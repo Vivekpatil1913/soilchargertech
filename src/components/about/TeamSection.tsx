@@ -56,13 +56,13 @@ const TINT = {
     panel: "bg-[#f3f9f0]",
     blob: "bg-[#dbecd5]",
     mark: "text-[#a6cf98]",
-    badge: "bg-[#e9f5e4] text-brand-700",
+    badge: "bg-[#e9f5e4] text-forest-700",
   },
   sand: {
     panel: "bg-[#faf6ee]",
     blob: "bg-[#ece1cb]",
     mark: "text-[#cdbb95]",
-    badge: "bg-[#f3ebd8] text-sand-700",
+    badge: "bg-[#f3ebd8] text-harvest-700",
   },
 } as const;
 
@@ -194,7 +194,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         <h3 className="font-display text-[1.02rem] font-bold leading-snug text-ink-900">
           {member.name}
         </h3>
-        <p className="mt-1 text-[0.86rem] font-semibold text-brand-700">{member.role}</p>
+        <p className="mt-1 text-[0.86rem] font-semibold text-forest-700">{member.role}</p>
 
         <blockquote className="mt-3 text-balance text-[0.82rem] leading-relaxed text-ink-500">
           &ldquo;{member.quote}&rdquo;
@@ -206,7 +206,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
             target="_blank"
             rel="noreferrer noopener"
             aria-label={`${member.name} on LinkedIn`}
-            className="grid size-9 place-items-center rounded-lg bg-sage-100 text-ink-800 transition-colors duration-300 hover:bg-brand-600 hover:text-white"
+            className="grid size-9 place-items-center rounded-lg bg-canvas-100 text-ink-800 transition-colors duration-300 hover:bg-forest-600 hover:text-white"
           >
             <LinkedinMark className="size-[1.05rem]" />
           </a>
@@ -226,7 +226,7 @@ export function TeamSection() {
           align="center"
           title={
             <>
-              The people <span className="text-brand-700">behind it</span>
+              The people <span className="text-forest-700">behind it</span>
             </>
           }
           lead="A passionate team working towards healthier soil, stronger farms and a brighter tomorrow."

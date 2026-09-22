@@ -17,7 +17,7 @@ const youtube =
  */
 export function VideoGallerySection() {
   return (
-    <Section id="videos" ground="forest" fx labelledBy="videos-heading">
+    <Section id="videos" ground="forest"  labelledBy="videos-heading">
       <Shell size="wide">
         <Heading
           id="videos-heading"
@@ -26,7 +26,7 @@ export function VideoGallerySection() {
           tone="onDark"
           title={
             <>
-              Farmers, <span className="text-shine">in their own words.</span>
+              Farmers, in their own words.
             </>
           }
           lead={`${galleryVideos.length} films from SCT's channel — fields, crops, mistakes and results, in Marathi. Each one plays here, in the viewer.`}

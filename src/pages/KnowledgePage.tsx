@@ -34,7 +34,7 @@ export default function KnowledgePage() {
         eyebrow="Knowledge centre"
         title={
           <>
-            Understand it, then <span className="text-shine">decide.</span>
+            Understand it, then decide.
           </>
         }
         lead="SCT's position is that a farmer who understands why a treatment works stops needing to be told what to do. Everything here is written for that."
@@ -62,7 +62,7 @@ export default function KnowledgePage() {
                 </div>
 
                 <div className="flex flex-1 flex-col justify-center p-7 sm:p-10">
-                  <p className="text-[0.72rem] font-bold uppercase tracking-[0.12em] text-brand-700">
+                  <p className="text-meta text-harvest-700">
                     {lead.category}
                   </p>
                   <h3 className="text-h2 mt-4 text-ink-900">
@@ -71,7 +71,7 @@ export default function KnowledgePage() {
                     </Link>
                   </h3>
                   <p className="text-lead mt-5 text-ink-500">{lead.excerpt}</p>
-                  <p className="mt-6 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-brand-700">
+                  <p className="mt-6 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-forest-700">
                     Read the article
                     <ArrowUpRight
                       aria-hidden
@@ -103,7 +103,7 @@ export default function KnowledgePage() {
                   </div>
 
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-700">
+                    <p className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-forest-700">
                       {article.category}
                     </p>
                     <h3 className="mt-2.5 font-display text-[1.05rem] font-bold leading-snug text-ink-900">

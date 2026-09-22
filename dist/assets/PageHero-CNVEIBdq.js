@@ -1,0 +1,6 @@
+import{j as e}from"./motion-BxOFPkZ-.js";import{c as o,a as h,J as r,H as c}from"./index-M-cZY8nr.js";/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const x=o("ChevronRight",[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]]);function j({eyebrow:i,title:n,lead:t,crumbs:s,children:l}){return e.jsx("section",{"aria-labelledby":"page-heading",className:"ground-canvas border-b border-ink-100",children:e.jsxs(h,{className:"py-10 lg:py-14",children:[s&&s.length>0?e.jsx("nav",{"aria-label":"Breadcrumb",className:"mb-6",children:e.jsxs("ol",{className:"flex flex-wrap items-center gap-1.5 text-xs text-ink-400",children:[e.jsx("li",{children:e.jsx(r,{href:"/",className:"transition-colors hover:text-forest-700",children:"Home"})}),s.map(a=>e.jsxs("li",{className:"flex items-center gap-1.5",children:[e.jsx(x,{"aria-hidden":!0,className:"size-3 text-ink-300"}),a.href?e.jsx(r,{href:a.href,className:"transition-colors hover:text-forest-700",children:a.label}):e.jsx("span",{className:"text-ink-600",children:a.label})]},a.label))]})}):null,e.jsx(c,{id:"page-heading",as:"h1",eyebrow:i,title:n,lead:t}),l?e.jsx("div",{className:"mt-8",children:l}):null]})})}export{x as C,j as P};

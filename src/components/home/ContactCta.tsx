@@ -1,8 +1,8 @@
-import { ArrowRight, MessageCircle, Phone, Store } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Phone, Store } from "lucide-react";
 
 import { Heading, Reveal, Section, Shell } from "@/components/ui";
 import { contact } from "@/data/site";
-import { telHref, whatsappHref } from "@/lib/utils";
+import { cn, telHref, whatsappHref } from "@/lib/utils";
 import Link from "@/shims/Link";
 
 /**
@@ -50,63 +50,81 @@ const DOORS = [
 
 export function ContactCta() {
   return (
-    <Section ground="forest" labelledBy="cta-heading" fx>
-      <Shell size="wide">
+    <Section ground="forestDeep" labelledBy="cta-heading">
+      <Shell>
         <Heading
           id="cta-heading"
           eyebrow="Next step"
           tone="onDark"
-          align="center"
-          title={<>Your soil is waiting.</>}
+          title="Your soil is waiting."
           lead="Start with one field, one season. That is how nearly every SCT farmer started — and it is the only way to judge it honestly."
         />
 
-        <ul className="mt-14 grid gap-5 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
           {DOORS.map((door, index) => {
             const Icon = door.icon;
             return (
-              <Reveal key={door.title} as="li" delay={index * 0.09} className="h-full">
+              <Reveal key={door.title} as="li" delay={index * 0.07} className="h-full">
                 <Link
                   href={door.href}
-                  className={
+                  className={cn(
+                    "group flex h-full flex-col rounded-2xl border p-6 transition-colors duration-300 sm:p-7",
                     door.primary
-                      ? "shadow-brand-glow group relative flex h-full flex-col rounded-2xl bg-brand-600 p-7 transition-all duration-400 motion-safe:hover:-translate-y-1 hover:bg-brand-500 sm:p-8"
-                      : "group relative flex h-full flex-col rounded-2xl border border-white/12 bg-white/[0.06] p-7 backdrop-blur-sm transition-all duration-400 hover:border-leaf-400/45 hover:bg-white/[0.1] motion-safe:hover:-translate-y-1 sm:p-8"
-                  }
+                      ? "border-harvest-400 bg-harvest-400 hover:bg-harvest-300"
+                      : "border-white/12 bg-white/[0.05] hover:border-harvest-400/40 hover:bg-white/[0.09]",
+                  )}
                 >
-                  <span
-                    className={
-                      door.primary
-                        ? "grid size-12 place-items-center rounded-squircle bg-white/20 text-white transition-transform duration-400 motion-safe:group-hover:scale-110"
-                        : "grid size-12 place-items-center rounded-squircle bg-brand-500/15 text-leaf-300 ring-1 ring-inset ring-brand-400/25 transition-transform duration-400 motion-safe:group-hover:scale-110"
-                    }
-                  >
-                    <Icon aria-hidden className="size-6" />
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={cn(
+                        "grid size-10 place-items-center rounded-lg",
+                        door.primary
+                          ? "bg-forest-950/10 text-forest-950"
+                          : "bg-white/10 text-harvest-300",
+                      )}
+                    >
+                      <Icon aria-hidden className="size-5" />
+                    </span>
+                    <p
+                      className={cn(
+                        "text-meta",
+                        door.primary ? "text-forest-950/60" : "text-white/40",
+                      )}
+                    >
+                      {door.eyebrow}
+                    </p>
+                  </div>
 
-                  <p
-                    className={`text-eyebrow mt-6 ${door.primary ? "text-brand-100" : "text-leaf-400"}`}
+                  <h3
+                    className={cn(
+                      "mt-5 font-display text-lg font-semibold",
+                      door.primary ? "text-forest-950" : "text-white",
+                    )}
                   >
-                    {door.eyebrow}
-                  </p>
-
-                  <h3 className="mt-2 font-display text-[1.25rem] font-bold leading-tight text-white">
                     {door.title}
                   </h3>
 
                   <p
-                    className={`mt-3 flex-1 text-[0.9rem] leading-relaxed ${door.primary ? "text-brand-50/90" : "text-sage-300/85"}`}
+                    className={cn(
+                      "mt-2.5 flex-1 text-sm leading-relaxed",
+                      door.primary ? "text-forest-950/75" : "text-white/60",
+                    )}
                   >
                     {door.body}
                   </p>
 
                   <span
-                    className={`mt-6 inline-flex items-center gap-2 text-[0.92rem] font-bold ${door.primary ? "text-white" : "text-leaf-400"}`}
+                    className={cn(
+                      "mt-6 inline-flex items-center gap-1.5 border-t pt-4 text-sm font-semibold",
+                      door.primary
+                        ? "border-forest-950/15 text-forest-950 tabular-nums"
+                        : "border-white/10 text-harvest-300",
+                    )}
                   >
                     {door.action}
-                    <ArrowRight
+                    <ArrowUpRight
                       aria-hidden
-                      className="size-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1"
+                      className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
                     />
                   </span>
                 </Link>
@@ -115,7 +133,7 @@ export function ContactCta() {
           })}
         </ul>
 
-        <p className="mt-10 text-center text-[0.86rem] text-sage-400">
+        <p className="mt-8 text-xs text-white/40">
           Guidance is available in Marathi, Hindi and English.
         </p>
       </Shell>

@@ -321,7 +321,7 @@ export function Lightbox({ items, startIndex, onClose, autoplayVideo = false }: 
               transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoom}) rotate(${rotation}deg)`,
             }}
             className={cn(
-              "max-h-full max-w-full select-none rounded-lg object-contain shadow-dark transition-transform duration-300 [transition-timing-function:var(--ease-expressive)]",
+              "max-h-full max-w-full select-none rounded-lg object-contain shadow-card transition-transform duration-300 [transition-timing-function:var(--ease-expressive)]",
               zoom > 1 ? "cursor-grab active:cursor-grabbing" : "",
             )}
           />
@@ -330,7 +330,7 @@ export function Lightbox({ items, startIndex, onClose, autoplayVideo = false }: 
             /* Width is capped by the height available, so the player never runs
                off the bottom of a laptop screen. */
             style={{ maxWidth: "min(64rem, calc((100dvh - 15rem) * 16 / 9))" }}
-            className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-dark"
+            className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-card"
           >
             {playing === item.id ? (
               <iframe
@@ -373,7 +373,7 @@ export function Lightbox({ items, startIndex, onClose, autoplayVideo = false }: 
             href={`https://www.youtube.com/watch?v=${item.youtubeId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[0.85rem] font-semibold text-leaf-400 underline-offset-4 hover:text-leaf-300 hover:underline"
+            className="inline-flex items-center gap-2 text-[0.85rem] font-semibold text-harvest-400 underline-offset-4 hover:text-harvest-300 hover:underline"
           >
             Watch on YouTube
             <ExternalLink aria-hidden className="size-3.5" />
@@ -400,7 +400,7 @@ export function Lightbox({ items, startIndex, onClose, autoplayVideo = false }: 
                 className={cn(
                   "relative h-12 w-16 shrink-0 overflow-hidden rounded-md ring-2 transition-all duration-300 sm:h-14 sm:w-20",
                   active
-                    ? "ring-brand-500"
+                    ? "ring-forest-500"
                     : "opacity-45 ring-transparent hover:opacity-90 hover:ring-white/30",
                 )}
               >
@@ -461,7 +461,7 @@ function ControlButton({
       title={label}
       className={cn(
         "grid size-9 place-items-center rounded-full text-white transition-all duration-300 [transition-timing-function:var(--ease-expressive)] hover:bg-white/20 disabled:pointer-events-none disabled:opacity-30 sm:size-10",
-        active ? "bg-brand-600 hover:bg-brand-500" : "bg-white/10",
+        active ? "bg-forest-600 hover:bg-forest-500" : "bg-white/10",
         className,
       )}
     >
@@ -521,7 +521,7 @@ export function PlayBadge({ className }: { className?: string }) {
     <span
       aria-hidden
       className={cn(
-        "grid h-11 w-16 place-items-center rounded-[0.9rem] bg-[#ff0000] text-white shadow-dark transition-transform duration-400 [transition-timing-function:var(--ease-expressive)] motion-safe:group-hover:scale-110",
+        "grid h-11 w-16 place-items-center rounded-[0.9rem] bg-[#ff0000] text-white shadow-card transition-transform duration-400 [transition-timing-function:var(--ease-expressive)] motion-safe:group-hover:scale-110",
         className,
       )}
     >

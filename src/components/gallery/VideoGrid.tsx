@@ -94,7 +94,7 @@ export function VideoGrid({
             <button
               type="button"
               onClick={() => setOpenAt(index)}
-              className="group relative block w-full overflow-hidden rounded-2xl bg-black transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:shadow-card-lg motion-safe:hover:-translate-y-1"
+              className="group relative block w-full overflow-hidden rounded-2xl bg-black transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:shadow-card motion-safe:hover:-translate-y-1"
             >
               <span className="block aspect-video w-full">
                 <img

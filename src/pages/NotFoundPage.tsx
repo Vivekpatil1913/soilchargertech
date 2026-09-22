@@ -14,19 +14,12 @@ export default function NotFoundPage() {
       />
 
       <section className="ground-forest">
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 fx-mesh" />
-          <div className="absolute inset-0 fx-dots opacity-50" />
-          <div className="bloom bloom-a absolute -left-40 -top-32 size-[32rem] bg-brand-500/25" />
-          <div className="bloom bloom-b absolute -bottom-32 -right-28 size-[26rem] bg-saffron-500/15" />
-        </div>
-
-        <Shell className="relative pb-28 pt-36 sm:pt-44 lg:pb-32 lg:pt-52">
-          <p className="text-eyebrow text-leaf-400">404</p>
+        <Shell className="relative py-20 lg:py-28">
+          <p className="text-eyebrow text-harvest-400">404</p>
           <h1 className="text-h1 mt-5 max-w-2xl text-white">
-            This page seems to have been <span className="text-shine">ploughed under.</span>
+            This page seems to have been ploughed under.
           </h1>
-          <p className="text-lead mt-6 max-w-xl text-sage-300/85">
+          <p className="text-lead mt-6 max-w-xl text-white/60">
             The page you were looking for is not here. It may have moved, or the link may be old.
             Everything else is still where it should be.
           </p>
@@ -41,13 +34,13 @@ export default function NotFoundPage() {
           </div>
 
           <nav aria-label="Site sections" className="mt-12">
-            <h2 className="text-eyebrow text-sage-400">Or try one of these</h2>
+            <h2 className="text-eyebrow text-white/45">Or try one of these</h2>
             <ul className="mt-5 flex flex-wrap gap-2.5">
               {mainNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 text-[0.9rem] font-medium text-sage-200 backdrop-blur transition-colors hover:border-leaf-400/45 hover:text-white"
+                    className="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 text-[0.9rem] font-medium text-white/75 backdrop-blur transition-colors hover:border-harvest-400/45 hover:text-white"
                   >
                     {item.label}
                   </Link>

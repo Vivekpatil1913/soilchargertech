@@ -52,7 +52,7 @@ export function PhotoGrid({ photos, className }: { photos: GalleryPhoto[]; class
             <button
               type="button"
               onClick={() => setOpenAt(index)}
-              className="group relative block w-full overflow-hidden rounded-2xl bg-sage-200 transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:shadow-card motion-safe:hover:-translate-y-1"
+              className="group relative block w-full overflow-hidden rounded-2xl bg-ink-100 transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:shadow-card motion-safe:hover:-translate-y-1"
             >
               <span className="block aspect-[4/3] w-full">
                 <img
@@ -72,7 +72,7 @@ export function PhotoGrid({ photos, className }: { photos: GalleryPhoto[]; class
               />
               <span
                 aria-hidden
-                className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full bg-white/90 text-brand-800 opacity-0 backdrop-blur transition-all duration-400 [transition-timing-function:var(--ease-expressive)] group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0"
+                className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full bg-white/90 text-forest-800 opacity-0 backdrop-blur transition-all duration-400 [transition-timing-function:var(--ease-expressive)] group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0"
               >
                 <Expand className="size-4" />
               </span>

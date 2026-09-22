@@ -1,11 +1,13 @@
 import { TeamSection } from "@/components/about/TeamSection";
 import { VisionMission } from "@/components/about/VisionMission";
+import { protectBrand } from "@/components/common/NoTranslate";
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
 import { ContactCta } from "@/components/home/ContactCta";
-import { Card, GhostNumber, Heading, Reveal, Section, Shell } from "@/components/ui";
+import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { journey } from "@/data/journey";
 import { site } from "@/data/site";
+import { cn } from "@/lib/utils";
 import Image from "@/shims/Image";
 
 /**
@@ -32,10 +34,12 @@ export default function AboutPage() {
         eyebrow="Who we are"
         title={
           <>
-            It started with one decision about <span className="text-shine">carbon.</span>
+            It started with one decision about carbon.
           </>
         }
-        lead={`${site.founder} founded Soil Charger Technology in Nashik in ${site.founded}. Not with a product — with a problem he could not stop thinking about.`}
+        lead={protectBrand(
+          `${site.founder} founded Soil Charger Technology in Nashik in ${site.founded}. Not with a product — with a problem he could not stop thinking about.`,
+        )}
       />
 
       {/* ---- The founder's letter, in full ------------------------------ */}
@@ -44,7 +48,7 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
             <Reveal className="lg:sticky lg:top-32 lg:self-start">
               <figure>
-                <div className="shadow-card-lg relative aspect-[4/5] overflow-hidden rounded-2xl">
+                <div className="shadow-card relative aspect-[4/5] overflow-hidden rounded-2xl">
                   <Image
                     src="/images/legacy/team1.png"
                     alt={`${site.founder}, founder of Soil Charger Technology`}
@@ -120,7 +124,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ---- Timeline ---------------------------------------------------- */}
-      <Section ground="forest" labelledBy="journey-heading" id="journey" fx>
+      <Section ground="forest" labelledBy="journey-heading" id="journey" >
         <Shell size="wide">
           <Heading
             id="journey-heading"
@@ -135,17 +139,14 @@ export default function AboutPage() {
             {journey.map((step, index) => (
               <Reveal key={step.year} as="li" delay={index * 0.08} className="h-full">
                 <Card tone="glass" className="h-full p-7">
-                  <GhostNumber
-                    value={String(index + 1).padStart(2, "0")}
-                    className="right-5 top-4 text-4xl text-white/[0.07] group-hover:text-leaf-400/25"
-                  />
-                  <p className="font-display text-[1.6rem] font-extrabold leading-none text-leaf-400">
+                  <span aria-hidden className={cn("pointer-events-none absolute font-display font-bold leading-none", "right-5 top-4 text-4xl text-white/[0.07] group-hover:text-harvest-400/25")}>{String(index + 1).padStart(2, "0")}</span>
+                  <p className="font-display text-[1.6rem] font-extrabold leading-none text-harvest-400">
                     {step.year}
                   </p>
                   <h3 className="mt-4 font-display text-[1.1rem] font-bold leading-snug text-white">
                     {step.title}
                   </h3>
-                  <p className="mt-3 flex-1 text-[0.9rem] leading-relaxed text-sage-300/85">
+                  <p className="mt-3 flex-1 text-[0.9rem] leading-relaxed text-white/60">
                     {step.summary}
                   </p>
                 </Card>

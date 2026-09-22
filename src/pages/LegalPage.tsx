@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 
+import { Brand, NoTranslate, protectBrand } from "@/components/common/NoTranslate";
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
 import { Section, Shell } from "@/components/ui";
-import { contact, site } from "@/data/site";
+import { contact } from "@/data/site";
 
 /**
  * LEGAL PAGE SHELL
@@ -53,7 +54,12 @@ export function LegalPage({
                 <h2 className="text-h3 text-ink-900">{section.heading}</h2>
                 <div className="mt-4 space-y-4 text-[1rem] leading-[1.75] text-ink-600">
                   {section.paragraphs.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+                    /* Most paragraphs are plain strings from the page files and
+                       several name the company mid-sentence; `protectBrand`
+                       holds the name back while the sentence translates. */
+                    <p key={index}>
+                      {typeof paragraph === "string" ? protectBrand(paragraph) : paragraph}
+                    </p>
                   ))}
                 </div>
               </section>
@@ -66,17 +72,19 @@ export function LegalPage({
                   Write to{" "}
                   <a
                     href={`mailto:${contact.emails.general}`}
-                    className="font-semibold text-brand-700 underline-offset-4 hover:underline"
+                    className="font-semibold text-forest-700 underline-offset-4 hover:underline"
                   >
-                    {contact.emails.general}
+                    <NoTranslate>{contact.emails.general}</NoTranslate>
                   </a>{" "}
-                  or call {contact.phones[0]}, and {site.name} will answer.
+                  or call <NoTranslate pad="both">{contact.phones[0]},</NoTranslate>and
+                  <Brand pad="both" />
+                  will answer.
                 </p>
               </div>
             </section>
           </div>
 
-          <p className="mt-14 rounded-2xl border border-saffron-200 bg-saffron-50 p-6 text-[0.88rem] leading-relaxed text-earth-800">
+          <p className="mt-14 rounded-2xl border border-harvest-200 bg-harvest-50 p-6 text-[0.88rem] leading-relaxed text-harvest-800">
             This page is a plain-language draft describing how the website actually behaves today.
             It has not been reviewed by a lawyer and should be before the site goes live.
           </p>

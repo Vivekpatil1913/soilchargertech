@@ -1,6 +1,7 @@
 import { ArrowLeft, Info, Leaf, MessageCircle, Package, Phone } from "lucide-react";
 import { Navigate, useParams } from "react-router-dom";
 
+import { NoTranslate } from "@/components/common/NoTranslate";
 import { Seo } from "@/components/common/Seo";
 import { ContactCta } from "@/components/home/ContactCta";
 import { CategoryCard } from "@/components/products/CategoryCard";
@@ -70,11 +71,11 @@ export default function CategoryPage() {
         jsonLd={jsonLd}
       />
 
-      <Section ground="tint" className="!pt-32 sm:!pt-36 lg:!pt-44">
+      <Section ground="canvas" rhythm="sm">
         <Shell size="wide">
           <Link
             href="/products"
-            className="group inline-flex items-center gap-2 text-[0.88rem] font-semibold text-ink-500 transition-colors hover:text-brand-700"
+            className="group inline-flex items-center gap-2 text-[0.88rem] font-semibold text-ink-500 transition-colors hover:text-forest-700"
           >
             <ArrowLeft
               aria-hidden
@@ -86,7 +87,7 @@ export default function CategoryPage() {
           <div className="mt-8 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             {/* ---- Pack -------------------------------------------------- */}
             <Reveal>
-              <div className="shadow-card-lg relative aspect-square overflow-hidden rounded-2xl bg-white">
+              <div className="shadow-card relative aspect-square overflow-hidden rounded-2xl bg-white">
                 <Image
                   {...categoryImageSrcSet(category)}
                   alt={`${category.name} product pack`}
@@ -104,21 +105,23 @@ export default function CategoryPage() {
                 <span
                   className={cn(
                     "rounded-full px-3 py-1.5 text-[0.72rem] font-bold tracking-wide text-white",
-                    category.range === "vedic" ? "bg-brand-700" : "bg-earth-700",
+                    category.range === "vedic" ? "bg-forest-700" : "bg-harvest-700",
                   )}
                 >
-                  {range.name}
+                  <NoTranslate>{range.name}</NoTranslate>
                 </span>
                 <span className="rounded-full bg-white px-3 py-1.5 text-[0.72rem] font-semibold text-ink-500 ring-1 ring-inset ring-hairline">
                   {category.group}
                 </span>
               </div>
 
-              <h1 className="text-h1 mt-6 text-ink-900">{category.name}</h1>
+              <NoTranslate as="h1" className="text-h1 mt-6 text-ink-900">
+                {category.name}
+              </NoTranslate>
               <p className="text-lead mt-4 text-ink-500">{category.summary}</p>
 
-              <div className="mt-8 rounded-2xl border border-hairline bg-white p-6">
-                <p className="text-eyebrow text-brand-700">What it does</p>
+              <div className="mt-8 rounded-2xl border border-ink-100 bg-white p-6">
+                <p className="text-eyebrow text-harvest-700">What it does</p>
                 <p className="mt-3 text-[0.98rem] leading-relaxed text-ink-600">
                   {category.detail}
                 </p>
@@ -126,14 +129,14 @@ export default function CategoryPage() {
 
               {category.benefits.length > 0 ? (
                 <div className="mt-8">
-                  <p className="text-eyebrow text-brand-700">How it helps your crop</p>
+                  <p className="text-eyebrow text-harvest-700">How it helps your crop</p>
                   <ul className="mt-4 space-y-3">
                     {category.benefits.map((benefit) => (
                       <li
                         key={benefit}
                         className="flex gap-3 text-[0.94rem] leading-relaxed text-ink-600"
                       >
-                        <Leaf aria-hidden className="mt-1 size-4 shrink-0 text-brand-600" />
+                        <Leaf aria-hidden className="mt-1 size-4 shrink-0 text-forest-600" />
                         <span>{benefit}</span>
                       </li>
                     ))}
@@ -143,18 +146,18 @@ export default function CategoryPage() {
 
               {category.dosage.length > 0 ? (
                 <div className="mt-8">
-                  <p className="text-eyebrow text-brand-700">How much to use</p>
-                  <dl className="mt-4 overflow-hidden rounded-xl border border-hairline">
+                  <p className="text-eyebrow text-harvest-700">How much to use</p>
+                  <dl className="mt-4 overflow-hidden rounded-xl border border-ink-100">
                     {category.dosage.map((line, index) => (
                       <div
                         key={line.label}
                         className={cn(
                           "flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-5 py-3.5",
-                          index % 2 === 0 ? "bg-white" : "bg-sage-50",
+                          index % 2 === 0 ? "bg-white" : "bg-canvas-50",
                         )}
                       >
                         <dt className="text-[0.88rem] font-semibold text-ink-700">{line.label}</dt>
-                        <dd className="font-display text-[1.02rem] font-bold text-brand-700">
+                        <dd className="font-display text-[1.02rem] font-bold text-forest-700">
                           {line.value}
                         </dd>
                       </div>
@@ -167,8 +170,8 @@ export default function CategoryPage() {
               ) : null}
 
               {category.note ? (
-                <p className="mt-6 flex gap-3 rounded-xl border border-saffron-200 bg-saffron-50 px-5 py-4 text-[0.88rem] leading-relaxed text-earth-800">
-                  <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-saffron-600" />
+                <p className="mt-6 flex gap-3 rounded-xl border border-harvest-200 bg-harvest-50 px-5 py-4 text-[0.88rem] leading-relaxed text-harvest-800">
+                  <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-harvest-600" />
                   <span>{category.note}</span>
                 </p>
               ) : null}
@@ -181,7 +184,7 @@ export default function CategoryPage() {
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shadow-brand-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-500 motion-safe:hover:-translate-y-0.5"
+                  className="shadow-glow-green inline-flex items-center justify-center gap-2.5 rounded-full bg-forest-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-forest-500 motion-safe:hover:-translate-y-0.5"
                 >
                   <MessageCircle aria-hidden className="size-4" />
                   Ask about this on WhatsApp
@@ -189,10 +192,10 @@ export default function CategoryPage() {
 
                 <a
                   href={telHref(contact.phones[0])}
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full border border-brand-200 bg-white px-7 py-4 text-[0.95rem] font-semibold text-brand-800 transition-colors hover:border-brand-400"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full border border-forest-200 bg-white px-7 py-4 text-[0.95rem] font-semibold text-forest-800 transition-colors hover:border-forest-400"
                 >
                   <Phone aria-hidden className="size-4" />
-                  {contact.phones[0]}
+                  <NoTranslate>{contact.phones[0]}</NoTranslate>
                 </a>
               </div>
             </Reveal>
@@ -205,14 +208,14 @@ export default function CategoryPage() {
         <Shell size="wide">
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
-              <p className="text-eyebrow text-brand-700">Available in</p>
+              <p className="text-eyebrow text-harvest-700">Available in</p>
               <h2 id="skus-heading" className="text-h2 mt-3 text-ink-900">
                 {category.skus.length}{" "}
                 {category.skus.length === 1 ? "product" : "products"} in this category
               </h2>
             </div>
             <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[0.86rem] text-ink-500 ring-1 ring-inset ring-hairline">
-              <Package aria-hidden className="size-4 text-brand-600" />
+              <Package aria-hidden className="size-4 text-forest-600" />
               Same dosage across the category
             </p>
           </div>
@@ -226,17 +229,17 @@ export default function CategoryPage() {
               ))}
             </ul>
           ) : (
-            <p className="mt-9 rounded-2xl border border-hairline bg-white p-7 text-[0.94rem] leading-relaxed text-ink-500">
+            <p className="mt-9 rounded-2xl border border-ink-100 bg-white p-7 text-[0.94rem] leading-relaxed text-ink-500">
               SCT has not published pack sizes for this category yet. Call the team on{" "}
-              <a href={telHref(contact.phones[0])} className="font-semibold text-brand-700">
-                {contact.phones[0]}
+              <a href={telHref(contact.phones[0])} className="font-semibold text-forest-700">
+                <NoTranslate>{contact.phones[0]}</NoTranslate>
               </a>{" "}
               and they will tell you what is available.
             </p>
           )}
 
           {category.skus.some((sku) => sku.provisional) ? (
-            <p className="mt-7 max-w-3xl rounded-2xl border border-saffron-200 bg-saffron-50 p-5 text-[0.86rem] leading-relaxed text-earth-800">
+            <p className="mt-7 max-w-3xl rounded-2xl border border-harvest-200 bg-harvest-50 p-5 text-[0.86rem] leading-relaxed text-harvest-800">
               The products above are generated from the pack sizes SCT published for this category.
               They are marked as awaiting confirmation and will be replaced with SCT&apos;s own
               product list.
@@ -246,10 +249,10 @@ export default function CategoryPage() {
       </Section>
 
       {related.length > 0 ? (
-        <Section ground="tint" labelledBy="related-heading">
+        <Section ground="canvas" labelledBy="related-heading">
           <Shell size="wide">
             <h2 id="related-heading" className="text-h2 text-ink-900">
-              More from the {range.name} range
+              More from the <NoTranslate pad="both">{range.name}</NoTranslate> range
             </h2>
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((item, index) => (

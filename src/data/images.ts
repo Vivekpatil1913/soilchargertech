@@ -205,6 +205,12 @@ export type SiteVideo = {
   credit: "SCT" | "Placeholder — replace with SCT footage";
 };
 
+/**
+ * NOT CURRENTLY RENDERED. `home/FieldVideo.tsx` was the only consumer and the
+ * 2026-09-21 redesign removed it — a full-width autoplaying MP4 above the fold
+ * is the opposite of what the reference does, and it cost 3 MB on a connection
+ * that may be 3G. The files are kept in /public for a future section.
+ */
 export const videos = {
   fieldBand: {
     sm: "/videos/field-band-854.mp4",

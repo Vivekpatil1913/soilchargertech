@@ -1,7 +1,8 @@
-import { Menu, Phone, X } from "lucide-react";
+import { Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { NoTranslate } from "@/components/common/NoTranslate";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui";
@@ -14,29 +15,29 @@ import Link from "@/shims/Link";
 /**
  * HEADER
  * ======
- * Five nav items, deliberately — the old site carried eleven across four
- * dropdowns. A farmer arriving on a phone does not need eleven choices; he
- * needs to know what this is and to find the products.
+ * Two tiers, the way an institution's site is built:
  *
- * The bar's height is set by the logo, not the other way round: the client
- * asked for prominent branding, so the lockup is sized first and the header
- * grows to hold it.
+ *   1. A thin forest strip carrying the things a visitor needs but should
+ *      never have to hunt for — the phone number, the email, the language.
+ *   2. The bar proper: logo, six destinations, one call to action.
  *
- * It starts transparent over the hero's dark ground and turns solid once the
- * page scrolls, so the logo never sits on a competing white slab at the top of
- * a dark hero.
+ * It is solid at every scroll position. The previous design faded a
+ * transparent bar in over a dark hero; that reads as a marketing page, and it
+ * makes the logo's legibility depend on whatever photograph is behind it.
+ * A bar that is simply always there is both calmer and more trustworthy — and
+ * it is what the reference does.
+ *
+ * The only thing scroll changes is elevation: a hairline and a whisper of
+ * shadow appear once the page has moved, so the bar detaches from the content
+ * sliding under it.
  */
 export function Header() {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /* Only the home page opens on a dark hero. Every other route starts with a
-     pale page header, so the bar must be solid from the first pixel there. */
-  const overHero = pathname === "/";
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -50,115 +51,112 @@ export function Header() {
     return unlockScroll;
   }, [menuOpen]);
 
-  const solid = scrolled || !overHero;
-
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-400 [transition-timing-function:var(--ease-expressive)]",
-        solid
-          ? "border-b border-hairline bg-sage-50/92 backdrop-blur-lg"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* ---- Utility strip ---------------------------------------------- */}
+      <div className="hidden bg-forest-950 text-white/70 lg:block">
+        <div className="shell flex h-9 items-center justify-between gap-6 text-[11px]">
+          <p className="tracking-wide">
+            Soil-first agricultural inputs from Nashik, Maharashtra
+            <span aria-hidden className="mx-2 text-harvest-400/50">
+              ·
+            </span>
+            <span className="text-harvest-300">Since 2015</span>
+          </p>
+
+          <div className="flex items-center gap-5">
+            <a
+              href={telHref(contact.phones[0])}
+              className="inline-flex items-center gap-1.5 tabular-nums transition-colors hover:text-white"
+            >
+              <Phone aria-hidden className="size-3" />
+              <NoTranslate>{contact.phones[0]}</NoTranslate>
+            </a>
+            <a
+              href={`mailto:${contact.emails.general}`}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <Mail aria-hidden className="size-3" />
+              <NoTranslate>{contact.emails.general}</NoTranslate>
+            </a>
+            <LanguageSwitcher onDark align="right" />
+          </div>
+        </div>
+      </div>
+
+      {/* ---- Main bar ---------------------------------------------------- */}
       <div
         className={cn(
-          "shell-wide flex items-center justify-between gap-4 transition-all duration-400",
-          solid ? "h-[5.25rem] lg:h-[6.25rem]" : "h-[6rem] lg:h-[7.25rem]",
+          "border-b bg-white/95 backdrop-blur-lg transition-shadow duration-300",
+          scrolled ? "border-ink-100 shadow-soft" : "border-ink-100/60",
         )}
       >
-        <Logo />
+        <div className="shell flex h-[4.5rem] items-center justify-between gap-4 lg:h-[5.5rem]">
+          <Logo />
 
-        {/* ---- Desktop nav --------------------------------------------- */}
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {mainNav.map((item) => {
-              const active =
-                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "relative inline-flex rounded-full px-3 py-2.5 text-[0.9rem] font-semibold transition-colors duration-200 xl:px-4 xl:text-[0.92rem]",
-                      solid
-                        ? active
-                          ? "text-brand-700"
-                          : "text-ink-600 hover:text-brand-700"
-                        : active
-                          ? "text-leaf-300"
-                          : "text-white/85 hover:text-white",
-                    )}
-                  >
-                    {item.label}
-                    {active ? (
-                      <span
-                        aria-hidden
-                        className={cn(
-                          "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full xl:inset-x-4",
-                          solid ? "bg-brand-600" : "bg-leaf-400",
-                        )}
-                      />
-                    ) : null}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+          {/* ---- Desktop nav ------------------------------------------- */}
+          <nav aria-label="Main" className="hidden lg:block">
+            <ul className="flex items-center gap-0.5">
+              {mainNav.map((item) => {
+                const active =
+                  item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "relative inline-flex rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-200 xl:px-3.5",
+                        active ? "text-forest-800" : "text-ink-600 hover:text-forest-700",
+                      )}
+                    >
+                      {item.label}
+                      {/* The gold underline is the same mark that sits under
+                          every section heading — here it says "you are on this
+                          page" in the site's own language. */}
+                      {active ? (
+                        <span
+                          aria-hidden
+                          className="absolute inset-x-3 -bottom-px h-[3px] rounded-full bg-harvest-400 xl:inset-x-3.5"
+                        />
+                      ) : null}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        {/* ---- Actions -------------------------------------------------- */}
-        <div className="flex items-center gap-2.5">
-          {/* Shown at every width. Below lg it takes the slot the contact CTA
-              has on desktop: a farmer who reads Marathi needs the language
-              control on the bar, and contact is already reachable from the
-              drawer and the phone link inside it. */}
-          <LanguageSwitcher onDark={!solid} align="right" />
+          {/* ---- Actions ------------------------------------------------ */}
+          <div className="flex items-center gap-2">
+            {/* Below lg the utility strip is gone, so the language control
+                moves onto the bar — a farmer who reads Marathi should not have
+                to open a drawer to find it. */}
+            <span className="lg:hidden">
+              <LanguageSwitcher align="right" />
+            </span>
 
-          <a
-            href={telHref(contact.phones[0])}
-            className={cn(
-              "items-center gap-2 rounded-full px-3.5 py-2.5 text-[0.88rem] font-semibold transition-colors",
-              /* Six nav items leave no room for this between lg and xl;
-                 the number is in the drawer and the footer either way. */
-              "hidden md:inline-flex lg:hidden xl:inline-flex",
-              solid ? "text-ink-600 hover:text-brand-700" : "text-white/85 hover:text-white",
-            )}
-          >
-            <Phone aria-hidden className="size-4" />
-            <span className="hidden xl:inline">{contact.phones[0]}</span>
-          </a>
+            <div className="hidden lg:block">
+              <Button href="/contact" className="whitespace-nowrap">
+                Talk to an expert
+              </Button>
+            </div>
 
-          {/* The wrapper carries the breakpoint, not the Button: `hidden` on
-              the Button loses to the `inline-flex` in its own base classes —
-              same specificity, and Tailwind's order decides — which is why
-              this CTA used to show up on phones. */}
-          <div className="hidden lg:block">
-            <Button
-              href="/contact"
-              variant={solid ? "primary" : "onDark"}
-              className="whitespace-nowrap"
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              className="grid size-10 place-items-center rounded-lg border border-ink-200 bg-white text-ink-700 transition-colors hover:border-forest-300 lg:hidden"
             >
-              Talk to an expert
-            </Button>
+              {menuOpen ? (
+                <X aria-hidden className="size-5" />
+              ) : (
+                <Menu aria-hidden className="size-5" />
+              )}
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className={cn(
-              "grid size-11 place-items-center rounded-full border transition-colors lg:hidden",
-              solid
-                ? "border-hairline bg-white text-ink-700"
-                : "border-white/25 bg-white/10 text-white backdrop-blur",
-            )}
-          >
-            {menuOpen ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
-          </button>
         </div>
       </div>
 
@@ -170,38 +168,47 @@ export function Header() {
         id="mobile-menu"
         hidden={!menuOpen}
         data-lenis-prevent
-        className="max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain border-t border-hairline bg-sage-50 lg:hidden"
+        className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-b border-ink-100 bg-white lg:hidden"
       >
-        <nav aria-label="Mobile" className="shell-wide py-5">
-          <ul className="space-y-1">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="flex flex-col rounded-xl px-4 py-3.5 transition-colors hover:bg-sage-100"
-                >
-                  <span className="font-display text-[1.05rem] font-bold text-ink-900">
-                    {item.label}
-                  </span>
-                  {item.hint ? (
-                    <span className="mt-0.5 text-[0.84rem] text-ink-500">{item.hint}</span>
-                  ) : null}
-                </Link>
-              </li>
-            ))}
+        <nav aria-label="Mobile" className="shell py-4">
+          <ul className="divide-y divide-ink-100">
+            {mainNav.map((item) => {
+              const active =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className="flex flex-col py-3.5 transition-colors hover:bg-canvas-50"
+                  >
+                    <span
+                      className={cn(
+                        "font-display text-base font-semibold",
+                        active ? "text-forest-800" : "text-ink-900",
+                      )}
+                    >
+                      {item.label}
+                    </span>
+                    {item.hint ? (
+                      <span className="mt-0.5 text-xs text-ink-500">{item.hint}</span>
+                    ) : null}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* No language switcher here — it is on the bar at every width now. */}
-          <div className="mt-5 flex flex-col gap-3 border-t border-hairline pt-5">
-            <Button href="/contact" size="lg">
+          <div className="mt-5 flex flex-col gap-2.5">
+            <Button href="/contact" size="lg" className="w-full">
               Talk to an expert
             </Button>
             <a
               href={telHref(contact.phones[0])}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-7 py-4 text-[0.95rem] font-semibold text-brand-800"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-ink-200 bg-white px-6 py-3 text-sm font-semibold text-forest-800 tabular-nums"
             >
               <Phone aria-hidden className="size-4" />
-              {contact.phones[0]}
+              <NoTranslate>{contact.phones[0]}</NoTranslate>
             </a>
           </div>
         </nav>

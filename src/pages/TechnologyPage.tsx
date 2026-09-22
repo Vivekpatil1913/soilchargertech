@@ -13,7 +13,7 @@ import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Method } from "@/components/home/Method";
-import { Card, GhostNumber, Heading, Reveal, Section, Shell } from "@/components/ui";
+import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { pillars } from "@/data/site";
 import { technologies } from "@/data/technologies";
 import { cn } from "@/lib/utils";
@@ -110,9 +110,14 @@ function ArtRoot({ className }: ArtProps) {
 
 /**
  * The visual design of each pillar card. The copy itself stays in
- * `data/site.ts`; only how it is dressed lives here. Each pillar carries its
- * own accent family so the row reads as a spectrum rather than four identical
- * green cards, and links down to the piece of science it rests on.
+ * `data/site.ts`; only how it is dressed lives here, plus the link down to the
+ * piece of science each pillar rests on.
+ *
+ * All four share one accent. They used to carry four different ones so the row
+ * would "read as a spectrum", but the four pillars are not four different kinds
+ * of claim — they are one argument in four parts, and colouring them apart said
+ * the opposite. What distinguishes them is the drawing, which is the thing
+ * actually worth looking at.
  */
 const PILLAR_DESIGN = [
   {
@@ -121,10 +126,6 @@ const PILLAR_DESIGN = [
     subject: "nourishment",
     rejected: "not on disease",
     href: "#crop-nutrition",
-    tile: "bg-brand-50 text-brand-700 ring-brand-100",
-    number: "text-brand-600/[0.16]",
-    label: "text-brand-700",
-    ink: "text-brand-600/[0.07]",
   },
   {
     icon: Mountain,
@@ -132,10 +133,6 @@ const PILLAR_DESIGN = [
     subject: "soil",
     rejected: "not on climate",
     href: "#soil-biology",
-    tile: "bg-saffron-50 text-saffron-600 ring-saffron-100",
-    number: "text-saffron-500/25",
-    label: "text-saffron-700",
-    ink: "text-saffron-500/[0.11]",
   },
   {
     icon: Leaf,
@@ -143,10 +140,6 @@ const PILLAR_DESIGN = [
     subject: "humus",
     rejected: "not on substitutes",
     href: "#organic-carbon",
-    tile: "bg-leaf-200/45 text-leaf-600 ring-leaf-200",
-    number: "text-leaf-500/25",
-    label: "text-brand-700",
-    ink: "text-leaf-500/[0.11]",
   },
   {
     icon: Droplets,
@@ -154,10 +147,6 @@ const PILLAR_DESIGN = [
     subject: "leaf & root",
     rejected: "not on fruit",
     href: "#mycorrhiza",
-    tile: "bg-earth-50 text-earth-600 ring-earth-100",
-    number: "text-earth-600/[0.16]",
-    label: "text-earth-700",
-    ink: "text-earth-600/[0.08]",
   },
 ] as const;
 
@@ -174,7 +163,7 @@ export default function TechnologyPage() {
         eyebrow="How it works"
         title={
           <>
-            Not a product range. <span className="text-shine">A method.</span>
+            Not a product range. A method.
           </>
         }
         lead="Four pillars that decide what SCT will and will not do, the science underneath them, and three principles a farmer follows in the field."
@@ -198,52 +187,40 @@ export default function TechnologyPage() {
               const Art = design.art;
               return (
                 <Reveal key={pillar.title} as="li" delay={index * 0.08} className="h-full">
-                  <Card className="h-full overflow-hidden p-7">
-                    <Art
-                      className={cn(
-                        "pointer-events-none absolute -bottom-1 -right-1 h-[120px] w-[160px] transition-transform duration-500 [transition-timing-function:var(--ease-expressive)] motion-safe:group-hover:scale-110",
-                        design.ink,
-                      )}
-                    />
+                  <Card className="h-full p-6">
+                    <Art className="pointer-events-none absolute -bottom-1 -right-1 h-[120px] w-[160px] text-forest-600/[0.07] transition-transform duration-500 motion-safe:group-hover:scale-105" />
 
-                    <GhostNumber
-                      value={String(index + 1).padStart(2, "0")}
-                      className={cn("right-6 top-5 text-[2.6rem] tracking-tight", design.number)}
-                    />
+                    <div className="relative flex items-center justify-between">
+                      <span className="grid size-10 place-items-center rounded-lg bg-forest-50 text-forest-700">
+                        <Icon aria-hidden className="size-5" />
+                      </span>
+                      <span
+                        aria-hidden
+                        className="font-display text-lg font-bold tabular-nums text-ink-200"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
 
-                    <span
-                      className={cn(
-                        "relative grid size-14 shrink-0 place-items-center rounded-[1.15rem] ring-1 ring-inset transition-transform duration-400 motion-safe:group-hover:scale-110",
-                        design.tile,
-                      )}
-                    >
-                      <Icon aria-hidden className="size-7" strokeWidth={1.6} />
-                    </span>
-
-                    <h3 className="relative mt-6 font-display text-[1.22rem] font-bold leading-tight text-ink-900">
+                    <h3 className="relative mt-5 font-display text-base font-semibold leading-snug text-ink-900">
                       Work on {design.subject}
                     </h3>
-                    <p
-                      className={cn(
-                        "relative mt-2 text-[0.72rem] font-bold uppercase tracking-[0.13em]",
-                        design.label,
-                      )}
-                    >
+                    <p className="relative mt-1 text-xs font-medium text-ink-400 line-through decoration-harvest-400/60">
                       {design.rejected}
                     </p>
-                    <p className="relative mt-4 flex-1 text-[0.92rem] leading-relaxed text-ink-500">
+                    <p className="relative mt-4 flex-1 border-t border-ink-100 pt-4 text-sm leading-relaxed text-ink-500">
                       {pillar.body}
                     </p>
 
                     <Link
                       href={design.href}
-                      className="group/link relative mt-6 inline-flex items-center gap-1.5 self-start text-[0.86rem] font-semibold text-brand-700 transition-colors hover:text-brand-800"
+                      className="group/link relative mt-5 inline-flex items-center gap-1.5 self-start text-xs font-semibold text-forest-700 transition-colors hover:text-forest-800"
                     >
                       Read more
                       <span className="sr-only"> about working on {design.subject}</span>
                       <ArrowRight
                         aria-hidden
-                        className="size-4 transition-transform duration-300 [transition-timing-function:var(--ease-expressive)] group-hover/link:translate-x-1"
+                        className="size-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5"
                       />
                     </Link>
                   </Card>
@@ -255,7 +232,7 @@ export default function TechnologyPage() {
       </Section>
 
       {/* ---- The science ------------------------------------------------- */}
-      <Section ground="forest" labelledBy="science-heading" id="science" fx>
+      <Section ground="forest" labelledBy="science-heading" id="science" >
         <Shell size="wide">
           <Heading
             id="science-heading"
@@ -273,15 +250,15 @@ export default function TechnologyPage() {
                   <h3 className="font-display text-[1.25rem] font-bold leading-tight text-white">
                     {technology.title}
                     {technology.marathi ? (
-                      <span lang="mr" className="ml-2.5 text-[0.95rem] font-semibold text-leaf-400">
+                      <span lang="mr" className="ml-2.5 text-[0.95rem] font-semibold text-harvest-400">
                         {technology.marathi}
                       </span>
                     ) : null}
                   </h3>
-                  <p className="mt-2.5 text-[0.92rem] font-semibold text-leaf-300/90">
+                  <p className="mt-2.5 text-[0.92rem] font-semibold text-harvest-300/90">
                     {technology.short}
                   </p>
-                  <p className="mt-4 flex-1 text-[0.92rem] leading-relaxed text-sage-300/85">
+                  <p className="mt-4 flex-1 text-[0.92rem] leading-relaxed text-white/60">
                     {technology.body}
                   </p>
                 </Card>
@@ -305,7 +282,7 @@ export default function TechnologyPage() {
             align="center"
             title={
               <>
-                What &ldquo;100% SCT&rdquo; <span className="text-brand-600">actually means</span>
+                What &ldquo;100% SCT&rdquo; <span className="text-forest-600">actually means</span>
               </>
             }
           />
@@ -334,8 +311,8 @@ export default function TechnologyPage() {
               const Icon = SYSTEM_ICONS[index] ?? Beaker;
               return (
                 <Reveal key={name} as="li" delay={index * 0.08}>
-                  <div className="flex items-center gap-3.5 rounded-2xl border border-hairline bg-white px-5 py-4">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-squircle bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200">
+                  <div className="flex items-center gap-3.5 rounded-2xl border border-ink-100 bg-white px-5 py-4">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-forest-50 text-forest-700 ring-1 ring-inset ring-forest-200">
                       <Icon aria-hidden className="size-5" />
                     </span>
                     <span className="font-display text-[1rem] font-bold text-ink-900">{name}</span>

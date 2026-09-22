@@ -1,9 +1,8 @@
 import { Seo } from "@/components/common/Seo";
 import { Benefits } from "@/components/home/Benefits";
 import { ContactCta } from "@/components/home/ContactCta";
-import { FieldVideo } from "@/components/home/FieldVideo";
-import { Gallery } from "@/components/home/Gallery";
-import { Hero } from "@/components/home/Hero";
+import { Hero, StatBand } from "@/components/home/Hero";
+import { Knowledge } from "@/components/home/Knowledge";
 import { Method } from "@/components/home/Method";
 import { Pillars } from "@/components/home/Pillars";
 import { Problem } from "@/components/home/Problem";
@@ -16,22 +15,25 @@ import { SITE_URL } from "@/lib/constants";
 /**
  * HOMEPAGE
  * ========
- * Ten sections, in the order a visitor asks the questions:
+ * Ten bands, in the order a visitor asks the questions:
  *
- *   who is this        → Hero
- *   what is their idea → Pillars
- *   what is wrong      → Problem
- *   what do they do    → Method
- *   what can I buy     → Products      ← the section the page is built to reach
- *   what do I get      → Benefits
- *   why them           → WhySct
- *   who else uses it   → Proof
- *   can I see it       → Gallery
- *   how do I reach them→ ContactCta
+ *   who is this          → Hero
+ *   how big are they     → StatBand
+ *   what is wrong        → Problem
+ *   what is their idea   → Pillars
+ *   what can I buy       → Products     ← the band the page is built to reach
+ *   what do I do with it → Method
+ *   what do I get        → Benefits
+ *   why them             → WhySct
+ *   who else uses it     → Proof
+ *   where do I learn     → Knowledge
+ *   how do I reach them  → ContactCta
  *
- * Grounds alternate deliberately: forest, soil and tint bands break the page
- * into chapters, and the products section sits on the darkest ground so the
- * white cards carry the most contrast on the page.
+ * Grounds alternate canvas → white → canvas → forest, which is what breaks a
+ * long page into chapters. Only two bands on the whole page are dark: Products
+ * and the closing call to action. That is deliberate — a dark band is the
+ * loudest thing the design system has, so it is spent on the catalogue and on
+ * the one action, and on nothing else.
  */
 export default function HomePage() {
   const jsonLd = {
@@ -71,16 +73,16 @@ export default function HomePage() {
         jsonLd={jsonLd}
       />
 
-      <FieldVideo />
       <Hero />
+      <StatBand />
       <Problem />
       <Pillars />
-      <Method />
       <Products />
+      <Method />
       <Benefits />
       <WhySct />
       <Proof />
-      <Gallery />
+      <Knowledge />
       <ContactCta />
     </>
   );

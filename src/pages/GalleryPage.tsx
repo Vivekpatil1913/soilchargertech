@@ -53,7 +53,7 @@ export default function GalleryPage() {
         eyebrow="Photo & video gallery"
         title={
           <>
-            Nothing staged. <span className="text-shine">Just the fields.</span>
+            Nothing staged. Just the fields.
           </>
         }
         lead="Photographs from farms working on SCT, and films of the farmers themselves — every one of them shot on real land, not in a studio."

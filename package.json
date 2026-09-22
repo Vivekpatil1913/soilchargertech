@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Soil Charger Technology \u2014 sustainable agriculture & soil health website (React + Vite)",
+  "description": "Soil Charger Technology — sustainable agriculture & soil health website (React + Vite)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b --noEmit && vite build",

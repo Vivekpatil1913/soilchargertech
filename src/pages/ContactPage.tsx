@@ -2,6 +2,7 @@ import { Mail, MapPin, MessageCircle, Phone, Store } from "lucide-react";
 import { useState } from "react";
 
 import { PageHero } from "@/components/common/PageHero";
+import { NoTranslate } from "@/components/common/NoTranslate";
 import { Seo } from "@/components/common/Seo";
 import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { faqs } from "@/data/faqs";
@@ -81,7 +82,7 @@ export default function ContactPage() {
   }
 
   const field =
-    "mt-2 w-full rounded-xl border border-hairline bg-white px-4 py-3 text-[0.95rem] text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-brand-400";
+    "mt-2 w-full rounded-xl border border-ink-200 bg-ink-50/30 px-4 py-2.5 text-sm text-ink-900 outline-none transition placeholder:text-ink-300 focus:border-forest-500 focus:bg-white focus:ring-2 focus:ring-forest-500/15";
 
   return (
     <>
@@ -96,7 +97,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={
           <>
-            Tell us about <span className="text-shine">your field.</span>
+            Tell us about your field.
           </>
         }
         lead="Describe your crop, your soil and what you are seeing. You will get an answer for your situation, not a general one."
@@ -119,19 +120,19 @@ export default function ContactPage() {
                     {...(channel.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="group flex h-full flex-col rounded-2xl border border-hairline bg-white p-6 transition-all duration-400 hover:border-brand-300 hover:shadow-card motion-safe:hover:-translate-y-1"
+                    className="group flex h-full flex-col rounded-2xl border border-ink-100 bg-white p-6 transition-all duration-400 hover:border-forest-300 hover:shadow-card motion-safe:hover:-translate-y-1"
                   >
-                    <span className="grid size-11 place-items-center rounded-squircle bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200 transition-transform duration-400 motion-safe:group-hover:scale-110">
+                    <span className="grid size-11 place-items-center rounded-xl bg-forest-50 text-forest-700 ring-1 ring-inset ring-forest-200 transition-transform duration-400 motion-safe:group-hover:scale-110">
                       <Icon aria-hidden className="size-5" />
                     </span>
-                    <p className="mt-5 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-ink-400">
+                    <p className="mt-5 text-meta text-ink-400">
                       {channel.label}
                     </p>
                     <p className="mt-1.5 break-words font-display text-[1rem] font-bold text-ink-900">
-                      {channel.value}
+                      <NoTranslate>{channel.value}</NoTranslate>
                     </p>
                     <p className="mt-2 flex-1 break-words text-[0.84rem] text-ink-500">
-                      {channel.hint}
+                      <NoTranslate>{channel.hint}</NoTranslate>
                     </p>
                   </a>
                 </Reveal>
@@ -204,7 +205,7 @@ export default function ContactPage() {
                   <div className="flex justify-end">
                     <button
                       type="submit"
-                      className="shadow-brand-glow inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-500 sm:w-auto"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest-800 px-6 py-3 text-sm font-semibold text-white shadow-glow-green transition-colors duration-200 hover:bg-forest-700 sm:w-auto"
                     >
                       <MessageCircle aria-hidden className="size-4" />
                       Submit
@@ -216,25 +217,25 @@ export default function ContactPage() {
 
             <Reveal delay={0.08} className="flex flex-col gap-5 self-start">
               <Card className="p-7" lift={false}>
-                <span className="grid size-11 place-items-center rounded-squircle bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200">
+                <span className="grid size-11 place-items-center rounded-xl bg-forest-50 text-forest-700 ring-1 ring-inset ring-forest-200">
                   <MapPin aria-hidden className="size-5" />
                 </span>
                 <h3 className="text-h3 mt-5 text-ink-900">Come and see us</h3>
-                <p className="mt-3 text-[0.94rem] leading-relaxed text-ink-500">
+                <NoTranslate as="p" className="mt-3 text-[0.94rem] leading-relaxed text-ink-500">
                   {addressOneLine}
-                </p>
+                </NoTranslate>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressOneLine)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-brand-700 hover:text-brand-800"
+                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-forest-700 hover:text-forest-800"
                 >
                   Get directions
                 </a>
               </Card>
 
               <Card className="p-7" lift={false}>
-                <span className="grid size-11 place-items-center rounded-squircle bg-saffron-50 text-saffron-700 ring-1 ring-inset ring-saffron-200">
+                <span className="grid size-11 place-items-center rounded-xl bg-harvest-50 text-harvest-700 ring-1 ring-inset ring-harvest-200">
                   <Store aria-hidden className="size-5" />
                 </span>
                 <h3 className="text-h3 mt-5 text-ink-900">Want to stock SCT?</h3>
@@ -250,7 +251,7 @@ export default function ContactPage() {
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-saffron-700 hover:text-saffron-600"
+                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-harvest-700 hover:text-harvest-600"
                 >
                   Start the conversation
                 </a>
@@ -261,7 +262,7 @@ export default function ContactPage() {
       </Section>
 
       {/* ---- FAQs -------------------------------------------------------- */}
-      <Section ground="tint" labelledBy="faq-heading" id="faqs">
+      <Section ground="canvas" labelledBy="faq-heading" id="faqs">
         <Shell size="narrow">
           <Heading
             id="faq-heading"
@@ -275,7 +276,7 @@ export default function ContactPage() {
               const open = openFaq === index;
               return (
                 <li key={faq.question}>
-                  <div className="overflow-hidden rounded-2xl border border-hairline bg-white">
+                  <div className="overflow-hidden rounded-2xl border border-ink-100 bg-white">
                     <h3>
                       <button
                         type="button"
@@ -289,7 +290,7 @@ export default function ContactPage() {
                         <span
                           aria-hidden
                           className={cn(
-                            "grid size-7 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-700 transition-transform duration-300",
+                            "grid size-7 shrink-0 place-items-center rounded-full bg-forest-50 text-forest-700 transition-transform duration-300",
                             open ? "rotate-45" : "",
                           )}
                         >

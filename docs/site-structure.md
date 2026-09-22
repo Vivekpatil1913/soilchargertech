@@ -2,7 +2,8 @@
 
 **Stack:** React 19 + Vite 6 + React Router 7 + Tailwind v4 + framer-motion
 **Built:** 2026-09-21 — complete rebuild, no code carried over from the previous design
-**Design language:** derived from [design-reference-scope.md](design-reference-scope.md) and [design-reference-sumago.md](design-reference-sumago.md)
+**Design language:** [design-reference-ngn.md](design-reference-ngn.md) — rebuilt against it 2026-09-21.
+The earlier SCOPE/Sumago direction is superseded; those files stay on record only.
 **Content source:** [sct-legacy-content.md](sct-legacy-content.md)
 
 ---
@@ -11,12 +12,13 @@
 
 | Route | Page file | What it does |
 |---|---|---|
-| `/` | `pages/HomePage.tsx` | The whole company in nine sections |
+| `/` | `pages/HomePage.tsx` | The whole company in eleven bands |
 | `/about` | `pages/AboutPage.tsx` | Founder's letter in full, timeline, vision/mission, team |
 | `/technology` | `pages/TechnologyPage.tsx` | Four pillars, the science, three principles, what "100% SCT" means |
 | `/products` | `pages/ProductsPage.tsx` | **Level 1** — the 21 category cards, filterable by range |
 | `/products/:category` | `pages/CategoryPage.tsx` | **Level 2** — what the category does, benefits, dosage, and the products inside it |
 | `/products/:category/:product` | `pages/ProductDetailPage.tsx` | **Level 3** — one pack, with the category's information repeated |
+| `/gallery` | `pages/GalleryPage.tsx` | Photographs and the 45 films from SCT's channel |
 | `/knowledge` | `pages/KnowledgePage.tsx` | Article index |
 | `/knowledge/:slug` | `pages/KnowledgeArticlePage.tsx` | Long-form article |
 | `/contact` | `pages/ContactPage.tsx` | Four channels, WhatsApp-backed form, FAQs |
@@ -58,71 +60,170 @@ category({
 Nothing else needs touching — the grid, the category pages and the product
 routes are all generated from that array.
 
-**Navigation is five items:** About · Technology · Products · Knowledge · Contact.
-The old site had eleven across four dropdowns. Journey, Applications and Farmer Stories were folded into `/about`, `/products` and the home page; all remain reachable from the footer.
+**Navigation is six items:** About · Technology · Products · Gallery · Knowledge · Contact.
+The old site had eleven across four dropdowns. Journey, Applications and Farmer
+Stories were folded into `/about`, `/products` and the home page; all remain
+reachable from the footer. Above `lg` a forest utility strip sits over the bar
+carrying the phone number, the email and the language switcher — the three
+things a visitor needs but should never have to hunt for.
 
 ---
 
 ## 2. Home page — the journey
 
-The section order is the argument, and it maps exactly to the brief:
+The section order is the argument:
 
-| # | Section | Component | Ground | Answers |
+| # | Band | Component | Ground | Answers |
 |---|---|---|---|---|
-| 1 | Hero | `home/Hero.tsx` | forest | Who is this, what do they sell |
-| 2 | Four Pillars | `home/Pillars.tsx` | forest | What is their idea |
-| 3 | The Problem | `home/Problem.tsx` | **soil** | What is wrong today |
-| 4 | Three Principles | `home/Method.tsx` | tint | What do they do about it |
+| 1 | Hero | `home/Hero.tsx` | canvas | Who is this, what do they sell |
+| 2 | Stat band | `home/Hero.tsx` → `StatBand` | **forest** | How big are they |
+| 3 | The Problem | `home/Problem.tsx` | white | What is wrong today |
+| 4 | Four Pillars | `home/Pillars.tsx` | canvas | What is their idea |
 | 5 | **Products** | `home/Products.tsx` | **forest** | **What can I buy** |
-| 6 | Benefits | `home/Benefits.tsx` | light | What do I get |
-| 7 | Why SCT | `home/WhySct.tsx` | tint | Why them, not the next shop |
-| 8 | Proof | `home/Proof.tsx` | light | Who else uses it |
-| 9 | Contact | `home/ContactCta.tsx` | forest | How do I reach them |
+| 6 | Three Principles | `home/Method.tsx` | white | What do I do with it |
+| 7 | Benefits | `home/Benefits.tsx` | canvas | What do I get |
+| 8 | Why SCT | `home/WhySct.tsx` | white | Why them, not the next shop |
+| 9 | Farmer voices | `home/Proof.tsx` | canvas | Who else uses it |
+| 10 | Knowledge | `home/Knowledge.tsx` | canvas | Where do I learn |
+| 11 | Contact | `home/ContactCta.tsx` | **forest** | How do I reach them |
 
-Grounds alternate deliberately — that is what breaks a long page into chapters. Products sits on the darkest ground so the white cards carry the most contrast anywhere on the site.
+**Only three bands on the page are dark**, and two of them are Products and the
+closing call to action. A dark band is the loudest thing the system has, so it
+is spent on the catalogue and on the one action, and on nothing else.
+
+The hero is a two-column opening, not a full-bleed photograph with text over
+it: the headline sits on paper so it is legible at every viewport, the page
+begins with words rather than atmosphere, and it costs one image instead of a
+video on a 3G connection.
+
+**Removed from the old home page:** the looping field-video band
+(`home/FieldVideo.tsx`) and the gallery strip section (`home/Gallery.tsx`).
+The gallery is now four photographs inside `Proof`, one click from the full
+page; the video band was a full-width autoplaying MP4 above the fold.
 
 ---
 
 ## 3. Design tokens
 
-All in `src/styles/globals.css`. **Palette sampled from the logo file itself:**
+All in `src/styles/globals.css`. Three families, and one of them is paper.
 
-| Token | Hex | Where it comes from |
+| Token | Hex | Role |
 |---|---|---|
-| `brand-600` | `#009c54` | the logo's lower arc |
-| `leaf-500` | `#6cb454` | the sprout leaves |
-| `saffron-500` | `#f08430` | the upper arc |
-| `earth-700` | `#782424` | the wordmark |
+| `forest-800` | `#0f4e30` | the dark ground, and the primary button |
+| `forest-500` | `#009c54` | **sampled from the client's logo** — the brand green |
+| `harvest-400` | `#eaad32` | the accent. Marks things; never a field you sit on |
+| `canvas-50` | `#fafaf5` | the warm paper the whole site sits on |
+| `ink-*` | `#0e1311`…`#f4f5f4` | neutrals, green-mixed. Nothing here is cold grey |
 
-Plus `sage-*` (green-tinted neutrals) and `ink-*` (green-mixed darks). Nothing on this site is a cold grey.
+Full ramps and their provenance: [design-reference-ngn.md](design-reference-ngn.md) §2.
 
-**Grounds:** `ground-light` · `ground-tint` · `ground-forest` (deep green) · `ground-soil` (maroon-brown)
+**Grounds:** `ground-canvas` · `ground-canvas-down` · `ground-light` ·
+`ground-forest` · `ground-forest-deep`. The canvas pair are near-invisible
+gradients — they give a *seam* between sections rather than a colour change a
+reader notices.
 
-**Type:** fluid `clamp()` at every level — `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-lead`, `text-eyebrow`. Headings carry tight negative tracking (`-0.032em`); eyebrows carry wide positive tracking (`0.15em`). That contrast is most of what makes it read as current.
+**Type:** `Fraunces` (serif) for every heading, `Inter` for everything else,
+`Tiro Devanagari Marathi` for the Marathi and Hindi translations. The
+serif/sans pairing is the identity; it does more for "established institution"
+than any amount of styling. Fluid `clamp()` at every level — `text-display`,
+`text-h1`…`text-h3`, `text-lead`, `text-eyebrow` (11px), `text-meta` (10px).
 
-**Motion tokens:** `--ease-entrance`, `--ease-standard`, `--ease-expressive`.
+Scale is deliberately small: a section heading tops out at 32px, body is 15px.
+The authority comes from the serif and the spacing, not from size.
 
-**Elevation:** `shadow-card`, `shadow-card-lg`, `shadow-dark`, `shadow-brand-glow`. All negative-spread — never a default Tailwind shadow.
+**Elevation:** `shadow-soft` and `shadow-card` only, plus `shadow-glow-green`
+for the primary button. All three are wide, soft and nearly transparent. What
+actually defines a card is `border border-ink-100`.
+
+**Signature marks:** `rule-harvest` (the gold rule under every heading — the
+one element that ties the site together), `edge-harvest` (the gold hairline
+seating a dark band against the light one above), `grain` + `grain-layer` (one
+inline SVG turbulence over the dark grounds).
 
 ---
 
-## 4. Motion system
+## 4. Motion
 
-Everything except the scroll reveals and the hero is pure CSS.
+**Three keyframes for the whole site** — `float`, `marquee`, `soft-pulse` —
+matching the reference. Everything is ambient: nothing animates to tell a
+story, and nothing has to finish before the page can be read.
 
-| Effect | Class | Technique |
-|---|---|---|
-| Ambient texture | `fx-mesh`, `fx-streaks`, `fx-dots` | Alpha-only backgrounds, so one class works over any ground |
-| Drifting orbs | `bloom` + `bloom-a` / `bloom-b` | 23s and 29s on `alternate` — mismatched clocks, so the pairing never visibly repeats |
-| Heading sweep | `text-shine` | Static green gradient clipped to glyphs, light band sweeps across it. **Once per page** |
-| Hero headline | `home/Hero.tsx` | Masked line reveal — `overflow-hidden` window, text parked at `translateY(115%)` |
-| Dosage chips | `marquee` + `marquee-track` | Content duplicated in DOM, `--dur` per instance, edge-masked, pauses on `group` hover |
-| Scroll reveal | `<Reveal>` | One movement, one duration, `once: true` |
+| Effect | Where |
+|---|---|
+| Scroll reveal | `<Reveal>` — one movement, 14px, 0.5s, `once: true` |
+| Dosage tickers | `marquee` + `marquee-track`, `--dur` per instance so two never march in step |
+| Photograph hover | `duration-700 group-hover:scale-105` |
+| Everything else | `transition-colors`. No hover lift is larger than 2px |
 
-**Reduced motion is handled at three levels** (the contract from the Sumago reference):
+**Reduced motion is handled at three levels:**
 1. Global kill in `@media (prefers-reduced-motion: reduce)`
-2. Animations declared only inside `@media (prefers-reduced-motion: no-preference)` — they never exist for a visitor who opted out
-3. `motion-safe:` / `motion-reduce:` at the call site
+2. Every `@keyframes` is declared **inside** `@media (prefers-reduced-motion: no-preference)` — for a visitor who opted out they do not exist at all
+3. `motion-safe:` at the call site for hover transforms
+
+**Gone from the previous design:** nine `fx-*` background layers, blurred
+drifting orbs, the `text-shine` gradient heading sweep, ghost numerals, and
+Lenis-driven parallax. `framer-motion` now drives scroll reveals and nothing
+else.
+
+---
+
+## 4b. Translation guards
+
+The site is served in Marathi and Hindi by driving Google Translate's own
+`googtrans` cookie (`layout/LanguageSwitcher.tsx`). Machine translation is
+indiscriminate — it rewrites every text node it finds, including the ones that
+are not language. Unguarded, switching to Marathi produced:
+
+| Was | Became | Why it matters |
+|---|---|---|
+| Soil Charger Technology | **माती चार्जर तंत्रज्ञान** in the footer lockup, **सॉईल चार्जर टेक्नॉलॉजी** in the paragraph below it | One name, two renderings, on one screen |
+| +91 86692 00221 | **+९१ ८६६९२ ००२२१** | Cannot be dialled from a keypad or copied into one |
+| Nashik – 422 101 | **नाशिक – ४२२ १०१** | Undeliverable, and not what you type into Maps |
+| SCT Vedic · Super Series | **एससीटी वैदिक · सुपर सिरीज** | Product names |
+| X (the social link) | **एक्स** | — |
+
+`components/common/NoTranslate.tsx` holds the fix. It sets **both**
+`translate="no"` and `class="notranslate"`, because a half-translated phone
+number is not a cosmetic bug.
+
+```tsx
+<Brand />                                  // the company name
+<Brand pad="after" /> makes organic…       // mid-sentence
+<NoTranslate>{contact.phones[0]}</NoTranslate>
+{protectBrand(site.description)}           // the name inside a plain string
+```
+
+**What is guarded:** the company name, product / category / range names, phone
+and WhatsApp numbers, email addresses, the postal address, and nav labels
+flagged `proper: true` in `data/navigation.ts`.
+
+**What is deliberately *not* guarded:** figures. Years, counters and dosages go
+back to Devanagari numerals, because that is correct Marathi and a farmer reads
+it more easily — `१.२ किलो प्रति एकर` is better for them than `1.2 kg per acre`.
+Pinning `2015` in place also fought the grammar: Marathi moves the postposition
+after the numeral, and the guard produced `पासून2015`. People's names are not
+guarded either — a Marathi reader seeing **राम मुखेकर** is being served, not
+mangled.
+
+### The `pad` prop, and why it exists
+
+A guard mid-sentence splits it into three DOM nodes. Google translates each
+neighbour on its own and does **not** preserve the whitespace — or sometimes the
+punctuation — at the seam, which produced `Soil Charger Technologyसेंद्रिय` and
+`Soil Charger Technologyनाशिक`. The only safe place for that space is *inside*
+the guard, so `pad` puts one there. It is a plain space, not `&nbsp;`, so a long
+name can still wrap in a narrow column; adjacent whitespace collapses in HTML,
+so padding a side that already has a literal space is harmless.
+
+`protectBrand()` applies this automatically, and also pulls trailing punctuation
+inside the guard so `…of Soil Charger Technology, Nashik.` survives the comma.
+
+### Checking it
+
+There is no automated test for this — it needs Google's live script. Verify by
+hand after touching any of the guarded surfaces: switch the site to Marathi and
+confirm the company name, every phone number and every product name are still
+in Latin script, with a space on each side.
 
 ---
 
@@ -130,21 +231,29 @@ Everything except the scroll reveals and the hero is pure CSS.
 
 ```
 src/components/
-├── ui/index.tsx          Shell · Section · Heading · Reveal · Button · Card · GhostNumber
+├── ui/index.tsx          Shell · Section · Eyebrow · Heading · Reveal ·
+│                         Button · Card · Chip · StepMark · Stat · Placeholder
 ├── layout/
-│   ├── Header.tsx        5-item nav, transparent→solid on scroll, mobile drawer
-│   ├── Logo.tsx          The client's file, ~100px tall on desktop
+│   ├── Header.tsx        Forest utility strip + solid bar, 6-item nav, drawer
+│   ├── Logo.tsx          The client's file, ~56px tall on desktop
 │   ├── Footer.tsx        Contact block above link columns
 │   └── LanguageSwitcher  EN/MR/HI, drives the hidden Google Translate select
-├── home/                 The 9 sections above
+├── home/                 The 11 bands above
 ├── products/
 │   ├── CategoryCard.tsx  One of the 21 — image panel, dosage marquee, product count
-│   ├── ProductRow.tsx    One pack inside a category — a row, not a card
-│   └── ProductVisual.tsx Branded SVG pack — bottle / pouch / sack
-└── common/               Seo · ScrollToTop · SmoothScroll · PageHero
+│   └── ProductRow.tsx    One pack inside a category — a row, not a card
+└── common/               Seo · ScrollToTop · SmoothScroll · PageHero ·
+                          NoTranslate (Brand / NoTranslate / protectBrand)
 ```
 
-Every section is built from the six `ui` primitives. That is what keeps the page reading as one system.
+Every section is built from these primitives. That is what keeps the page
+reading as one system.
+
+**The header is solid at every scroll position.** The previous design faded a
+transparent bar in over a dark hero, which made the logo's legibility depend on
+whatever photograph sat behind it and forced every inner page to open on a dark
+slab so the bar had something to sit on. Both are gone: `main` clears the fixed
+header, and `PageHero` is a pale band with a breadcrumb.
 
 ---
 
@@ -167,7 +276,7 @@ Every section is built from the six `ui` primitives. That is what keeps the page
 | 2 | ~~All 21 product photos are dead~~ — **recovered** from the Internet Archive and converted to WebP | Done. Higher-resolution masters from the client would still improve three of them |
 | 2b | **Product lists inside each category are provisional** — generated from published pack sizes | Client sends the real SKU list per category → drop into `skus` |
 | 3 | **Only 2 testimonials exist** | Collect with consent — SCT's YouTube channel is full of material |
-| 4 | Marathi/Hindi is **machine translation** | SCT-written copy would read far better |
+| 4 | Marathi/Hindi is **machine translation**. Names, numbers and addresses are guarded (§4b), but the prose is still Google's | SCT-written copy would read far better |
 | 5 | Contact form **opens WhatsApp**, stores nothing — there is no backend | Add one if enquiries need tracking |
 | 6 | Legal pages are **plain-language drafts**, not lawyer-reviewed | Review before launch |
 | 7 | 15 content gaps from the old site still open | See [sct-legacy-content.md](sct-legacy-content.md) §16 |

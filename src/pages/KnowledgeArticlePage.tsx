@@ -38,17 +38,12 @@ export default function KnowledgeArticlePage() {
       />
 
       <article>
-        <header className="ground-forest">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 fx-mesh" />
-            <div className="absolute inset-0 fx-dots opacity-50" />
-            <div className="bloom bloom-a absolute -left-32 -top-24 size-[28rem] bg-brand-500/25" />
-          </div>
+        <header className="ground-canvas border-b border-ink-100">
 
-          <Shell className="relative pb-16 pt-32 sm:pt-36 lg:pb-20 lg:pt-44">
+          <Shell className="relative py-10 lg:py-14">
             <Link
               href="/knowledge"
-              className="group inline-flex items-center gap-2 text-[0.88rem] font-semibold text-sage-300 transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-xs font-semibold text-ink-500 transition-colors hover:text-forest-700"
             >
               <ArrowLeft
                 aria-hidden
@@ -57,15 +52,16 @@ export default function KnowledgeArticlePage() {
               Knowledge centre
             </Link>
 
-            <p className="text-eyebrow mt-8 text-leaf-400">{article.category}</p>
-            <h1 className="text-h1 mt-4 max-w-3xl text-white">{article.title}</h1>
-            <p className="text-lead mt-5 max-w-2xl text-sage-300/85">{article.excerpt}</p>
-            <p className="mt-5 text-[0.84rem] text-sage-400">{article.readingTime}</p>
+            <p className="text-eyebrow mt-8 text-harvest-700">{article.category}</p>
+            <h1 className="text-h1 mt-4 max-w-3xl text-ink-900">{article.title}</h1>
+            <span aria-hidden className="rule-harvest mt-4" />
+            <p className="text-lead mt-5 max-w-2xl text-ink-500">{article.excerpt}</p>
+            <p className="mt-5 text-xs text-ink-400">{article.readingTime}</p>
           </Shell>
         </header>
 
         <Shell className="relative">
-          <div className="shadow-card-lg relative -mt-10 aspect-[16/9] overflow-hidden rounded-2xl">
+          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl border border-ink-100 shadow-card">
             <Image
               src={article.image.src}
               alt={article.image.alt}
@@ -109,7 +105,7 @@ export default function KnowledgeArticlePage() {
       </article>
 
       {more.length > 0 ? (
-        <Section ground="tint" labelledBy="more-reading">
+        <Section ground="canvas" labelledBy="more-reading">
           <Shell size="wide">
             <h2 id="more-reading" className="text-h2 text-ink-900">
               More reading
@@ -128,7 +124,7 @@ export default function KnowledgeArticlePage() {
                       />
                     </div>
                     <div className="flex flex-1 flex-col p-5">
-                      <p className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-700">
+                      <p className="text-meta text-harvest-700">
                         {item.category}
                       </p>
                       <h3 className="mt-2 font-display text-[1rem] font-bold leading-snug text-ink-900">

@@ -91,7 +91,7 @@ export function ShowMore({
           "inline-flex items-center gap-2.5 rounded-full px-7 py-4 text-[0.95rem] font-semibold transition-all duration-300 [transition-timing-function:var(--ease-expressive)] motion-safe:hover:-translate-y-0.5",
           onDark
             ? "border border-white/25 bg-white/10 text-white backdrop-blur hover:bg-white/20"
-            : "border border-brand-200 bg-white text-brand-800 hover:border-brand-400 hover:text-brand-700",
+            : "border border-forest-200 bg-white text-forest-800 hover:border-forest-400 hover:text-forest-700",
         )}
       >
         {fullyShown ? "Show less" : "View more"}
@@ -100,7 +100,7 @@ export function ShowMore({
           <span
             className={cn(
               "rounded-full px-2 py-0.5 text-[0.75rem] font-bold tabular-nums",
-              onDark ? "bg-white/15 text-white/80" : "bg-brand-50 text-brand-700",
+              onDark ? "bg-white/15 text-white/80" : "bg-forest-50 text-forest-700",
             )}
           >
             +{remaining}

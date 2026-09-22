@@ -80,6 +80,9 @@ export type Stat = {
   id: string;
   /** Numeric target for the counter; `null` renders the placeholder label. */
   value: number | null;
+  /** A year is a label, not a quantity — it must never take a thousands
+   *  separator. Everything else is grouped for readability. */
+  format?: "year" | "count";
   suffix?: string;
   label: string;
   caption: string;
@@ -95,6 +98,7 @@ export const stats: Stat[] = [
   {
     id: "since",
     value: 2015,
+    format: "year",
     label: "Working on soil since",
     caption: "Organic carbon made the first priority.",
     verified: true,

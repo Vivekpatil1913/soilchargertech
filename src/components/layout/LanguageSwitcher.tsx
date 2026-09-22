@@ -195,7 +195,7 @@ export function LanguageSwitcher({
           "inline-flex items-center gap-2 rounded-full border py-2.5 pl-3.5 pr-3 text-[0.85rem] font-semibold transition-colors",
           onDark
             ? "border-white/25 bg-white/10 text-white backdrop-blur hover:bg-white/20"
-            : "border-hairline bg-white text-ink-700 hover:border-brand-300 hover:text-brand-700",
+            : "border-ink-100 bg-white text-ink-700 hover:border-forest-300 hover:text-forest-700",
         )}
       >
         <Globe aria-hidden className={cn("size-4", onDark ? "text-white/80" : "text-ink-500")} />
@@ -214,7 +214,7 @@ export function LanguageSwitcher({
           options out of the tab order while it is closed. */}
       <div
         className={cn(
-          "absolute top-[calc(100%+0.6rem)] z-50 w-60 origin-top rounded-2xl border border-hairline bg-white p-1.5 shadow-card-lg transition-all duration-300 [transition-timing-function:var(--ease-expressive)]",
+          "absolute top-[calc(100%+0.6rem)] z-50 w-60 origin-top rounded-2xl border border-ink-100 bg-white p-1.5 shadow-card transition-all duration-300 [transition-timing-function:var(--ease-expressive)]",
           align === "right" ? "right-0" : "left-0",
           open
             ? "visible translate-y-0 scale-100 opacity-100"
@@ -230,7 +230,7 @@ export function LanguageSwitcher({
           aria-label="Choose language"
           onKeyDown={onListKeyDown}
           data-lenis-prevent
-          className="relative max-h-[17.5rem] overflow-y-auto overscroll-contain [scrollbar-color:var(--color-brand-200)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-brand-200 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5"
+          className="relative max-h-[17.5rem] overflow-y-auto overscroll-contain [scrollbar-color:var(--color-forest-200)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-forest-200 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5"
         >
           {LANGUAGES.map((language) => {
             const selected = language.code === active;
@@ -243,18 +243,18 @@ export function LanguageSwitcher({
                 onClick={() => change(language.code)}
                 className={cn(
                   "flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200",
-                  selected ? "bg-brand-50 text-brand-800" : "text-ink-700 hover:bg-sage-50",
+                  selected ? "bg-forest-50 text-forest-800" : "text-ink-700 hover:bg-canvas-50",
                 )}
               >
                 <span className="flex flex-col leading-tight">
                   <span className="font-display text-[0.95rem] font-bold">{language.native}</span>
                   <span
-                    className={cn("text-[0.76rem]", selected ? "text-brand-700" : "text-ink-400")}
+                    className={cn("text-[0.76rem]", selected ? "text-forest-700" : "text-ink-400")}
                   >
                     {language.label}
                   </span>
                 </span>
-                {selected ? <Check aria-hidden className="size-4 shrink-0 text-brand-600" /> : null}
+                {selected ? <Check aria-hidden className="size-4 shrink-0 text-forest-600" /> : null}
               </button>
             );
           })}
