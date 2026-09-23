@@ -1,3 +1,4 @@
+import { IsoCertification } from "@/components/common/IsoCertification";
 import { Seo } from "@/components/common/Seo";
 import { Benefits } from "@/components/home/Benefits";
 import { ContactCta } from "@/components/home/ContactCta";
@@ -16,7 +17,7 @@ import { SITE_URL } from "@/lib/constants";
 /**
  * HOMEPAGE
  * ========
- * Ten sections, in the order a visitor asks the questions:
+ * Eleven sections, in the order a visitor asks the questions:
  *
  *   who is this        → Hero
  *   what is their idea → Pillars
@@ -27,6 +28,7 @@ import { SITE_URL } from "@/lib/constants";
  *   why them           → WhySct
  *   who else uses it   → Proof
  *   can I see it       → Gallery
+ *   can I trust them   → IsoCertification
  *   how do I reach them→ ContactCta
  *
  * Grounds alternate deliberately: forest, soil and tint bands break the page
@@ -81,6 +83,7 @@ export default function HomePage() {
       <WhySct />
       <Proof />
       <Gallery />
+      <IsoCertification />
       <ContactCta />
     </>
   );

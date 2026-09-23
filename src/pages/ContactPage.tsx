@@ -1,13 +1,24 @@
-import { Mail, MapPin, MessageCircle, Phone, Store } from "lucide-react";
+import {
+  Briefcase,
+  Globe2,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquareText,
+  Phone,
+  Store,
+} from "lucide-react";
 import { useState } from "react";
 
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
+import { EnquiryLauncher, ExportLauncher } from "@/components/forms/launchers";
 import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { faqs } from "@/data/faqs";
 import { addressOneLine, contact } from "@/data/site";
 import { SITE_URL } from "@/lib/constants";
 import { cn, telHref, whatsappHref } from "@/lib/utils";
+import Link from "@/shims/Link";
 
 /**
  * CONTACT
@@ -20,7 +31,15 @@ import { cn, telHref, whatsappHref } from "@/lib/utils";
  * The form does not submit anywhere yet. There is no backend on this build, so
  * rather than fake a success state it opens the visitor's WhatsApp with the
  * message pre-filled — which is both honest and, for this audience, faster than
- * an email they will never see a reply to.
+ * an email they will never see a reply to. Every other form on the site uses
+ * the same rule; see src/lib/form-submit.ts.
+ *
+ * THE OTHER FORMS
+ * ---------------
+ * Five more came across from the old site. Two are modals opened from the band
+ * near the bottom of this page (export and product enquiry) and three are
+ * applications living on /careers. This page points at all of them, because
+ * "contact" is where a visitor looks for any of them.
  */
 
 const faqSchema = {
@@ -63,6 +82,49 @@ const CHANNELS = [
     hint: `Sales: ${contact.emails.sales}`,
   },
 ] as const;
+
+/** One shell for the four cards in the "other forms" band. */
+const FORM_CARD =
+  "group flex h-full w-full flex-col rounded-2xl border border-hairline bg-surface p-6 text-left transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:border-brand-300 hover:shadow-card motion-safe:hover:-translate-y-1";
+
+function FormCardBody({
+  icon,
+  eyebrow,
+  title,
+  body,
+  action,
+  tone = "brand",
+}: {
+  icon: React.ReactNode;
+  eyebrow: string;
+  title: string;
+  body: string;
+  action: string;
+  tone?: "brand" | "saffron";
+}) {
+  return (
+    <>
+      <span
+        className={cn(
+          "grid size-11 place-items-center rounded-squircle ring-1 ring-inset transition-transform duration-400 motion-safe:group-hover:scale-110",
+          tone === "saffron"
+            ? "bg-saffron-50 text-saffron-700 ring-saffron-200"
+            : "bg-brand-50 text-brand-700 ring-brand-200",
+        )}
+      >
+        {icon}
+      </span>
+      <p className="mt-5 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-ink-400">
+        {eyebrow}
+      </p>
+      <h3 className="mt-1.5 font-display text-[1.05rem] font-bold leading-tight text-ink-900">
+        {title}
+      </h3>
+      <p className="mt-2.5 flex-1 text-[0.86rem] leading-relaxed text-ink-500">{body}</p>
+      <span className="mt-5 text-[0.86rem] font-bold text-brand-700">{action}</span>
+    </>
+  );
+}
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -243,6 +305,12 @@ export default function ContactPage() {
                   are, how many farmers you work with, and whether you have used the technology
                   yourself.
                 </p>
+                <Link
+                  href="/careers#distributor"
+                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-saffron-700 hover:text-saffron-600"
+                >
+                  Open the application form
+                </Link>
                 <a
                   href={whatsappHref(
                     contact.whatsapp,
@@ -250,13 +318,78 @@ export default function ContactPage() {
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-saffron-700 hover:text-saffron-600"
+                  className="mt-2 block text-[0.86rem] font-semibold text-ink-400 transition-colors hover:text-brand-700"
                 >
-                  Start the conversation
+                  Or ask a question on WhatsApp first
                 </a>
               </Card>
             </Reveal>
           </div>
+        </Shell>
+      </Section>
+
+      {/* ---- Every other form on the site -------------------------------- */}
+      <Section ground="tint" labelledBy="forms-heading">
+        <Shell size="wide">
+          <Heading
+            id="forms-heading"
+            eyebrow="Other forms"
+            align="center"
+            title="Looking for something more specific?"
+            lead="Everything the old site asked you to fill in is still here, and none of it takes more than a few minutes."
+          />
+
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <Reveal as="li" className="h-full">
+              <EnquiryLauncher className={FORM_CARD}>
+                <FormCardBody
+                  icon={<MessageSquareText aria-hidden className="size-5" />}
+                  eyebrow="Products"
+                  title="Product enquiry"
+                  body="Tick the products you want to know about and add your question."
+                  action="Open the form"
+                />
+              </EnquiryLauncher>
+            </Reveal>
+
+            <Reveal as="li" delay={0.06} className="h-full">
+              <ExportLauncher className={FORM_CARD}>
+                <FormCardBody
+                  icon={<Globe2 aria-hidden className="size-5" />}
+                  eyebrow="Export"
+                  title="Export enquiry"
+                  body="Buying for a region, or shipping outside India? Tell us what you need."
+                  action="Open the form"
+                  tone="saffron"
+                />
+              </ExportLauncher>
+            </Reveal>
+
+            <Reveal as="li" delay={0.12} className="h-full">
+              <Link href="/careers#distributor" className={FORM_CARD}>
+                <FormCardBody
+                  icon={<Store aria-hidden className="size-5" />}
+                  eyebrow="Partnership"
+                  title="Distributor application"
+                  body="The full SCT business application — personal details, your shop, and your documents."
+                  action="Go to the application"
+                />
+              </Link>
+            </Reveal>
+
+            <Reveal as="li" delay={0.18} className="h-full">
+              <Link href="/careers#employment" className={FORM_CARD}>
+                <FormCardBody
+                  icon={<Briefcase aria-hidden className="size-5" />}
+                  eyebrow="Careers"
+                  title="Jobs and internships"
+                  body="Apply for a role on the team, or for an internship in the field."
+                  action="See both forms"
+                  tone="saffron"
+                />
+              </Link>
+            </Reveal>
+          </ul>
         </Shell>
       </Section>
 

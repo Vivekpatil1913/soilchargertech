@@ -14,6 +14,7 @@ import HomePage from "@/pages/HomePage";
  * home page and nothing more until they navigate.
  */
 const AboutPage = lazy(() => import("@/pages/AboutPage"));
+const CareersPage = lazy(() => import("@/pages/CareersPage"));
 const ContactPage = lazy(() => import("@/pages/ContactPage"));
 const GalleryPage = lazy(() => import("@/pages/GalleryPage"));
 const KnowledgeArticlePage = lazy(() => import("@/pages/KnowledgeArticlePage"));
@@ -63,6 +64,7 @@ export default function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/knowledge" element={<KnowledgePage />} />
             <Route path="/knowledge/:slug" element={<KnowledgeArticlePage />} />
+            <Route path="/careers" element={<CareersPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />

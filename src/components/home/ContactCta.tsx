@@ -43,7 +43,7 @@ const DOORS = [
     title: "Become a distributor",
     body: "SCT appoints dealers at village, taluka and district level. Tell us where you are and how many farmers you work with.",
     action: "Start an application",
-    href: "/contact",
+    href: "/careers#distributor",
     primary: false,
   },
 ] as const;

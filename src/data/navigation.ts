@@ -6,13 +6,20 @@ export type NavLink = {
 };
 
 /**
- * Primary navigation — six items, deliberately.
+ * Primary navigation — seven items, deliberately.
  *
  * The old site carried eleven top-level destinations across four dropdowns.
  * A farmer arriving on a phone does not need eleven choices; he needs to know
  * what this is and to find the products. So the bar carries only what serves
  * that: the idea, the catalogue, the proof — in photographs and in the
- * farmers' own films — the reading, and a way to make contact.
+ * farmers' own films — the reading, the ways to join, and a way to make
+ * contact.
+ *
+ * Careers is the seventh, and it is in the bar rather than only in the footer
+ * because it is where three of the site's six forms live — an internship, a
+ * distributor application and a job application. The old site gave Career its
+ * own top-level menu; burying it in a footer column would have quietly cost
+ * SCT applications.
  *
  * Journey and Farmer Stories were not deleted — they were folded into /about
  * and the home page respectively, and still appear in the footer for anyone
@@ -28,6 +35,7 @@ export const mainNav: NavLink[] = [
   { label: "Products", href: "/products", hint: "21 products across two ranges" },
   { label: "Gallery", href: "/gallery", hint: "Photographs and films from the fields" },
   { label: "Knowledge", href: "/knowledge", hint: "Soil health, explained simply" },
+  { label: "Careers", href: "/careers", hint: "Internships, distributorship and jobs" },
   { label: "Contact", href: "/contact", hint: "Talk to our team" },
 ];
 
@@ -39,6 +47,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
       { label: "Our Journey", href: "/about#journey" },
       { label: "Vision & Mission", href: "/about#vision" },
       { label: "Our Team", href: "/about#team" },
+      { label: "Careers", href: "/careers" },
     ],
   },
   {
@@ -65,6 +74,9 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
       { label: "Photo Gallery", href: "/gallery#photos" },
       { label: "Video Gallery", href: "/gallery#videos" },
       { label: "Farmer Stories", href: "/#farmer-stories" },
+      { label: "Internship", href: "/careers#internship" },
+      { label: "Become a Distributor", href: "/careers#distributor" },
+      { label: "Job Vacancies", href: "/careers#employment" },
       { label: "FAQs", href: "/contact#faqs" },
       { label: "Contact", href: "/contact" },
     ],

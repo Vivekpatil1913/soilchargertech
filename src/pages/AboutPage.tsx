@@ -1,5 +1,6 @@
 import { TeamSection } from "@/components/about/TeamSection";
 import { VisionMission } from "@/components/about/VisionMission";
+import { IsoCertification } from "@/components/common/IsoCertification";
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
 import { ContactCta } from "@/components/home/ContactCta";
@@ -159,6 +160,8 @@ export default function AboutPage() {
       <VisionMission />
 
       <TeamSection />
+
+      <IsoCertification ground="tint" />
 
       <ContactCta />
     </>

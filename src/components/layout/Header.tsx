@@ -14,9 +14,10 @@ import Link from "@/shims/Link";
 /**
  * HEADER
  * ======
- * Five nav items, deliberately — the old site carried eleven across four
- * dropdowns. A farmer arriving on a phone does not need eleven choices; he
- * needs to know what this is and to find the products.
+ * Seven nav items — the old site carried eleven across four dropdowns. A
+ * farmer arriving on a phone does not need eleven choices; he needs to know
+ * what this is, to find the products, and to find the way in if he wants to
+ * sell them. See src/data/navigation.ts for what earned each slot.
  *
  * The bar's height is set by the logo, not the other way round: the client
  * asked for prominent branding, so the lockup is sized first and the header
@@ -81,7 +82,7 @@ export function Header() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex rounded-full px-3 py-2.5 text-[0.9rem] font-semibold transition-colors duration-200 xl:px-4 xl:text-[0.92rem]",
+                      "relative inline-flex whitespace-nowrap rounded-full px-2.5 py-2.5 text-[0.88rem] font-semibold transition-colors duration-200 xl:px-3.5 xl:text-[0.92rem]",
                       solid
                         ? active
                           ? "text-brand-700"
@@ -96,7 +97,7 @@ export function Header() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full xl:inset-x-4",
+                          "absolute inset-x-2.5 -bottom-0.5 h-0.5 rounded-full xl:inset-x-3.5",
                           solid ? "bg-brand-600" : "bg-leaf-400",
                         )}
                       />

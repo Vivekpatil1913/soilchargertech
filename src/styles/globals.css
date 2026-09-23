@@ -87,6 +87,15 @@
   --color-sage-300: #c7dccc;
   --color-sage-400: #a3c0aa;
 
+  /* ---- Lime — the footer accent. Yellower and brighter than leaf, which
+     is what keeps it readable against a near-black ground. --------------- */
+  --color-lime-300: #b8da70;
+  --color-lime-400: #9bc53d;
+
+  /* ---- Bone — off-white, for footer text ----------------------------- */
+  --color-bone-100: #f1f5ec;
+  --color-bone-200: #dbe4d0;
+
   /* ---- Ink — darks, also green-mixed --------------------------------- */
   --color-ink-300: #9aa79e;
   --color-ink-400: #7c8a81;
@@ -160,6 +169,18 @@
     outline: 2px solid var(--color-brand-600);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  /* Tailwind v4's Preflight dropped the `cursor: pointer` that buttons carried
+     in v3, so every button on the site — the FAQ accordion, the testimonial
+     arrows, the gallery filters, the modal close — was showing a text arrow
+     instead of a hand. Restored once here rather than pinned to 25 call sites,
+     where the next button added would simply miss it again.
+
+     Disabled controls are excluded so a dead slider arrow still reads as dead. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
   }
 
   ::selection {
@@ -326,6 +347,45 @@
     100% 100%;
 }
 
+/* Near-black. The footer only.
+   The forest band is a gradient that ends bright (#14512f), and the section
+   directly above the footer is almost always that band — so a footer in any
+   mid-green reads as a continuation of it rather than as a separate thing.
+   This band steps down to near-black instead, and carries a lime hairline on
+   top so the seam is explicit whatever section precedes it. */
+@utility ground-night {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #060f0b;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, #030906 0%, #071310 58%, #0a1b12 100%);
+  background-size:
+    54px 54px,
+    54px 54px,
+    100% 100%;
+
+  /* The logo's two arcs, laid along the top edge: saffron above, green below.
+     Saffron stays decorative here — lime is the footer's interactive colour,
+     so nothing orange is ever a link. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    z-index: 1;
+    height: 1px;
+    background-image: linear-gradient(
+      90deg,
+      rgb(240 132 48 / 0.85) 0%,
+      rgb(155 197 61 / 0.75) 40%,
+      rgb(155 197 61 / 0.1) 100%
+    );
+  }
+}
+
 /* Soil brown, from the wordmark maroon. Used once, for the problem section. */
 @utility ground-soil {
   position: relative;
@@ -441,6 +501,18 @@
   }
 }
 
+/* The ISO badge's slow rise and fall. The old site did this with a `vert-move`
+   class on a 2s loop, which read as a bounce; 7s reads as breathing. */
+@keyframes badge-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -0.85rem, 0);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .fx-mesh {
     animation: fx-mesh-pan 19s ease-in-out infinite;
@@ -456,6 +528,9 @@
   }
   .bloom-b {
     animation: bloom-drift-b 29s ease-in-out infinite alternate;
+  }
+  .badge-float {
+    animation: badge-float 7s ease-in-out infinite;
   }
 }
 

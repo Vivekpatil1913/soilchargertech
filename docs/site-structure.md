@@ -11,7 +11,7 @@
 
 | Route | Page file | What it does |
 |---|---|---|
-| `/` | `pages/HomePage.tsx` | The whole company in nine sections |
+| `/` | `pages/HomePage.tsx` | The whole company in eleven sections |
 | `/about` | `pages/AboutPage.tsx` | Founder's letter in full, timeline, vision/mission, team |
 | `/technology` | `pages/TechnologyPage.tsx` | Four pillars, the science, three principles, what "100% SCT" means |
 | `/products` | `pages/ProductsPage.tsx` | **Level 1** — the 21 category cards, filterable by range |
@@ -19,7 +19,8 @@
 | `/products/:category/:product` | `pages/ProductDetailPage.tsx` | **Level 3** — one pack, with the category's information repeated |
 | `/knowledge` | `pages/KnowledgePage.tsx` | Article index |
 | `/knowledge/:slug` | `pages/KnowledgeArticlePage.tsx` | Long-form article |
-| `/contact` | `pages/ContactPage.tsx` | Four channels, WhatsApp-backed form, FAQs |
+| `/careers` | `pages/CareersPage.tsx` | Three tracks, each opening its migrated application form |
+| `/contact` | `pages/ContactPage.tsx` | Four channels, WhatsApp-backed form, links to every other form, FAQs |
 | `/privacy`, `/terms` | `pages/PrivacyPage.tsx`, `TermsPage.tsx` | Share `LegalPage.tsx` |
 | `*` | `pages/NotFoundPage.tsx` | 404 |
 
@@ -58,8 +59,8 @@ category({
 Nothing else needs touching — the grid, the category pages and the product
 routes are all generated from that array.
 
-**Navigation is five items:** About · Technology · Products · Knowledge · Contact.
-The old site had eleven across four dropdowns. Journey, Applications and Farmer Stories were folded into `/about`, `/products` and the home page; all remain reachable from the footer.
+**Navigation is seven items:** About · Technology · Products · Gallery · Knowledge · Careers · Contact.
+The old site had eleven across four dropdowns. Journey, Applications and Farmer Stories were folded into `/about`, `/products` and the home page; all remain reachable from the footer. Careers is in the bar rather than only in the footer because three of the site's six forms live there.
 
 ---
 
@@ -77,7 +78,9 @@ The section order is the argument, and it maps exactly to the brief:
 | 6 | Benefits | `home/Benefits.tsx` | light | What do I get |
 | 7 | Why SCT | `home/WhySct.tsx` | tint | Why them, not the next shop |
 | 8 | Proof | `home/Proof.tsx` | light | Who else uses it |
-| 9 | Contact | `home/ContactCta.tsx` | forest | How do I reach them |
+| 9 | Gallery | `home/Gallery.tsx` | tint | Can I see it |
+| 10 | ISO 9001:2008 | `common/IsoCertification.tsx` | light | Can I trust them |
+| 11 | Contact | `home/ContactCta.tsx` | forest | How do I reach them |
 
 Grounds alternate deliberately — that is what breaks a long page into chapters. Products sits on the darkest ground so the white cards carry the most contrast anywhere on the site.
 
@@ -132,19 +135,68 @@ Everything except the scroll reveals and the hero is pure CSS.
 src/components/
 ├── ui/index.tsx          Shell · Section · Heading · Reveal · Button · Card · GhostNumber
 ├── layout/
-│   ├── Header.tsx        5-item nav, transparent→solid on scroll, mobile drawer
+│   ├── Header.tsx        7-item nav, transparent→solid on scroll, mobile drawer
 │   ├── Logo.tsx          The client's file, ~100px tall on desktop
-│   ├── Footer.tsx        Contact block above link columns
+│   ├── Footer.tsx        Contact block above link columns — deliberately no forms
 │   └── LanguageSwitcher  EN/MR/HI, drives the hidden Google Translate select
-├── home/                 The 9 sections above
+├── home/                 The home sections above
+├── forms/                The six forms migrated from the old site — see §5b
 ├── products/
 │   ├── CategoryCard.tsx  One of the 21 — image panel, dosage marquee, product count
 │   ├── ProductRow.tsx    One pack inside a category — a row, not a card
 │   └── ProductVisual.tsx Branded SVG pack — bottle / pouch / sack
-└── common/               Seo · ScrollToTop · SmoothScroll · PageHero
+└── common/               Seo · ScrollToTop · SmoothScroll · PageHero · IsoCertification
 ```
 
 Every section is built from the six `ui` primitives. That is what keeps the page reading as one system.
+
+---
+
+## 5b. The six forms
+
+Every form the old site carried was migrated with its fields intact. Field
+lists and option lists live in `src/data/forms.ts`; the hand-off rule lives in
+`src/lib/form-submit.ts`; the shared controls are `components/forms/fields.tsx`.
+
+| Form | Old site | Now lives | Goes to |
+|---|---|---|---|
+| **Export** | hero modal | `/products` band + `/contact` band, as a modal | sales inbox |
+| **Enquiry** | footer, site-wide | `/products` band + `/contact` band, as a modal | WhatsApp |
+| **Internship** | Career menu → modal | `/careers#internship`, inline | careers inbox |
+| **SCT Business / Distributor** | Career menu → modal | `/careers#distributor`, inline | careers inbox |
+| **Job Vacancy** | Career menu → modal | `/careers#employment`, inline | careers inbox |
+| **Add Testimonial** | testimonial section → modal + OTP | `home/Proof.tsx`, as a modal | WhatsApp |
+
+**Modal or inline?** The two enquiry forms interrupt whatever the visitor was
+reading and hand the page straight back, so they stayed modal. The three
+applications are why someone opened the page at all — and the distributor form
+is 26 fields and six uploads, which is miserable inside a scrolling modal on a
+phone — so those are inline on `/careers`.
+
+**Not in the footer.** The old site put its enquiry form there and that was
+tried first. A footer is where a visitor goes to leave, the dark ground forced
+a button style nothing else on the site uses, and the band pushed the link
+columns below the fold on a phone. Both enquiry forms now sit at the end of
+`/products`, where the question actually occurs to someone.
+
+**`FormModal` portals to `document.body`, and must.** Every dark ground sets
+`isolation: isolate`, so a modal rendered inside one is trapped in that
+section's stacking context and the fixed `z-50` header paints straight over its
+backdrop. The portal puts it in the root context where `z-[100]` means what it
+says. The panel is also a flex column with its own scrolling body — as a tall
+panel inside a scrolling overlay, the `sticky` title bar hid the first row of
+field labels as they slid underneath it.
+
+**Deliberate differences from the old forms**, each one also commented at the
+call site:
+
+- District / taluka / village were dependent dropdowns fed by an API that is
+  not part of this build. They are free-text; the same information is collected.
+- The state dropdown posted opaque numeric IDs. It posts the state's name here.
+- Middle name and the two "previous experience" dates were `required`. They are
+  optional — a required field an applicant cannot truthfully fill blocks the
+  whole form.
+- The testimonial OTP is not reimplemented; see §7 row 5b.
 
 ---
 
@@ -168,7 +220,8 @@ Every section is built from the six `ui` primitives. That is what keeps the page
 | 2b | **Product lists inside each category are provisional** — generated from published pack sizes | Client sends the real SKU list per category → drop into `skus` |
 | 3 | **Only 2 testimonials exist** | Collect with consent — SCT's YouTube channel is full of material |
 | 4 | Marathi/Hindi is **machine translation** | SCT-written copy would read far better |
-| 5 | Contact form **opens WhatsApp**, stores nothing — there is no backend | Add one if enquiries need tracking |
+| 5 | **No backend.** All six migrated forms compose their answers and hand off to WhatsApp or a prefilled email; nothing is stored, and file uploads have to be attached by the sender | Add a POST endpoint and rewrite `deliver()` in `src/lib/form-submit.ts` — nothing else changes |
+| 5b | The testimonial form's **OTP step is not reimplemented** — it needs an SMS gateway. Sending over WhatsApp stands in, since the message arrives from the sender's own number | Reinstate in front of `deliver()` once there is a backend |
 | 6 | Legal pages are **plain-language drafts**, not lawyer-reviewed | Review before launch |
 | 7 | 15 content gaps from the old site still open | See [sct-legacy-content.md](sct-legacy-content.md) §16 |
 
