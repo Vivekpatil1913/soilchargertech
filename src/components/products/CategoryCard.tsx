@@ -11,8 +11,8 @@ import Link from "@/shims/Link";
  * CATEGORY CARD
  * =============
  * One of the 21 categories. Anatomy follows docs/design-reference-scope.md §4 —
- * image panel with a scrim and corner badges, then name, one-line benefit, a
- * dosage marquee, and the count of products inside.
+ * image panel with a scrim and corner badges, then name, one-line benefit, the
+ * dosage, and the count of products inside.
  *
  * WHY THE DOSAGE IS ON THE CARD
  * -----------------------------
@@ -21,19 +21,32 @@ import Link from "@/shims/Link";
  * appear before the click rather than a page deep. No competitor site reviewed
  * for this project does that — they stop at a name and a photograph.
  *
+ * WHY IT NO LONGER SCROLLS
+ * ------------------------
  * Dosage lines are long ("2–3 ml per litre, 1 to 2 times a day") and a category
- * may carry three. They scroll rather than wrap, which would leave cards in the
- * same row at different heights.
+ * may carry three, so they used to run past in a marquee rather than wrap and
+ * leave cards in a row at different heights. That was wrong twice over:
+ *
+ *   · Accessibility. Content that moves for more than five seconds needs a way
+ *     to pause, stop or hide it (WCAG 2.2.2). The track paused on `:hover`,
+ *     which does not exist on a phone — and a phone is where this card is
+ *     mostly read. There was no pause at all on touch.
+ *   · Its own purpose. The whole argument for putting dosage on the card is
+ *     that it can be taken in at a glance while comparing categories. A figure
+ *     that is sliding out of view cannot be.
+ *
+ * So the first line is shown in full and the rest collapse to a count. The
+ * figure a farmer wants is legible and still, the card height stays fixed
+ * across a row, and the full table is one tap away on the category page.
  *
  * PUT THIS CARD IN A `min-w-0` GRID OR FLEX ITEM
  * ----------------------------------------------
- * The dosage track below is `white-space: nowrap`, so the card's min-content
- * width is the full length of the longest dosage line — about 950px. A grid
- * item defaults to `min-width: auto`, which is that min-content width, so the
- * column grows to 950px and the card runs off the side of a phone. The site
- * clips horizontal overflow at the root, so it fails silently: no scrollbar,
- * just a card with its right half cut off. `min-w-0` on the item lets the
- * column take the space it actually has and the marquee clip as intended.
+ * Still required. The dosage chip is `truncate`, and a truncating child only
+ * shrinks if its ancestors are allowed to: a grid item defaults to
+ * `min-width: auto`, which resolves to its min-content width, so the column
+ * would grow to fit the longest dosage line and the card would run off the
+ * side of a phone. The site clips horizontal overflow at the root, so it fails
+ * silently — no scrollbar, just a card with its right half cut off.
  */
 export function CategoryCard({
   category,
@@ -45,10 +58,9 @@ export function CategoryCard({
   const range = productRanges[category.range];
   const isVedic = category.range === "vedic";
 
-  /* Duplicated deliberately: -50% only loops seamlessly when the track holds
-     the content twice. */
-  const chips = category.dosage.map((line) => `${line.label} · ${line.value}`);
-  const track = chips.length > 0 ? [...chips, ...chips] : [];
+  /* The first dosage line in full, and a count for anything after it. One
+     fixed-height row either way, so cards in a row stay level. */
+  const [leadDosage, ...restDosage] = category.dosage;
 
   return (
     <Card className={cn("overflow-hidden", className)}>
@@ -99,24 +111,24 @@ export function CategoryCard({
           {category.summary}
         </p>
 
-        {track.length > 0 ? (
-          <div className="marquee mt-3.5 h-7">
-            <div
-              className="marquee-track h-full items-center gap-2 pr-2"
-              style={{ "--dur": "26s" } as React.CSSProperties}
+        {leadDosage ? (
+          <div className="mt-3.5 flex h-7 min-w-0 items-center gap-1.5">
+            <span
+              title={`${leadDosage.label} · ${leadDosage.value}`}
+              className="inline-flex min-w-0 items-center truncate rounded-full bg-brand-50 px-3 py-1 text-[0.74rem] font-semibold text-brand-700 ring-1 ring-inset ring-brand-100"
             >
-              {track.map((chip, index) => (
-                <span
-                  key={`${chip}-${index}`}
-                  className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-brand-50 px-3 py-1 text-[0.74rem] font-semibold text-brand-700 ring-1 ring-inset ring-brand-100"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
+              {leadDosage.label} · {leadDosage.value}
+            </span>
+            {restDosage.length > 0 ? (
+              <span className="shrink-0 whitespace-nowrap text-[0.72rem] font-semibold text-ink-500">
+                +{restDosage.length} more
+              </span>
+            ) : null}
           </div>
         ) : (
-          <p className="mt-3.5 text-[0.76rem] text-ink-400">Dosage on request — call the SCT team.</p>
+          <p className="mt-3.5 flex h-7 items-center text-[0.76rem] text-ink-500">
+            Dosage on request — call the SCT team.
+          </p>
         )}
 
         <span className="mt-3.5 inline-flex items-center gap-1.5 text-[0.84rem] font-semibold text-brand-700">

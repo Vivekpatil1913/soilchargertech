@@ -188,6 +188,21 @@ export function Heading({
    One movement, one duration, used sparingly. `viewport.once` means a reveal
    never replays on scroll-back, which is what makes repeated visits to a long
    page feel calm rather than busy.
+
+   `amount` MUST STAY "some"
+   -------------------------
+   "some" is IntersectionObserver threshold 0 — any part of the element, however
+   small. A fractional threshold is unreachable for anything taller than the
+   viewport: an element 4x the viewport height tops out at an intersection ratio
+   of 0.25, and one 10x as tall tops out at 0.1. This used to be `amount: 0.15`,
+   which meant any section taller than about 6.5 viewports would never cross the
+   threshold and would sit at opacity 0 permanently. The negative bottom margin,
+   not the threshold, is what holds the reveal back until the element has
+   properly entered.
+
+   (This rule was previously documented in lib/animations.ts, alongside a motion
+   vocabulary that nothing on the site ever imported. That file is gone; the
+   rule is here, next to the only code it governs.)
    ========================================================================== */
 
 const REVEAL: Variants = {
@@ -213,25 +228,12 @@ export function Reveal({
       variants={REVEAL}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15, margin: "0px 0px -60px 0px" }}
+      viewport={{ once: true, amount: "some", margin: "0px 0px -60px 0px" }}
       transition={{ duration: 0.62, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </MotionTag>
   );
-}
-
-/** Staggers its children by index. Use for a grid of cards. */
-export function RevealGroup({
-  children,
-  className,
-  as: Tag = "div",
-}: {
-  children: ReactNode;
-  className?: string;
-  as?: ElementType;
-}) {
-  return <Tag className={className}>{children}</Tag>;
 }
 
 /* ==========================================================================
@@ -249,9 +251,17 @@ type ButtonProps = {
   className?: string;
 } & Omit<ComponentPropsWithoutRef<"a">, "href" | "children" | "className">;
 
+/**
+ * `primary` sits on brand-700, not brand-600.
+ *
+ * Measured against white at this label size (~15px bold, which is not WCAG
+ * "large text"): 600 gives 3.57:1 and 500 gives 3.38:1 — both below AA — so
+ * the old resting/hover pair failed, and hovering made it worse. 700 is
+ * 5.41:1 and 800 is 7.76:1, so hover now increases contrast.
+ */
 const VARIANT: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "bg-brand-600 text-white shadow-brand-glow hover:bg-brand-500 motion-safe:hover:-translate-y-0.5",
+    "bg-brand-700 text-white shadow-brand-glow hover:bg-brand-800 motion-safe:hover:-translate-y-0.5",
   secondary:
     "border border-brand-200 bg-white text-brand-800 hover:border-brand-400 hover:text-brand-700 motion-safe:hover:-translate-y-0.5",
   ghost: "text-brand-700 hover:text-brand-800 underline-offset-4 hover:underline",

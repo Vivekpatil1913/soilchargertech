@@ -1,4 +1,4 @@
-import { Check, ChevronDown, Paperclip, X } from "lucide-react";
+import { AlertCircle, Check, ChevronDown, Paperclip, X } from "lucide-react";
 import { useId, useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -31,18 +31,62 @@ import { cn } from "@/lib/utils";
    ========================================================================== */
 
 const CONTROL = [
-  "w-full rounded-xl border border-hairline bg-white px-4 py-3",
+  // `hairline-strong`, not `hairline`. The decorative hairline is 1.23:1 on
+  // white, well under the 3:1 WCAG 1.4.11 requires of anything that delimits a
+  // control — the edge of every input on the site was effectively invisible.
+  "w-full rounded-xl border border-hairline-strong bg-white px-4 py-3",
   "text-[0.95rem] text-ink-900 outline-none",
   "transition-[border-color,box-shadow] duration-300 [transition-timing-function:var(--ease-standard)]",
-  "placeholder:text-ink-300",
-  "focus:border-brand-400 focus:ring-4 focus:ring-brand-500/12",
+  // ink-300 is 2.50:1 and fails even large-text; placeholders are still text.
+  "placeholder:text-ink-400",
+  "focus:border-brand-600 focus:ring-4 focus:ring-brand-600/20",
   // Only after the field has been touched does the browser's :invalid show.
-  "data-[touched=true]:invalid:border-earth-600 data-[touched=true]:invalid:ring-earth-600/10",
+  "data-[touched=true]:invalid:border-error data-[touched=true]:invalid:ring-error/15",
 ].join(" ");
 
+/**
+ * The visible focus ring for a control whose real input is `sr-only`.
+ *
+ * The checkbox and the file picker both hide the native input and paint an
+ * `aria-hidden` proxy, which meant the focus ring landed on something 1px
+ * square offscreen: a keyboard visitor had no way to tell which control they
+ * were on (WCAG 2.4.7). Applied to the wrapping <label>, so the ring appears
+ * around the thing the eye is on.
+ */
+const FOCUS_WITHIN =
+  "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-700";
+
+/**
+ * Marks a control touched on first blur, and records whether it was valid at
+ * that moment.
+ *
+ * `data-touched` drives the red border, as before — a field is not painted red
+ * before the visitor has had a chance to fill it in. `aria-invalid` and the
+ * message are new: the error state used to be a border colour and nothing
+ * else, which is invisible to a screen reader and fails WCAG 1.4.1 for anyone
+ * who does not distinguish the hue.
+ */
 function useTouched() {
   const [touched, setTouched] = useState(false);
-  return { "data-touched": touched, onBlur: () => setTouched(true) } as const;
+  const [message, setMessage] = useState("");
+
+  const onBlur = (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    setTouched(true);
+    setMessage(event.currentTarget.validationMessage);
+  };
+
+  const invalid = touched && message.length > 0;
+
+  return {
+    message: invalid ? message : "",
+    props: {
+      "data-touched": touched,
+      "aria-invalid": invalid || undefined,
+      onBlur,
+    },
+  } as const;
 }
 
 /* ==========================================================================
@@ -53,12 +97,24 @@ type FieldShellProps = {
   label: string;
   required?: boolean;
   hint?: ReactNode;
+  /** Browser validation message, surfaced once the field has been blurred. */
+  error?: string;
   className?: string;
-  children: (id: string) => ReactNode;
+  /** Receives the control id and the ids the control must point describedby at. */
+  children: (id: string, describedBy: string | undefined) => ReactNode;
 };
 
-function FieldShell({ label, required, hint, className, children }: FieldShellProps) {
+function FieldShell({ label, required, hint, error, className, children }: FieldShellProps) {
   const id = useId();
+  const hintId = `${id}-hint`;
+  const errorId = `${id}-error`;
+
+  /* The hint used to be a sibling paragraph with nothing tying it to the
+     input, so "Enter a 10-digit mobile number, with or without +91" was never
+     announced (WCAG 3.3.2). Both ids are listed, error last, so a screen
+     reader reads the requirement and then what went wrong. */
+  const describedBy = [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(" ");
+
   return (
     <div className={cn("min-w-0", className)}>
       <label
@@ -67,13 +123,32 @@ function FieldShell({ label, required, hint, className, children }: FieldShellPr
       >
         {label}
         {required ? (
-          <span className="text-saffron-600" aria-hidden>
-            *
-          </span>
+          <>
+            <span className="text-saffron-700" aria-hidden>
+              *
+            </span>
+            <span className="sr-only">(required)</span>
+          </>
         ) : null}
       </label>
-      {children(id)}
-      {hint ? <p className="mt-1.5 text-[0.78rem] leading-relaxed text-ink-400">{hint}</p> : null}
+
+      {children(id, describedBy || undefined)}
+
+      {hint ? (
+        <p id={hintId} className="mt-1.5 text-[0.78rem] leading-relaxed text-ink-400">
+          {hint}
+        </p>
+      ) : null}
+
+      {error ? (
+        <p
+          id={errorId}
+          className="mt-1.5 flex gap-1.5 text-[0.78rem] font-medium leading-relaxed text-error"
+        >
+          <AlertCircle aria-hidden className="mt-[0.15em] size-3.5 shrink-0" />
+          <span>{error}</span>
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -111,8 +186,14 @@ export function TextField({
 }) {
   const touched = useTouched();
   return (
-    <FieldShell label={label} required={required} hint={hint} className={className}>
-      {(id) => (
+    <FieldShell
+      label={label}
+      required={required}
+      hint={hint}
+      error={touched.message}
+      className={className}
+    >
+      {(id, describedBy) => (
         <input
           id={id}
           type={type}
@@ -124,8 +205,9 @@ export function TextField({
           title={title}
           autoComplete={autoComplete}
           inputMode={inputMode}
+          aria-describedby={describedBy}
           className={CONTROL}
-          {...touched}
+          {...touched.props}
         />
       )}
     </FieldShell>
@@ -157,8 +239,14 @@ export function TextAreaField({
 }) {
   const touched = useTouched();
   return (
-    <FieldShell label={label} required={required} hint={hint} className={className}>
-      {(id) => (
+    <FieldShell
+      label={label}
+      required={required}
+      hint={hint}
+      error={touched.message}
+      className={className}
+    >
+      {(id, describedBy) => (
         <textarea
           id={id}
           rows={rows}
@@ -166,8 +254,9 @@ export function TextAreaField({
           onChange={(event) => onChange(event.target.value)}
           placeholder={placeholder}
           required={required}
+          aria-describedby={describedBy}
           className={cn(CONTROL, "resize-y leading-relaxed")}
-          {...touched}
+          {...touched.props}
         />
       )}
     </FieldShell>
@@ -203,16 +292,23 @@ export function SelectField({
 }) {
   const touched = useTouched();
   return (
-    <FieldShell label={label} required={required} hint={hint} className={className}>
-      {(id) => (
+    <FieldShell
+      label={label}
+      required={required}
+      hint={hint}
+      error={touched.message}
+      className={className}
+    >
+      {(id, describedBy) => (
         <div className="relative">
           <select
             id={id}
             value={value}
             onChange={(event) => onChange(event.target.value)}
             required={required}
-            className={cn(CONTROL, "appearance-none pr-11", value ? "text-ink-900" : "text-ink-300")}
-            {...touched}
+            aria-describedby={describedBy}
+            className={cn(CONTROL, "appearance-none pr-11", value ? "text-ink-900" : "text-ink-400")}
+            {...touched.props}
           >
             <option value="">{placeholder}</option>
             {options.map((option) => (
@@ -257,15 +353,19 @@ export function FileField({
   className?: string;
 }) {
   const id = useId();
+  const hintId = `${id}-hint`;
 
   return (
     <div className={cn("min-w-0", className)}>
       <span className="mb-2 flex items-baseline gap-1 text-[0.85rem] font-semibold text-ink-700">
         {label}
         {required ? (
-          <span className="text-saffron-600" aria-hidden>
-            *
-          </span>
+          <>
+            <span className="text-saffron-700" aria-hidden>
+              *
+            </span>
+            <span className="sr-only">(required)</span>
+          </>
         ) : null}
       </span>
 
@@ -274,16 +374,23 @@ export function FileField({
         className={cn(
           "flex cursor-pointer items-center gap-3 rounded-xl border border-dashed px-4 py-3.5",
           "transition-colors duration-300",
+          /* The real <input type="file"> is sr-only, so the focus ring landed
+             on something 1px square offscreen and a keyboard visitor could not
+             see where they were (WCAG 2.4.7). `has-[:focus-visible]` puts it
+             on the thing the eye is actually looking at. It is used rather
+             than `peer-*` because the input is the label's LAST child, and a
+             peer selector only reaches following siblings. */
+          FOCUS_WITHIN,
           file
-            ? "border-brand-300 bg-brand-50/60"
-            : "border-hairline bg-sage-50 hover:border-brand-300 hover:bg-brand-50/40",
+            ? "border-brand-400 bg-brand-50/60"
+            : "border-hairline-strong bg-sage-50 hover:border-brand-400 hover:bg-brand-50/40",
         )}
       >
         <span
           className={cn(
             "grid size-9 shrink-0 place-items-center rounded-squircle",
             file
-              ? "bg-brand-600 text-white"
+              ? "bg-brand-700 text-white"
               : "bg-white text-ink-400 ring-1 ring-inset ring-hairline",
           )}
         >
@@ -324,12 +431,17 @@ export function FileField({
           type="file"
           accept={accept}
           required={required && !file}
+          aria-describedby={hint ? hintId : undefined}
           onChange={(event) => onChange(event.target.files?.[0] ?? null)}
           className="sr-only"
         />
       </label>
 
-      {hint ? <p className="mt-1.5 text-[0.78rem] leading-relaxed text-ink-400">{hint}</p> : null}
+      {hint ? (
+        <p id={hintId} className="mt-1.5 text-[0.78rem] leading-relaxed text-ink-400">
+          {hint}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -366,9 +478,10 @@ export function CheckboxGroup({
               className={cn(
                 "flex cursor-pointer items-center gap-3 rounded-xl border px-3.5 py-2.5",
                 "transition-colors duration-300",
+                FOCUS_WITHIN,
                 checked
-                  ? "border-brand-300 bg-brand-50/70"
-                  : "border-hairline bg-white hover:border-brand-200 hover:bg-sage-50",
+                  ? "border-brand-400 bg-brand-50/70"
+                  : "border-hairline-strong bg-white hover:border-brand-400 hover:bg-sage-50",
               )}
             >
               <input
@@ -381,7 +494,9 @@ export function CheckboxGroup({
                 aria-hidden
                 className={cn(
                   "grid size-5 shrink-0 place-items-center rounded-md border transition-colors duration-200",
-                  checked ? "border-brand-600 bg-brand-600 text-white" : "border-ink-300 bg-white",
+                  checked
+                    ? "border-brand-700 bg-brand-700 text-white"
+                    : "border-hairline-strong bg-white",
                 )}
               >
                 {checked ? <Check className="size-3.5" strokeWidth={3} /> : null}
@@ -476,7 +591,7 @@ export function SubmitRow({
       )}
       <button
         type="submit"
-        className="shadow-brand-glow inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 [transition-timing-function:var(--ease-expressive)] hover:bg-brand-500 motion-safe:hover:-translate-y-0.5 sm:w-auto"
+        className="shadow-brand-glow inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-full bg-brand-700 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 [transition-timing-function:var(--ease-expressive)] hover:bg-brand-800 motion-safe:hover:-translate-y-0.5 sm:w-auto"
       >
         {icon}
         {label}
@@ -489,7 +604,7 @@ export function SubmitRow({
 export function RequiredNote() {
   return (
     <>
-      Fields marked <span className="font-semibold text-saffron-600">*</span> are required.
+      Fields marked <span className="font-semibold text-saffron-700">*</span> are required.
     </>
   );
 }

@@ -38,8 +38,14 @@
   --color-brand-300: #77d29d;
   --color-brand-400: #43b87a;
   --color-brand-500: #16a05c;
-  /* 500 and below clear WCAG AA for white text at button sizes. */
   --color-brand-600: #009c54;
+  /* CONTRAST, MEASURED — white text on each step, against WCAG AA 4.5:1:
+       400 2.51  ·  500 3.38  ·  600 3.57  ·  700 5.41 ✓  ·  800 7.76 ✓
+     Button labels here are ~15px bold, which is NOT WCAG "large text" (that
+     starts at 18.66px bold), so 4.5:1 applies and only 700 and darker pass.
+     An earlier note claimed "500 and below" cleared AA — it was inverted.
+     600 stays the DISPLAY green: large headings, icons and accents, where it
+     is large text and does pass. It is no longer a button background. */
   --color-brand-700: #077a45;
   --color-brand-800: #095f39;
   --color-brand-900: #094e30;
@@ -96,11 +102,34 @@
   --color-bone-100: #f1f5ec;
   --color-bone-200: #dbe4d0;
 
-  /* ---- Ink — darks, also green-mixed --------------------------------- */
+  /* ---- Ink — darks, also green-mixed ---------------------------------
+     TUNED FOR A PHONE HELD IN A FIELD, NOT A MONITOR INDOORS
+
+     This audience reads the site outdoors, on mid-range Android screens, in
+     daylight that eats apparent contrast. AA's 4.5:1 is a floor for a screen
+     in a room; it is not enough in sun. So the tiers that carry actual
+     sentences are pushed to AAA (7:1) rather than parked just over AA.
+
+     Measured as the worst of white / sage-50 / sage-100, the three grounds
+     text ever sits on:
+
+       300  2.25  NON-TEXT ONLY — grab handle, disabled glyphs. Never a word.
+       400  5.62  hints, captions, small labels
+       500  7.25  BODY COPY — the tier most of the site reads from
+       600  9.66  emphasis body, header nav
+       700 11.08  form labels
+       800 13.61  strong text
+       900 15.58  headings
+
+     400 started at #7c8a81 (3.43:1 on sage-50) and 500 at #5b6a60 (5.42:1) —
+     the first failed AA outright, the second passed AA but sat well under the
+     outdoor bar. Retuning the token values rather than rewriting ~50 call
+     sites keeps every existing usage meaningful and moves the whole site at
+     once; the steps are spaced so the hierarchy is still legible. */
   --color-ink-300: #9aa79e;
-  --color-ink-400: #7c8a81;
-  --color-ink-500: #5b6a60;
-  --color-ink-600: #3f4e45;
+  --color-ink-400: #56645a;
+  --color-ink-500: #47534b;
+  --color-ink-600: #37403a;
   --color-ink-700: #2a3830;
   --color-ink-800: #1c2922;
   --color-ink-900: #121d17;
@@ -108,7 +137,23 @@
   /* ---- Semantic ------------------------------------------------------- */
   --color-background: var(--color-sage-50);
   --color-surface: #ffffff;
+  /* Decorative edges only — 1.23:1 on white, far below the 3:1 WCAG 1.4.11
+     asks of anything that delimits a control. */
   --color-hairline: #dfeae2;
+  /* The border for inputs, selects, textareas and checkboxes. 3.23:1 on white
+     and 3.06:1 on sage-50 — the two grounds a control ever sits on — so the
+     boundary clears the 3:1 WCAG 1.4.11 asks of a UI component. */
+  --color-hairline-strong: #8a918c;
+
+  /* ---- Action — the two colours every primary control uses --------------
+     Split from `brand-600` so the contrast decision lives in one place, and
+     so hover INCREASES contrast rather than dropping it (600 -> 500 used to
+     take a failing 3.57:1 down to 3.38:1). */
+  --color-action: var(--color-brand-700);
+  --color-action-hover: var(--color-brand-800);
+
+  /* ---- Feedback ------------------------------------------------------- */
+  --color-error: #9a2b1e;
 
   /* ---- Type ----------------------------------------------------------- */
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
@@ -244,6 +289,25 @@
   line-height: 1.68;
 }
 
+/* The body tier the scale was missing. Nine different arbitrary sizes had
+   grown across the components (0.84 / 0.86 / 0.88 / 0.9 / 0.92 / 0.94 / 0.95 /
+   0.98 / 1.02rem) because there was nowhere for ordinary copy to go. New work
+   uses these three; the arbitrary values are migrated as each file is touched. */
+@utility text-body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@utility text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+@utility text-caption {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
 @utility text-eyebrow {
   font-size: 0.76rem;
   font-weight: 700;
@@ -331,7 +395,26 @@
   );
 }
 
-/* Deep green, almost black. White cards lift off it. */
+/* Deep green, almost black. White cards lift off it.
+   --------------------------------------------------------------------------
+   THE BRIGHT END IS A CONTRAST BUDGET, NOT JUST A COLOUR
+   It used to finish at #14512f. Measured against the text that actually sits
+   on this band, that was too light — and the problem compounded inside a
+   `Card tone="glass"`, whose `bg-white/[0.06]` lifts the ground another step
+   before any text is drawn on it. On that lightened corner the section
+   eyebrows, the quiet body copy and the contrast lines all landed at
+   4.06–4.41:1, just under AA:
+
+     sage-400  4.06   leaf-400  4.35   saffron-300  4.17   sage-300/85  4.41
+
+   Finishing at #123f26 instead puts every one of them at 5.05–5.46:1 with the
+   glass still at 6%. One value, rather than bumping four text tokens a step
+   lighter and only inside cards — which would have meant the same element
+   using a different token depending on what it sat in.
+
+   It is still the brightest point of the band, so the reason ground-night
+   exists (a footer in any mid-green would read as a continuation of this)
+   is unchanged. */
 @utility ground-forest {
   position: relative;
   isolation: isolate;
@@ -340,7 +423,7 @@
   background-image:
     linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(145deg, #05150c 0%, #0a2716 40%, #0d3a20 70%, #14512f 100%);
+    linear-gradient(145deg, #05150c 0%, #0a2716 40%, #0c3219 70%, #123f26 100%);
   background-size:
     54px 54px,
     54px 54px,
@@ -348,7 +431,7 @@
 }
 
 /* Near-black. The footer only.
-   The forest band is a gradient that ends bright (#14512f), and the section
+   The forest band is a gradient that ends bright (#123f26), and the section
    directly above the footer is almost always that band — so a footer in any
    mid-green reads as a continuation of it rather than as a separate thing.
    This band steps down to near-black instead, and carries a lime hairline on
@@ -513,6 +596,14 @@
   }
 }
 
+/* The dashed ring around that badge turns once a minute — slow enough that it
+   never competes with the mark, present enough that the seal reads as live. */
+@keyframes badge-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .fx-mesh {
     animation: fx-mesh-pan 19s ease-in-out infinite;
@@ -531,6 +622,9 @@
   }
   .badge-float {
     animation: badge-float 7s ease-in-out infinite;
+  }
+  .badge-ring {
+    animation: badge-ring-spin 60s linear infinite;
   }
 }
 
@@ -585,44 +679,17 @@
   }
 }
 
-/* ==========================================================================
-   MARQUEE
-   --------------------------------------------------------------------------
-   The track's content must be duplicated in the DOM for -50% to loop
-   seamlessly. The mask dissolves both edges so nothing clips against a hard
-   boundary, and hovering the parent `group` pauses it so a reader can finish
-   the line they are on.
-   ========================================================================== */
-
-@keyframes marquee-x {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@utility marquee {
-  position: relative;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7% 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7% 93%, transparent);
-}
-
-@utility marquee-track {
-  display: inline-flex;
-  width: max-content;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .marquee-track {
-    /* Speed is set per instance with --dur, so paired rows can run at
-       different rates from the same class. */
-    animation: marquee-x var(--dur, 40s) linear infinite;
-  }
-  .group:hover .marquee-track {
-    animation-play-state: paused;
+/* Windows High Contrast drops background images but keeps the transparent
+   fill, so the clipped word — "follows.", "carbon.", "your field." and the
+   rest — rendered as a hole in the headline. Hand the glyphs back a real
+   colour and drop the gradient entirely. */
+@media (forced-colors: active) {
+  .text-shine {
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+    background-image: none;
+    filter: none;
+    animation: none;
   }
 }
 

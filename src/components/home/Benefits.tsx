@@ -10,6 +10,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { Reveal, Section, Shell } from "@/components/ui";
+import Image from "@/shims/Image";
 
 /**
  * WHAT CHANGES IN THE FIELD
@@ -108,38 +109,38 @@ const ACCENT: Record<
 > = {
   brand: {
     tile: "bg-gradient-to-br from-brand-100 to-brand-50 ring-brand-200/60",
-    icon: "text-brand-600",
-    number: "text-brand-600",
+    icon: "text-brand-700",
+    number: "text-brand-700",
     rule: "bg-brand-200",
   },
   water: {
     tile: "bg-gradient-to-br from-sky-100 to-sky-50 ring-sky-200/60",
-    icon: "text-sky-600",
-    number: "text-sky-600",
+    icon: "text-sky-700",
+    number: "text-sky-700",
     rule: "bg-sky-200",
   },
   saffron: {
     tile: "bg-gradient-to-br from-saffron-100 to-saffron-50 ring-saffron-200/60",
-    icon: "text-saffron-600",
-    number: "text-saffron-600",
+    icon: "text-saffron-700",
+    number: "text-saffron-700",
     rule: "bg-saffron-200",
   },
   amber: {
     tile: "bg-gradient-to-br from-amber-100 to-amber-50 ring-amber-200/60",
-    icon: "text-amber-600",
-    number: "text-amber-600",
+    icon: "text-amber-700",
+    number: "text-amber-700",
     rule: "bg-amber-200",
   },
   rose: {
     tile: "bg-gradient-to-br from-rose-100 to-rose-50 ring-rose-200/60",
-    icon: "text-rose-600",
-    number: "text-rose-600",
+    icon: "text-rose-700",
+    number: "text-rose-700",
     rule: "bg-rose-200",
   },
   plum: {
     tile: "bg-gradient-to-br from-fuchsia-100 to-fuchsia-50 ring-fuchsia-200/60",
-    icon: "text-fuchsia-600",
-    number: "text-fuchsia-600",
+    icon: "text-fuchsia-700",
+    number: "text-fuchsia-700",
     rule: "bg-fuchsia-200",
   },
 };
@@ -262,34 +263,34 @@ function Decor() {
           The ground colour is left flat; the haze and the leaves carry the
           depth instead. */}
 
-      <img
+      <Image
         src="/images/legacy/leaf.png"
         alt=""
-        loading="lazy"
         className="absolute -left-6 -top-1 w-20 -rotate-[18deg] opacity-60 drop-shadow-[0_18px_22px_rgba(9,78,48,0.16)] sm:-left-10 sm:top-4 sm:w-32 sm:opacity-90 lg:w-40"
       />
-      <img
+      <Image
         src="/images/legacy/leaf.png"
         alt=""
-        loading="lazy"
         className="absolute -right-6 -top-2 w-20 -rotate-[14deg] -scale-x-100 opacity-60 drop-shadow-[0_18px_22px_rgba(9,78,48,0.16)] sm:-right-8 sm:top-0 sm:w-32 sm:opacity-90 lg:w-40"
       />
-      <img
+      <Image
         src="/images/legacy/leaf.png"
         alt=""
-        loading="lazy"
         className="absolute -left-14 top-52 hidden w-28 rotate-[26deg] opacity-70 lg:block"
       />
-      <img
+      <Image
         src="/images/legacy/leaf.png"
         alt=""
-        loading="lazy"
         className="absolute -right-12 top-48 hidden w-28 rotate-[22deg] -scale-x-100 opacity-70 lg:block"
       />
 
       {/* The field haze. Masked at BOTH ends: fading only upwards left a hard
           line where the section met the next one. */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-[url('/images/hero/field-landscape.jpg')] bg-cover bg-bottom opacity-[0.18] [mask-image:linear-gradient(to_top,transparent_0%,#000_45%,transparent_100%)] sm:h-40 lg:h-48" />
+      {/* The WebP derivative, not the source JPEG. This is the one image on
+          the site referenced from CSS rather than through <Image>, so it is
+          also the one that has to name a generated file by hand — the build
+          drops originals that have derivatives. */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-[url('/images/hero/field-landscape-1200.webp')] bg-cover bg-bottom opacity-[0.18] [mask-image:linear-gradient(to_top,transparent_0%,#000_45%,transparent_100%)] sm:h-40 lg:h-48" />
     </div>
   );
 }

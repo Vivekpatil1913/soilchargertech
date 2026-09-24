@@ -18,7 +18,9 @@ import Image from "@/shims/Image";
  *   2. The clip is requested only once the browser is idle — never competing
  *      with the fonts, the hero image or the first paint.
  *   3. It is skipped entirely — zero bytes — on Save-Data, on anything slower
- *      than 4g, and when the visitor has asked for reduced motion.
+ *      than 4g, when the visitor has asked for reduced motion, and on a
+ *      phone-sized viewport in any browser that will not report a connection
+ *      at all (see `videoIsWelcome`).
  *   4. It fades in only once it is genuinely playing, so a stall or a codec
  *      failure degrades to the photograph rather than a black rectangle.
  *
@@ -35,11 +37,23 @@ function videoIsWelcome() {
 
   const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
   if (connection?.saveData) return false;
-  /* `effectiveType` is absent on Safari and Firefox — absence is not evidence
-     of a slow line, so only an explicit 2g/3g reading opts out. */
-  if (connection?.effectiveType && connection.effectiveType !== "4g") return false;
 
-  return true;
+  if (connection?.effectiveType) {
+    /* An explicit reading is the best signal there is. Anything below 4g opts
+       out regardless of screen size. */
+    return connection.effectiveType === "4g";
+  }
+
+  /* No reading at all — which is every Safari and every Firefox, so it is the
+     majority case on iOS, not an edge one. Treating absence as permission meant
+     an iPhone on a weak rural line fetched the clip anyway: 2.2 MB nobody asked
+     for, and the poster was already telling the story.
+     Screen width is the only proxy left. It is a weak one, but it is honest in
+     the direction that matters — a large viewport is far more likely to be a
+     laptop on fixed broadband than a phone on mobile data, and a phone-sized
+     viewport is exactly the case worth protecting. Below that, the poster
+     stands alone, which the section is designed for anyway. */
+  return window.matchMedia("(min-width: 1024px)").matches;
 }
 
 export function LoopingVideo({ video, sizes }: { video: SiteVideo; sizes?: string }) {

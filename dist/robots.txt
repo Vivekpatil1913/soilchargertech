@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# The SPA fallback serves index.html for unknown paths, so a crawler
+# that follows a stale link gets the 404 page rather than a server error.
+Disallow: /404
+
+Sitemap: https://www.soilchargertechnology.com/sitemap.xml

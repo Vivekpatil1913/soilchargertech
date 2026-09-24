@@ -95,7 +95,7 @@ export default function ProductsPage() {
                   className={cn(
                     "inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.9rem] font-semibold transition-all duration-300",
                     active
-                      ? "shadow-brand-glow border-brand-600 bg-brand-600 text-white"
+                      ? "shadow-brand-glow border-brand-700 bg-brand-700 text-white"
                       : "border-hairline bg-white text-ink-600 hover:border-brand-300 hover:text-brand-700",
                   )}
                 >

@@ -12,11 +12,20 @@ import { useState } from "react";
 
 import { PageHero } from "@/components/common/PageHero";
 import { Seo } from "@/components/common/Seo";
+import {
+  FieldRow,
+  RequiredNote,
+  SubmitRow,
+  TextAreaField,
+  TextField,
+} from "@/components/forms/fields";
+import { SuccessPanel } from "@/components/forms/FormModal";
 import { EnquiryLauncher, ExportLauncher } from "@/components/forms/launchers";
 import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { faqs } from "@/data/faqs";
 import { addressOneLine, contact } from "@/data/site";
 import { SITE_URL } from "@/lib/constants";
+import { deliver, type Delivery } from "@/lib/form-submit";
 import { cn, telHref, whatsappHref } from "@/lib/utils";
 import Link from "@/shims/Link";
 
@@ -129,21 +138,40 @@ function FormCardBody({
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [form, setForm] = useState({ name: "", village: "", crop: "", message: "" });
+  /** Set once the hand-off has happened, so the page can say what it did. */
+  const [sent, setSent] = useState<Delivery | null>(null);
 
+  /**
+   * This used to call `window.open` and stop there. If a pop-up blocker caught
+   * it — which is common, and the whole reason `deliver()` returns the link it
+   * opened — the visitor pressed Submit, nothing happened, and there was no
+   * message, no retry and no address to fall back on. Every other form on the
+   * site already handled that through <SuccessPanel />; this one now does too.
+   */
   function send(event: React.FormEvent) {
     event.preventDefault();
-    const lines = [
-      `Name: ${form.name || "—"}`,
-      `Village: ${form.village || "—"}`,
-      `Crop: ${form.crop || "—"}`,
-      "",
-      form.message,
-    ].join("\n");
-    window.open(whatsappHref(contact.whatsapp, lines), "_blank", "noopener,noreferrer");
+    setSent(
+      deliver({
+        title: "Crop enquiry",
+        destination: "whatsapp",
+        groups: [
+          {
+            answers: [
+              { label: "Name", value: form.name },
+              { label: "Village / taluka", value: form.village },
+              { label: "Crop", value: form.crop },
+              { label: "What they are seeing", value: form.message },
+            ],
+          },
+        ],
+      }),
+    );
   }
 
-  const field =
-    "mt-2 w-full rounded-xl border border-hairline bg-white px-4 py-3 text-[0.95rem] text-ink-900 outline-none transition-colors placeholder:text-ink-300 focus:border-brand-400";
+  function reset() {
+    setForm({ name: "", village: "", crop: "", message: "" });
+    setSent(null);
+  }
 
   return (
     <>
@@ -204,75 +232,64 @@ export default function ContactPage() {
           {/* ---- Form + address ------------------------------------------ */}
           <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <Reveal>
+              {/* The fields come from components/forms/fields.tsx like every
+                  other form on the site. This page used to re-implement them
+                  inline with a different border, a different focus ring and no
+                  error handling, which meant one site carried two form systems
+                  that drifted apart. */}
               <Card className="p-7 sm:p-9" lift={false}>
-                <Heading
-                  eyebrow="Or write it down"
-                  title="Ask about your crop"
-                  lead="Fill this in and it opens WhatsApp with your details ready to send — no account, no waiting for an email reply."
-                />
-
-                <form onSubmit={send} className="mt-8 space-y-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <label className="block">
-                      <span className="text-[0.85rem] font-semibold text-ink-700">Your name</span>
-                      <input
-                        type="text"
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className={field}
-                        placeholder="Full name"
-                      />
-                    </label>
-
-                    <label className="block">
-                      <span className="text-[0.85rem] font-semibold text-ink-700">
-                        Village / taluka
-                      </span>
-                      <input
-                        type="text"
-                        value={form.village}
-                        onChange={(e) => setForm({ ...form, village: e.target.value })}
-                        className={field}
-                        placeholder="Where is the field?"
-                      />
-                    </label>
-                  </div>
-
-                  <label className="block">
-                    <span className="text-[0.85rem] font-semibold text-ink-700">Crop</span>
-                    <input
-                      type="text"
-                      value={form.crop}
-                      onChange={(e) => setForm({ ...form, crop: e.target.value })}
-                      className={field}
-                      placeholder="Grapes, pomegranate, sugarcane, vegetables…"
+                {sent ? (
+                  <SuccessPanel delivery={sent} onReset={reset} resetLabel="Ask about another field" />
+                ) : (
+                  <>
+                    <Heading
+                      eyebrow="Or write it down"
+                      title="Ask about your crop"
+                      lead="Fill this in and it opens WhatsApp with your details ready to send — no account, no waiting for an email reply."
                     />
-                  </label>
 
-                  <label className="block">
-                    <span className="text-[0.85rem] font-semibold text-ink-700">
-                      What are you seeing?
-                    </span>
-                    <textarea
-                      required
-                      rows={5}
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className={cn(field, "resize-y")}
-                      placeholder="Describe the problem — the soil, the leaf, the roots, what you have already tried."
-                    />
-                  </label>
+                    <form onSubmit={send} className="mt-8 space-y-5">
+                      <FieldRow>
+                        <TextField
+                          label="Your name"
+                          value={form.name}
+                          onChange={(name) => setForm({ ...form, name })}
+                          placeholder="Full name"
+                          autoComplete="name"
+                        />
+                        <TextField
+                          label="Village / taluka"
+                          value={form.village}
+                          onChange={(village) => setForm({ ...form, village })}
+                          placeholder="Where is the field?"
+                          autoComplete="address-level2"
+                        />
+                      </FieldRow>
 
-                  <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      className="shadow-brand-glow inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-500 sm:w-auto"
-                    >
-                      <MessageCircle aria-hidden className="size-4" />
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                      <TextField
+                        label="Crop"
+                        value={form.crop}
+                        onChange={(crop) => setForm({ ...form, crop })}
+                        placeholder="Grapes, pomegranate, sugarcane, vegetables…"
+                      />
+
+                      <TextAreaField
+                        label="What are you seeing?"
+                        required
+                        rows={5}
+                        value={form.message}
+                        onChange={(message) => setForm({ ...form, message })}
+                        placeholder="Describe the problem — the soil, the leaf, the roots, what you have already tried."
+                      />
+
+                      <SubmitRow
+                        label="Send on WhatsApp"
+                        icon={<MessageCircle aria-hidden className="size-4" />}
+                        note={<RequiredNote />}
+                      />
+                    </form>
+                  </>
+                )}
               </Card>
             </Reveal>
 
@@ -394,7 +411,10 @@ export default function ContactPage() {
       </Section>
 
       {/* ---- FAQs -------------------------------------------------------- */}
-      <Section ground="tint" labelledBy="faq-heading" id="faqs">
+      {/* `light`, not `tint`. The forms band above is already tint, and two
+          tint sections back to back read as one undifferentiated block — the
+          ground alternation is what chapters every other page on the site. */}
+      <Section ground="light" labelledBy="faq-heading" id="faqs">
         <Shell size="narrow">
           <Heading
             id="faq-heading"
@@ -414,6 +434,8 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => setOpenFaq(open ? null : index)}
                         aria-expanded={open}
+                        aria-controls={`faq-panel-${index}`}
+                        id={`faq-trigger-${index}`}
                         className="flex w-full items-center justify-between gap-5 px-6 py-5 text-left"
                       >
                         <span className="font-display text-[1rem] font-bold text-ink-900">
@@ -430,7 +452,13 @@ export default function ContactPage() {
                         </span>
                       </button>
                     </h3>
-                    <div hidden={!open} className="px-6 pb-6">
+                    <div
+                      id={`faq-panel-${index}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${index}`}
+                      hidden={!open}
+                      className="px-6 pb-6"
+                    >
                       <p className="text-[0.94rem] leading-relaxed text-ink-500">{faq.answer}</p>
                     </div>
                   </div>

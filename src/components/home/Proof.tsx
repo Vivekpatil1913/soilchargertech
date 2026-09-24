@@ -1,7 +1,6 @@
-import { ChevronLeft, ChevronRight, PlayCircle, Quote, Star, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, PlayCircle, Quote, Users } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { TestimonialLauncher } from "@/components/forms/launchers";
 import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { socials } from "@/data/site";
 import { testimonials, type Testimonial } from "@/data/testimonials";
@@ -36,6 +35,12 @@ import { testimonials, type Testimonial } from "@/data/testimonials";
  * farmers filmed in their own fields. That is a far better answer to "does
  * this work" than six quotes nobody can verify, and it sends the visitor
  * somewhere they can judge for themselves.
+ *
+ * The old site's "ADD TESTIMONIAL" band used to close this section. It has
+ * been removed at the client's request. The dialog behind it still exists —
+ * components/forms/TestimonialForm.tsx and the TestimonialLauncher in
+ * components/forms/launchers.tsx — so it can be reattached from anywhere with
+ * a single <TestimonialLauncher> without rebuilding the form.
  */
 
 /** Above this count the quotes slide instead of sitting in a row. */
@@ -82,26 +87,6 @@ export function Proof() {
             </Reveal>
           </div>
         )}
-
-        {/* ---- The old site's "ADD TESTIMONIAL" ------------------------- */}
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-dashed border-brand-200 bg-brand-50/50 p-7 text-center sm:flex-row sm:justify-between sm:text-left">
-            <div className="min-w-0">
-              <h3 className="font-display text-[1.05rem] font-bold text-ink-900">
-                Used SCT on your own field?
-              </h3>
-              <p className="mt-1.5 max-w-xl text-[0.9rem] leading-relaxed text-ink-500">
-                Tell the next farmer what happened — in your words, in your language. Send a photo
-                or a clip from the field with it if you have one.
-              </p>
-            </div>
-
-            <TestimonialLauncher className="shadow-brand-glow inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-full bg-brand-600 px-6 py-3.5 text-[0.9rem] font-bold text-white transition-all duration-300 [transition-timing-function:var(--ease-expressive)] hover:bg-brand-500 motion-safe:hover:-translate-y-0.5 sm:w-auto">
-              <Star aria-hidden className="size-4" />
-              Add your testimonial
-            </TestimonialLauncher>
-          </div>
-        </Reveal>
       </Shell>
     </Section>
   );
@@ -206,7 +191,7 @@ function SliderArrow({
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <Card className="h-full p-7 sm:p-8">
-      <Quote aria-hidden className="size-8 shrink-0 text-brand-200" />
+      <Quote aria-hidden className="size-8 shrink-0 text-brand-300" />
 
       <blockquote className="mt-5 flex-1">
         <p

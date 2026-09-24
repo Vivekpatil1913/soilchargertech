@@ -57,30 +57,31 @@ export function IsoCertification({ ground = "light" }: { ground?: "light" | "tin
   return (
     <Section ground={ground} labelledBy="iso-heading">
       <Shell size="wide">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           {/* ---- The mark ------------------------------------------------ */}
           <Reveal className="order-2 lg:order-1">
-            <div className="relative mx-auto grid max-w-[20rem] place-items-center py-6">
+            <div className="relative mx-auto grid w-full max-w-[30rem] place-items-center py-8 sm:py-10">
               {/* Halo — the brand green, not a photograph. */}
               <span
                 aria-hidden
-                className="absolute size-[17rem] rounded-full bg-brand-500/12 blur-3xl"
+                className="absolute size-[20rem] rounded-full bg-brand-500/16 blur-3xl sm:size-[26rem]"
               />
               <span
                 aria-hidden
-                className="absolute size-[13rem] rounded-full border border-brand-200/70"
+                className="absolute size-[17rem] rounded-full border border-brand-200/70 sm:size-[21.5rem]"
               />
               <span
                 aria-hidden
-                className="absolute size-[16rem] rounded-full border border-dashed border-brand-200/50"
+                className="badge-ring absolute size-[19.5rem] rounded-full border border-dashed border-brand-300/60 sm:size-[24.5rem]"
               />
 
               <Image
                 src={images.certification.iso.src}
                 alt={images.certification.iso.alt}
-                width={240}
-                height={240}
-                className="badge-float relative w-[12rem] max-w-full drop-shadow-[0_18px_34px_rgba(9,95,57,0.18)] sm:w-[13.5rem]"
+                width={346}
+                height={288}
+                sizes="(min-width: 640px) 264px, 208px"
+                className="badge-float relative w-[13rem] max-w-full drop-shadow-[0_24px_44px_rgba(9,95,57,0.28)] sm:w-[16.5rem]"
               />
             </div>
           </Reveal>

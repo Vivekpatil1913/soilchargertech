@@ -17,11 +17,12 @@ import { SITE_URL } from "@/lib/constants";
 /**
  * HOMEPAGE
  * ========
- * Eleven sections, in the order a visitor asks the questions:
+ * Twelve sections, in the order a visitor asks the questions:
  *
  *   who is this        → Hero
+ *   is that my problem → Problem
+ *   are they real      → FieldVideo
  *   what is their idea → Pillars
- *   what is wrong      → Problem
  *   what do they do    → Method
  *   what can I buy     → Products      ← the section the page is built to reach
  *   what do I get      → Benefits
@@ -30,6 +31,22 @@ import { SITE_URL } from "@/lib/constants";
  *   can I see it       → Gallery
  *   can I trust them   → IsoCertification
  *   how do I reach them→ ContactCta
+ *
+ * WHY THE VIDEO IS NO LONGER FIRST
+ * --------------------------------
+ * It used to open the page, above the hero. Three things were wrong with that
+ * on a phone, which is where most of this audience arrives:
+ *
+ *   · the band is floored at a fixed height, so it owned the entire first
+ *     screen and pushed the <h1>, the proposition and both CTAs below the fold;
+ *   · its only call to action points at YouTube, so the first thing a visitor
+ *     could act on sent them off the site before they knew what was sold;
+ *   · it carries an <h2>, which meant the document ran h2 before h1.
+ *
+ * Nothing about the section itself was wrong — it was in the wrong place.
+ * "Show me this is real" is the live question once the problem has landed, not
+ * before anything has been said, so it now sits third, between Problem and
+ * Pillars. Full-bleed there still reads as a chapter break.
  *
  * Grounds alternate deliberately: forest, soil and tint bands break the page
  * into chapters, and the products section sits on the darkest ground so the
@@ -73,9 +90,9 @@ export default function HomePage() {
         jsonLd={jsonLd}
       />
 
-      <FieldVideo />
       <Hero />
       <Problem />
+      <FieldVideo />
       <Pillars />
       <Method />
       <Products />

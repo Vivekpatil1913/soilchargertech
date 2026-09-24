@@ -1,4 +1,5 @@
 import { contact, site } from "@/data/site";
+import { track } from "@/lib/analytics";
 import { whatsappHref } from "@/lib/utils";
 
 /**
@@ -97,6 +98,10 @@ export function deliver({
 }): Delivery {
   const body = composeMessage(title, groups);
 
+  /* One chokepoint for five of the six forms plus the contact page, so this
+     is the only place submission needs counting. */
+  track("Form: submitted", { form: title, channel: destination });
+
   if (destination === "whatsapp") {
     const href = whatsappHref(contact.whatsapp, body);
     window.open(href, "_blank", "noopener,noreferrer");
@@ -149,6 +154,18 @@ export function formatDate(value: string): string {
 /**
  * Ten digits, optionally with a country code — the same rule the old site's
  * `pattern` attribute enforced, moved here so every form shares one definition.
+ *
+ * WRITTEN AS A REGEX LITERAL ON PURPOSE
+ * -------------------------------------
+ * This used to be a double-quoted string: "^(\+\d{1,3}[- ]?)?\d{10}$". In a JS
+ * string literal `\+` and `\d` are not recognised escapes, so they collapse to
+ * `+` and `d` and the value became "^(+d{1,3}[- ]?)?d{10}$" — which is not a
+ * valid regex at all ("nothing to repeat" at the leading `+`). HTML ignores a
+ * `pattern` it cannot compile, silently and with no console warning, so phone
+ * validation had been doing nothing on all six forms.
+ *
+ * Taking `.source` off a literal means the escapes are the regex's, not the
+ * string's, and the engine has already proved it compiles.
  */
-export const PHONE_PATTERN = "^(\+\d{1,3}[- ]?)?\d{10}$";
+export const PHONE_PATTERN = /^(\+\d{1,3}[- ]?)?\d{10}$/.source;
 export const PHONE_TITLE = "Enter a 10-digit mobile number, with or without +91";

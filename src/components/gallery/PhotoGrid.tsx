@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Lightbox, type LightboxItem } from "@/components/gallery/Lightbox";
 import { ShowMore, useProgressive } from "@/components/gallery/ShowMore";
 import { Reveal } from "@/components/ui";
+import Image from "@/shims/Image";
 import type { GalleryPhoto } from "@/data/gallery";
 import { cn } from "@/lib/utils";
 
@@ -55,11 +56,12 @@ export function PhotoGrid({ photos, className }: { photos: GalleryPhoto[]; class
               className="group relative block w-full overflow-hidden rounded-2xl bg-sage-200 transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:shadow-card motion-safe:hover:-translate-y-1"
             >
               <span className="block aspect-[4/3] w-full">
-                <img
+                <Image
                   src={photo.src}
                   alt={photo.alt}
-                  loading="lazy"
-                  decoding="async"
+                  /* Two across on a phone, four on a laptop — so a tile is
+                     never wider than half the viewport on the small end. */
+                  sizes="(max-width: 640px) 48vw, (max-width: 1024px) 31vw, 23vw"
                   className="size-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-expressive)] motion-safe:group-hover:scale-[1.07]"
                 />
               </span>

@@ -69,7 +69,12 @@ export function Hero() {
 
       <Shell
         size="wide"
-        className="relative grid items-center gap-12 pb-20 pt-16 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-28 lg:pt-24"
+        /* The hero opens the page now, so it owns the clearance under the
+           fixed header rather than inheriting it from the video band that used
+           to sit above it. The header is 6rem tall while transparent and
+           7.25rem at lg, so these match the pt PageHero uses on every other
+           route — which is also what keeps the two openings consistent. */
+        className="relative grid items-center gap-12 pb-20 pt-32 sm:pt-36 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-28 lg:pt-44"
       >
         {/* ---- Copy ------------------------------------------------------ */}
         <div>
@@ -108,7 +113,7 @@ export function Hero() {
           >
             <Link
               href="/products"
-              className="shadow-brand-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-500 motion-safe:hover:-translate-y-0.5"
+              className="shadow-brand-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-700 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-800 motion-safe:hover:-translate-y-0.5"
             >
               See the 21 products
               <ArrowRight aria-hidden className="size-4" />
@@ -134,7 +139,7 @@ export function Hero() {
                 <dt className="font-display text-[1.65rem] font-extrabold leading-none text-leaf-400">
                   {item.value}
                 </dt>
-                <dd className="mt-1.5 text-[0.78rem] leading-tight text-sage-300/75">
+                <dd className="mt-1.5 text-[0.78rem] leading-tight text-sage-300/90">
                   {item.label}
                 </dd>
               </div>
@@ -188,8 +193,13 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Certification, floated off the corner so it reads as a seal. */}
-          <div className="absolute -left-3 top-6 hidden items-center gap-2.5 rounded-full border border-white/15 bg-black/50 px-4 py-2.5 backdrop-blur-md sm:flex">
+          {/* Certification, floated off the corner so it reads as a seal.
+              Shown at every width: this was `hidden sm:flex`, which hid the
+              only third-party credential on the page from exactly the device
+              most of this audience arrives on. It sits inside the gutter below
+              `sm` and hangs off the frame from `sm` up, where there is margin
+              for it. */}
+          <div className="absolute left-3 top-4 flex items-center gap-2 rounded-full border border-white/15 bg-black/50 px-3 py-2 backdrop-blur-md sm:-left-3 sm:top-6 sm:gap-2.5 sm:px-4 sm:py-2.5">
             <ShieldCheck aria-hidden className="size-4 text-leaf-400" />
             <span className="text-[0.8rem] font-bold text-white">ISO 9001 certified</span>
           </div>

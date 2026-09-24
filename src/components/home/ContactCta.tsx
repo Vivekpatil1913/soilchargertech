@@ -70,7 +70,7 @@ export function ContactCta() {
                   href={door.href}
                   className={
                     door.primary
-                      ? "shadow-brand-glow group relative flex h-full flex-col rounded-2xl bg-brand-600 p-7 transition-all duration-400 motion-safe:hover:-translate-y-1 hover:bg-brand-500 sm:p-8"
+                      ? "shadow-brand-glow group relative flex h-full flex-col rounded-2xl bg-brand-700 p-7 transition-all duration-400 motion-safe:hover:-translate-y-1 hover:bg-brand-800 sm:p-8"
                       : "group relative flex h-full flex-col rounded-2xl border border-white/12 bg-white/[0.06] p-7 backdrop-blur-sm transition-all duration-400 hover:border-leaf-400/45 hover:bg-white/[0.1] motion-safe:hover:-translate-y-1 sm:p-8"
                   }
                 >
@@ -95,7 +95,7 @@ export function ContactCta() {
                   </h3>
 
                   <p
-                    className={`mt-3 flex-1 text-[0.9rem] leading-relaxed ${door.primary ? "text-brand-50/90" : "text-sage-300/85"}`}
+                    className={`mt-3 flex-1 text-[0.9rem] leading-relaxed ${door.primary ? "text-brand-50" : "text-sage-300/85"}`}
                   >
                     {door.body}
                   </p>

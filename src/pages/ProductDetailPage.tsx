@@ -212,7 +212,7 @@ export default function ProductDetailPage() {
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shadow-brand-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-600 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-500 motion-safe:hover:-translate-y-0.5"
+                  className="shadow-brand-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-700 px-7 py-4 text-[0.95rem] font-bold text-white transition-all duration-300 hover:bg-brand-800 motion-safe:hover:-translate-y-0.5"
                 >
                   <MessageCircle aria-hidden className="size-4" />
                   Enquire on WhatsApp

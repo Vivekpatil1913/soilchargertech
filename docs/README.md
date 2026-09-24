@@ -5,6 +5,7 @@ Read these before making IA, copy or design decisions.
 
 | File | What's in it |
 |---|---|
+| [ux-audit-2026.md](ux-audit-2026.md) | **Full UI/UX audit of the redesign branch** (2026-09-24). 20 sections: executive summary, first-time-user journey, 2026 trend assessment, visual/IA/section-by-section/page-by-page audits, conversion psychology, accessibility with computed WCAG ratios, responsive, interaction, performance with measured bundle and asset weights, trust, competitor expectations, prioritised issue table, quick wins vs major work, recommended homepage structure, design-system corrections, copy audit, and a top-10 action list. |
 | [site-structure.md](site-structure.md) | **The build.** Routes, the nine home sections and what each answers, design tokens sampled from the logo, the motion system, component map, content provenance, known limitations and deploy notes. |
 | [sct-legacy-content.md](sct-legacy-content.md) | **Start here.** Complete content inventory of the old site — site map, all copy verbatim, vision/mission, founder's letter, all 21 products with dosage & packing, counters, testimonials, team, 102 image URLs, 51 YouTube IDs, all 6 forms, and a list of 15 content gaps that need client input. |
 | [sct-legacy-blog-archive.md](sct-legacy-blog-archive.md) | Full text of all 21 blog articles (11 English, 10 Marathi), scraped end to end. |

@@ -94,7 +94,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-eyebrow text-lime-400">Reach us</h2>
+            <h3 className="text-eyebrow text-lime-400">Reach us</h3>
             <ul className="mt-5 space-y-4 text-[0.92rem]">
               {contact.phones.map((phone) => (
                 <li key={phone}>
@@ -131,7 +131,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-eyebrow text-lime-400">Find us</h2>
+            <h3 className="text-eyebrow text-lime-400">Find us</h3>
             <p className="mt-5 flex gap-3 text-[0.92rem] leading-relaxed text-bone-200/85">
               <MapPin aria-hidden className="mt-1 size-4 shrink-0 text-lime-400" />
               <span>{addressOneLine}</span>
@@ -160,7 +160,7 @@ export function Footer() {
         <nav aria-label="Footer" className="grid gap-8 pb-7 pt-9 sm:grid-cols-2 lg:grid-cols-4">
           {footerNav.map((group) => (
             <div key={group.heading}>
-              <h2 className="text-eyebrow text-bone-200/60">{group.heading}</h2>
+              <h3 className="text-eyebrow text-bone-200/60">{group.heading}</h3>
               <ul className="mt-5 space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.href + link.label}>

@@ -1,0 +1,11 @@
+# Netlify / Cloudflare Pages SPA fallback.
+#
+# This is a client-side-routed app: only index.html exists on disk, and every
+# other path is resolved by the router once JavaScript has run. Without this
+# rule a request for /products/root-charger -- which is precisely the kind of
+# URL this site is built to have shared over WhatsApp -- returns a hard 404
+# from the host, because there is no such file.
+#
+# 200 rather than 301: the URL must stay as the visitor typed it so the router
+# can read it. A redirect to / would throw away the path.
+/*  /index.html  200

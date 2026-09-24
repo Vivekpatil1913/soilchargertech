@@ -65,11 +65,11 @@ export default function KnowledgePage() {
                   <p className="text-[0.72rem] font-bold uppercase tracking-[0.12em] text-brand-700">
                     {lead.category}
                   </p>
-                  <h3 className="text-h2 mt-4 text-ink-900">
+                  <h2 className="text-h2 mt-4 text-ink-900">
                     <Link href={`/knowledge/${lead.slug}`} className="after:absolute after:inset-0">
                       {lead.title}
                     </Link>
-                  </h3>
+                  </h2>
                   <p className="text-lead mt-5 text-ink-500">{lead.excerpt}</p>
                   <p className="mt-6 inline-flex items-center gap-1.5 text-[0.9rem] font-semibold text-brand-700">
                     Read the article

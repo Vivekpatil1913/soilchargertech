@@ -111,7 +111,7 @@ export function WhySct() {
                         </span>
 
                         <div className="min-w-0">
-                          <p className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-brand-600">
+                          <p className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-brand-700">
                             {reason.stat}
                           </p>
                           <h3 className="mt-1.5 font-display text-[1.08rem] font-bold leading-snug text-ink-900">

@@ -152,7 +152,7 @@ export default function CareersPage() {
                       className={cn(
                         "grid size-12 place-items-center rounded-squircle ring-1 ring-inset transition-transform duration-400 motion-safe:group-hover:scale-110",
                         selected
-                          ? "bg-brand-600 text-white ring-brand-600"
+                          ? "bg-brand-700 text-white ring-brand-700"
                           : "bg-brand-50 text-brand-700 ring-brand-200",
                       )}
                     >

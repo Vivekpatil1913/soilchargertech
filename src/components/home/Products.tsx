@@ -61,10 +61,20 @@ export function Products() {
                     : "hover:border-saffron-400/50",
                 )}
               >
+                {/* saffron-100, not saffron-300.
+                    These two eyebrows are how the Vedic and Super ranges are
+                    told apart at a glance. Simulated against deuteranopia and
+                    protanopia — which between them affect roughly 8% of men,
+                    and this audience is overwhelmingly male — leaf-400 and
+                    saffron-300 collapse to a perceptual separation of 2.3 and
+                    8.1: the same colour, for those readers. saffron-100 keeps
+                    the range's warm identity but carries the distinction on
+                    lightness instead of hue, which survives both (25.4 / 26.4)
+                    and reads more clearly on the dark ground besides. */}
                 <p
                   className={cn(
                     "text-eyebrow",
-                    range.id === "vedic" ? "text-leaf-400" : "text-saffron-300",
+                    range.id === "vedic" ? "text-leaf-400" : "text-saffron-100",
                   )}
                 >
                   {range.tagline}

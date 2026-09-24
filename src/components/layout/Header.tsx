@@ -117,14 +117,22 @@ export function Header() {
               drawer and the phone link inside it. */}
           <LanguageSwitcher onDark={!solid} align="right" />
 
+          {/* The one action that is visible at EVERY width.
+              Below lg the primary CTA is hidden and the number used to be
+              hidden too, so a visitor on a phone — which is most of them — saw
+              a logo, a language control and a hamburger, and had nothing to
+              press without opening a menu first. Icon-only under md, icon plus
+              label from xl, and it collapses to the icon again between lg and
+              xl where seven nav items leave no room for the number. */}
           <a
             href={telHref(contact.phones[0])}
+            aria-label={`Call SCT on ${contact.phones[0]}`}
             className={cn(
-              "items-center gap-2 rounded-full px-3.5 py-2.5 text-[0.88rem] font-semibold transition-colors",
-              /* Six nav items leave no room for this between lg and xl;
-                 the number is in the drawer and the footer either way. */
-              "hidden md:inline-flex lg:hidden xl:inline-flex",
-              solid ? "text-ink-600 hover:text-brand-700" : "text-white/85 hover:text-white",
+              "inline-flex items-center justify-center gap-2 rounded-full text-[0.88rem] font-semibold transition-colors",
+              "size-11 md:size-auto md:px-3.5 md:py-2.5",
+              solid
+                ? "border border-hairline bg-white text-ink-700 hover:text-brand-700 md:border-0 md:bg-transparent md:text-ink-600"
+                : "border border-white/25 bg-white/10 text-white backdrop-blur hover:bg-white/20 md:border-0 md:bg-transparent md:text-white/85 md:backdrop-blur-none md:hover:bg-transparent md:hover:text-white",
             )}
           >
             <Phone aria-hidden className="size-4" />

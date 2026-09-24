@@ -1,0 +1,25 @@
+# Apache / cPanel SPA fallback. Same job as public/_redirects; see the comment
+# there for why it is needed.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Anything that exists on disk is served as-is: assets, images, videos,
+  # sitemap.xml, robots.txt.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else is a route, so hand it to the app with the URL intact.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Hashed filenames are immutable; the shell must never be cached.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2|webp|avif|mp4)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "^(index\.html|sitemap\.xml|robots\.txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

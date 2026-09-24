@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { MotionConfig } from "framer-motion";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { ScrollToTop } from "@/components/common/ScrollToTop";
@@ -6,6 +7,7 @@ import { SmoothScroll } from "@/components/common/SmoothScroll";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleTranslateMount } from "@/components/layout/LanguageSwitcher";
 import { Header } from "@/components/layout/Header";
+import { mountAnalytics, trackOutboundClicks } from "@/lib/analytics";
 import HomePage from "@/pages/HomePage";
 
 /**
@@ -36,16 +38,33 @@ function RouteFallback() {
   );
 }
 
+/**
+ * `reducedMotion="user"` is load-bearing, not a nicety.
+ *
+ * globals.css has a three-level reduced-motion contract, but all three levels
+ * are CSS: the global kill zeroes `animation-duration` and `transition-duration`,
+ * and `motion-safe:` gates the hover lifts. None of that reaches framer-motion,
+ * which animates by writing inline styles frame by frame — so every <Reveal>
+ * on the site, the hero's masked line reveal and the modal's enter/exit were
+ * still running at full amplitude for a visitor who had explicitly asked for
+ * reduced motion. This is the level that covers them: framer-motion reads the
+ * media query itself and holds animated properties at their target values.
+ */
 export default function App() {
+  useEffect(() => {
+    mountAnalytics();
+    return trackOutboundClicks();
+  }, []);
+
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <SmoothScroll />
       <ScrollToTop />
       <GoogleTranslateMount />
 
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-600 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-700 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
       >
         Skip to content
       </a>
@@ -74,6 +93,6 @@ export default function App() {
       </main>
 
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

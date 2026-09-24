@@ -1,6 +1,7 @@
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { track } from "@/lib/analytics";
 import { LANGUAGES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -170,6 +171,7 @@ export function LanguageSwitcher({
     }
 
     setActive(code);
+    track("Language: changed", { to: code });
     /* English is the page's own language: clearing the cookie is what restores
        the original text. Anything else is a translation target. */
     writeTranslationCookie(code === "en" ? null : `/en/${code}`);
