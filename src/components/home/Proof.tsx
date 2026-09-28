@@ -56,7 +56,7 @@ export function Proof() {
       id="farmer-stories"
       ground="light"
       labelledBy="proof-heading"
-      className="overflow-hidden py-12! md:py-14! xl:py-16!"
+      className="overflow-hidden border-y border-brand-100 bg-brand-50! py-12! md:py-14! xl:py-16!"
     >
       <ProofBackdrop />
 
@@ -117,12 +117,19 @@ export function Proof() {
   );
 }
 
-/** Soft waves and a stray sprig behind the section — decoration only. */
+/**
+ * Soft waves and a stray sprig behind the section — decoration only.
+ *
+ * The waves are masked to fade out at the top and bottom. Unmasked, the upper
+ * wave is filled right up to the SVG's top edge and the lower one stops dead
+ * at its bottom edge, and both edges showed as hard horizontal lines across
+ * the section.
+ */
 function ProofBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <svg
-        className="absolute inset-x-0 top-28 h-[30rem] w-full text-brand-100"
+        className="absolute inset-x-0 top-28 h-[30rem] w-full text-white [mask-image:linear-gradient(180deg,transparent,#000_25%,#000_70%,transparent)]"
         viewBox="0 0 1440 400"
         preserveAspectRatio="none"
         fill="currentColor"
