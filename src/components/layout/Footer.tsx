@@ -44,12 +44,12 @@ export function Footer() {
         <div className="bloom bloom-b absolute -bottom-40 -right-28 size-[30rem] bg-saffron-500/10" />
       </div>
 
-      <div className="shell-wide relative pb-5 pt-12 lg:pb-6 lg:pt-14">
+      <div className="shell-wide relative pb-5 pt-9 lg:pb-5 lg:pt-10">
         {/* ---- Brand + contact ------------------------------------------ */}
-        <div className="grid gap-8 border-b border-white/10 pb-9 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-10">
+        <div className="grid gap-7 border-b border-white/10 pb-7 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-10">
           <div>
             <div className="flex items-center gap-4">
-              <span className="grid size-[4.5rem] place-items-center rounded-2xl bg-white p-2">
+              <span className="grid size-[5.25rem] shrink-0 place-items-center rounded-2xl bg-white p-1">
                 <LogoMark />
               </span>
               <div>
@@ -63,11 +63,11 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-bone-200/80">
+            <p className="mt-4 max-w-sm text-[0.92rem] leading-relaxed text-bone-200/80">
               {site.description}
             </p>
 
-            <ul className="mt-5 flex flex-wrap gap-2.5">
+            <ul className="mt-4 flex flex-wrap gap-2.5">
               {socials.map((social) => {
                 const Icon = SOCIAL_ICON[social.icon];
                 return (
@@ -95,7 +95,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-eyebrow text-lime-400">Reach us</h3>
-            <ul className="mt-5 space-y-4 text-[0.92rem]">
+            <ul className="mt-4 space-y-3 text-[0.92rem]">
               {contact.phones.map((phone) => (
                 <li key={phone}>
                   <a
@@ -132,11 +132,11 @@ export function Footer() {
 
           <div>
             <h3 className="text-eyebrow text-lime-400">Find us</h3>
-            <p className="mt-5 flex gap-3 text-[0.92rem] leading-relaxed text-bone-200/85">
+            <p className="mt-4 flex gap-3 text-[0.92rem] leading-relaxed text-bone-200/85">
               <MapPin aria-hidden className="mt-1 size-4 shrink-0 text-lime-400" />
               <span>{addressOneLine}</span>
             </p>
-            <p className="mt-5 text-[0.84rem] text-bone-200/70">
+            <p className="mt-4 text-[0.84rem] text-bone-200/70">
               Sales:{" "}
               <a
                 href={`mailto:${contact.emails.sales}`}
@@ -157,11 +157,11 @@ export function Footer() {
         </div>
 
         {/* ---- Link columns --------------------------------------------- */}
-        <nav aria-label="Footer" className="grid gap-8 pb-7 pt-9 sm:grid-cols-2 lg:grid-cols-4">
+        <nav aria-label="Footer" className="grid gap-7 pb-6 pt-7 sm:grid-cols-2 lg:grid-cols-4">
           {footerNav.map((group) => (
             <div key={group.heading}>
               <h3 className="text-eyebrow text-bone-200/60">{group.heading}</h3>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-4 space-y-2">
                 {group.links.map((link) => (
                   <li key={link.href + link.label}>
                     <Link
@@ -178,7 +178,7 @@ export function Footer() {
         </nav>
 
         {/* ---- Legal ----------------------------------------------------- */}
-        <div className="flex flex-col gap-4 border-t border-white/10 pt-5 text-[0.84rem] text-bone-200/65 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-4 text-[0.84rem] text-bone-200/65 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()}{" "}
             <span translate="no" className="notranslate">

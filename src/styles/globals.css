@@ -160,6 +160,8 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   /* Decoration only — the handwritten margin notes in the benefits section. */
   --font-script: "Caveat", "Segoe Script", cursive;
+  /* Editorial serif — section titles in the Method infographic only. */
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
 
   /* ---- Motion tokens -------------------------------------------------- */
   /* Named after their job, so a call site reads as intent, not as numbers. */
@@ -360,18 +362,18 @@
 
 /* Vertical rhythm. One value, used by every section on the site. */
 @utility section-y {
-  padding-block: 4.5rem;
+  padding-block: 3rem;
 }
 
 @media (min-width: 768px) {
   .section-y {
-    padding-block: 6rem;
+    padding-block: 4rem;
   }
 }
 
 @media (min-width: 1280px) {
   .section-y {
-    padding-block: 7rem;
+    padding-block: 4.5rem;
   }
 }
 
@@ -625,6 +627,57 @@
   }
   .badge-ring {
     animation: badge-ring-spin 60s linear infinite;
+  }
+  /* Method infographic: the dashed inner orbit and a slow sway on the sprout. */
+  .method-orbit {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: badge-ring-spin 90s linear infinite;
+  }
+  .method-sway {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: method-sway 6s ease-in-out infinite alternate;
+  }
+  .method-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: method-pulse 2.8s ease-in-out infinite;
+  }
+  /* "100% SCT" section: the loose leaves drift and turn a few degrees. */
+  .leaf-drift {
+    animation: leaf-drift 9s ease-in-out infinite;
+  }
+}
+
+@keyframes leaf-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0.4rem, -0.9rem, 0) rotate(6deg);
+  }
+}
+
+@keyframes method-sway {
+  from {
+    transform: rotate(-1.6deg);
+  }
+  to {
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes method-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.9);
+    opacity: 0;
   }
 }
 

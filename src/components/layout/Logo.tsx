@@ -23,7 +23,7 @@ export function Logo({ compact = false, className }: { compact?: boolean; classN
       href="/"
       aria-label="Soil Charger Technology — go to homepage"
       className={cn(
-        "relative block shrink-0 transition-transform duration-300 [transition-timing-function:var(--ease-expressive)] motion-safe:hover:scale-[1.03]",
+        "relative block shrink-0 overflow-hidden rounded-xl bg-white lg:rounded-2xl transition-transform duration-300 [transition-timing-function:var(--ease-expressive)] motion-safe:hover:scale-[1.03]",
         compact
           ? "h-[3.5rem] w-[3.7rem]"
           : "h-[4.25rem] w-[4.5rem] sm:h-[5.25rem] sm:w-[5.5rem] lg:h-[6rem] lg:w-[6.35rem]",

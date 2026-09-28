@@ -19,9 +19,9 @@ import Link from "@/shims/Link";
  * what this is, to find the products, and to find the way in if he wants to
  * sell them. See src/data/navigation.ts for what earned each slot.
  *
- * The bar's height is set by the logo, not the other way round: the client
- * asked for prominent branding, so the lockup is sized first and the header
- * grows to hold it.
+ * The client asked for prominent branding, so the lockup keeps its full size
+ * — but rather than growing the bar to hold it, the logo hangs below a slim
+ * bar as a badge.
  *
  * It starts transparent over the hero's dark ground and turns solid once the
  * page scrolls, so the logo never sits on a competing white slab at the top of
@@ -65,10 +65,12 @@ export function Header() {
       <div
         className={cn(
           "shell-wide flex items-center justify-between gap-4 transition-all duration-400",
-          solid ? "h-[5.25rem] lg:h-[6.25rem]" : "h-[6rem] lg:h-[7.25rem]",
+          solid ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[4.75rem] lg:h-[5.5rem]",
         )}
       >
-        <Logo />
+        {/* The bar is slim; the logo keeps its full size and hangs below it
+            as a badge, so branding stays prominent without a tall header. */}
+        <Logo className="mt-1.5 self-start shadow-[0_10px_28px_-12px_rgba(12,40,24,0.45)] ring-1 ring-black/5 sm:mt-2" />
 
         {/* ---- Desktop nav --------------------------------------------- */}
         <nav aria-label="Main" className="hidden lg:block">
@@ -179,7 +181,7 @@ export function Header() {
         id="mobile-menu"
         hidden={!menuOpen}
         data-lenis-prevent
-        className="max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain border-t border-hairline bg-sage-50 lg:hidden"
+        className="max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t border-hairline bg-sage-50 lg:hidden"
       >
         <nav aria-label="Mobile" className="shell-wide py-5">
           <ul className="space-y-1">

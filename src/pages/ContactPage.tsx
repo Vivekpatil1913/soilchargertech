@@ -1,5 +1,6 @@
 import {
   Briefcase,
+  ChevronRight,
   Globe2,
   Mail,
   MapPin,
@@ -20,6 +21,7 @@ import {
   TextField,
 } from "@/components/forms/fields";
 import { SuccessPanel } from "@/components/forms/FormModal";
+import { FormCardArt, type FormCardArtKind } from "@/components/contact/FormCardArt";
 import { EnquiryLauncher, ExportLauncher } from "@/components/forms/launchers";
 import { Card, Heading, Reveal, Section, Shell } from "@/components/ui";
 import { faqs } from "@/data/faqs";
@@ -94,10 +96,11 @@ const CHANNELS = [
 
 /** One shell for the four cards in the "other forms" band. */
 const FORM_CARD =
-  "group flex h-full w-full flex-col rounded-2xl border border-hairline bg-surface p-6 text-left transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:border-brand-300 hover:shadow-card motion-safe:hover:-translate-y-1";
+  "group relative isolate flex h-full w-full flex-col overflow-hidden rounded-2xl border border-hairline bg-surface p-5 text-left shadow-[0_1px_2px_rgb(16_40_24/0.04)] transition-all duration-400 [transition-timing-function:var(--ease-expressive)] hover:border-brand-300 hover:shadow-card motion-safe:hover:-translate-y-1";
 
 function FormCardBody({
   icon,
+  art,
   eyebrow,
   title,
   body,
@@ -105,32 +108,53 @@ function FormCardBody({
   tone = "brand",
 }: {
   icon: React.ReactNode;
+  art: FormCardArtKind;
   eyebrow: string;
   title: string;
   body: string;
   action: string;
   tone?: "brand" | "saffron";
 }) {
+  const saffron = tone === "saffron";
   return (
     <>
+      <FormCardArt kind={art} tone={tone} />
+
       <span
         className={cn(
           "grid size-11 place-items-center rounded-squircle ring-1 ring-inset transition-transform duration-400 motion-safe:group-hover:scale-110",
-          tone === "saffron"
+          saffron
             ? "bg-saffron-50 text-saffron-700 ring-saffron-200"
             : "bg-brand-50 text-brand-700 ring-brand-200",
         )}
       >
         {icon}
       </span>
-      <p className="mt-5 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-ink-400">
+      <p className="mt-4 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-ink-400">
         {eyebrow}
       </p>
-      <h3 className="mt-1.5 font-display text-[1.05rem] font-bold leading-tight text-ink-900">
+      <h3 className="mt-1.5 pr-20 font-display text-[1.15rem] font-bold leading-tight text-ink-900">
         {title}
       </h3>
-      <p className="mt-2.5 flex-1 text-[0.86rem] leading-relaxed text-ink-500">{body}</p>
-      <span className="mt-5 text-[0.86rem] font-bold text-brand-700">{action}</span>
+      <p className="mt-2 flex-1 pr-20 text-[0.9rem] leading-relaxed text-ink-500">{body}</p>
+      <span
+        className={cn(
+          "mt-4 inline-flex items-center gap-4 self-start rounded-full py-1 pl-5 pr-1.5 text-[0.9rem] font-bold shadow-[0_2px_8px_rgb(16_40_24/0.06)] transition-colors duration-300",
+          saffron
+            ? "bg-saffron-50 text-saffron-700 group-hover:bg-saffron-100"
+            : "bg-brand-50 text-brand-700 group-hover:bg-brand-100",
+        )}
+      >
+        {action}
+        <span
+          className={cn(
+            "grid size-8 place-items-center rounded-full text-white transition-transform duration-300 motion-safe:group-hover:translate-x-0.5",
+            saffron ? "bg-saffron-600" : "bg-brand-700",
+          )}
+        >
+          <ChevronRight aria-hidden className="size-4" strokeWidth={2.5} />
+        </span>
+      </span>
     </>
   );
 }
@@ -361,6 +385,7 @@ export default function ContactPage() {
               <EnquiryLauncher className={FORM_CARD}>
                 <FormCardBody
                   icon={<MessageSquareText aria-hidden className="size-5" />}
+                  art="products"
                   eyebrow="Products"
                   title="Product enquiry"
                   body="Tick the products you want to know about and add your question."
@@ -373,6 +398,7 @@ export default function ContactPage() {
               <ExportLauncher className={FORM_CARD}>
                 <FormCardBody
                   icon={<Globe2 aria-hidden className="size-5" />}
+                  art="export"
                   eyebrow="Export"
                   title="Export enquiry"
                   body="Buying for a region, or shipping outside India? Tell us what you need."
@@ -386,6 +412,7 @@ export default function ContactPage() {
               <Link href="/careers#distributor" className={FORM_CARD}>
                 <FormCardBody
                   icon={<Store aria-hidden className="size-5" />}
+                  art="partnership"
                   eyebrow="Partnership"
                   title="Distributor application"
                   body="The full SCT business application — personal details, your shop, and your documents."
@@ -398,6 +425,7 @@ export default function ContactPage() {
               <Link href="/careers#employment" className={FORM_CARD}>
                 <FormCardBody
                   icon={<Briefcase aria-hidden className="size-5" />}
+                  art="careers"
                   eyebrow="Careers"
                   title="Jobs and internships"
                   body="Apply for a role on the team, or for an internship in the field."

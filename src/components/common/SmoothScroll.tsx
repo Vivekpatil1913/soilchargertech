@@ -15,6 +15,7 @@ type LenisInstance = {
   destroy: () => void;
   stop: () => void;
   start: () => void;
+  scrollTo: (target: number, options?: { immediate?: boolean; force?: boolean }) => void;
 };
 
 let instance: LenisInstance | null = null;
@@ -26,6 +27,16 @@ export function pauseSmoothScroll(): void {
 
 export function resumeSmoothScroll(): void {
   instance?.start();
+}
+
+/**
+ * Jump to a position with no animation. Goes through Lenis when it is running:
+ * a bare `window.scrollTo` leaves Lenis's own target where it was, and its next
+ * frame drags the page straight back.
+ */
+export function jumpTo(top: number): void {
+  if (instance) instance.scrollTo(top, { immediate: true, force: true });
+  else window.scrollTo({ top, left: 0, behavior: "instant" as ScrollBehavior });
 }
 
 export function SmoothScroll() {

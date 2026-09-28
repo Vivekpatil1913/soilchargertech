@@ -71,8 +71,8 @@ export function Hero() {
         size="wide"
         /* The hero opens the page now, so it owns the clearance under the
            fixed header rather than inheriting it from the video band that used
-           to sit above it. The header is 6rem tall while transparent and
-           7.25rem at lg, so these match the pt PageHero uses on every other
+           to sit above it. The logo badge hangs below the header to
+           about 6.5rem at lg, so these clear it and match the pt PageHero uses on every other
            route — which is also what keeps the two openings consistent. */
         className="relative grid items-center gap-12 pb-20 pt-32 sm:pt-36 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-28 lg:pt-44"
       >

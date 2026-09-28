@@ -162,7 +162,7 @@ export const images = {
   },
 
   certification: {
-    iso: { src: "/images/legacy/ISO.png", alt: "ISO 9001:2008 certification mark", credit: "SCT" },
+    iso: { src: "/images/legacy/ISO.png", alt: "ISO 9001:2015 certification mark", credit: "SCT" },
   },
 } as const satisfies Record<string, Record<string, SiteImage>>;
 

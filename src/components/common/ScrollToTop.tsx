@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { jumpTo } from "@/components/common/SmoothScroll";
+
 /**
  * A browser restores scroll position on a real page load; a client-side router
  * does not. Without this, following a link from the bottom of the products page
  * drops you at the bottom of the next one.
+ *
+ * Keyed on `location.key`, not `pathname`, so clicking the menu item for the
+ * page you are already on still takes you back to the top.
  *
  * HASH LINKS
  * ----------
@@ -18,17 +23,24 @@ import { useLocation } from "react-router-dom";
  *
  * The target is resolved after paint instead, and the scroll is offset by the
  * height of the fixed header so the heading is not left underneath it.
+ *
+ * Every jump goes through `jumpTo`, which moves Lenis as well as the window —
+ * otherwise Lenis animates the page back to where it was.
  */
 
-/** Tallest the fixed header gets, plus a little air. */
+/** Tallest the fixed header gets (logo badge included), plus a little air. */
 const HEADER_OFFSET = 120;
 
+if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
 export function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const { hash, key } = useLocation();
 
   useEffect(() => {
     if (!hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      jumpTo(0);
       return;
     }
 
@@ -39,13 +51,11 @@ export function ScrollToTop() {
       second = requestAnimationFrame(() => {
         const target = document.getElementById(decodeURIComponent(hash.slice(1)));
         if (!target) {
-          window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+          jumpTo(0);
           return;
         }
         const top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-        /* Instant, not smooth: Lenis drives scrolling on this site and
-           animating against it fights the library. Same reason as ShowMore. */
-        window.scrollTo({ top: Math.max(top, 0), behavior: "instant" as ScrollBehavior });
+        jumpTo(Math.max(top, 0));
       });
     });
 
@@ -53,7 +63,7 @@ export function ScrollToTop() {
       cancelAnimationFrame(first);
       cancelAnimationFrame(second);
     };
-  }, [pathname, hash]);
+  }, [hash, key]);
 
   return null;
 }

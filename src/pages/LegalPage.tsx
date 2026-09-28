@@ -44,7 +44,7 @@ export function LegalPage({
       <PageHero eyebrow="Legal" title={title} lead={lead} />
 
       <Section ground="light">
-        <Shell size="narrow">
+        <Shell>
           <p className="text-[0.86rem] text-ink-400">Last updated: {updated}</p>
 
           <div className="mt-10 space-y-11">

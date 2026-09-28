@@ -71,14 +71,10 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
     heading: "Resources",
     links: [
       { label: "Knowledge Centre", href: "/knowledge" },
-      { label: "Photo Gallery", href: "/gallery#photos" },
-      { label: "Video Gallery", href: "/gallery#videos" },
-      { label: "Farmer Stories", href: "/#farmer-stories" },
       { label: "Internship", href: "/careers#internship" },
       { label: "Become a Distributor", href: "/careers#distributor" },
       { label: "Job Vacancies", href: "/careers#employment" },
       { label: "FAQs", href: "/contact#faqs" },
-      { label: "Contact", href: "/contact" },
     ],
   },
 ];
